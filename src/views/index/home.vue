@@ -1,9 +1,9 @@
 <template>
-  <el-carousel :interval="4000" type="card" height="500px">
-    <el-carousel-item v-for="item in links" :key="item" >
-    <div class="block">
-      <a href="https://code.xiaxuyang.com">
-        <el-image :src="src"></el-image>
+  <el-carousel :interval="1600000" type="card" height="520px">
+    <el-carousel-item v-for="(item, index) in links" :key="item" >
+    <div class="block" >
+      <a :href="links[index%5]">
+        <el-image :src="src[index%5]"></el-image>
       </a>
     </div>        
     </el-carousel-item>
@@ -12,6 +12,11 @@
 </template>
 
 <script>
+import pic1 from "../../assets/imgs/stream.jpg"
+import pic2 from "../../assets/imgs/bird.jpg"
+import pic3 from "../../assets/imgs/deer.jpg"
+import pic4 from "../../assets/imgs/dog.jpg"
+import pic5 from "../../assets/imgs/wolf.jpg"
 export default{
     data(){
       return{
@@ -22,7 +27,9 @@ export default{
           "https://csdn.com", 
           "https://taobao.com"
           ],
-        src: "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg"
+        //src: "https://cube.elemecdn.com/6/94/4d3ea53c084bad6931a56d5158a48jpeg.jpeg",
+        src: [pic1, pic2,pic3,pic4,pic5],
+        cnt: 0,
       }
     },
     methods:{
@@ -35,6 +42,10 @@ export default{
 </script>
 
 <style>
+.el-image__inner{
+    width: 880px;
+}
+
 .el-carousel__item h3 {
     color: #475669;
     font-size: 14px;

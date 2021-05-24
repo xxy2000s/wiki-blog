@@ -3,7 +3,7 @@
 <el-row>
 </el-row>
 
-<el-row :gutter="20">
+<el-row :gutter="20" style="text-align:center">
   <el-col :span="6">
     <div class="grid-content">
     <router-link to="/navi/cs">
