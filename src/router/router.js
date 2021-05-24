@@ -11,12 +11,12 @@ const routes = [
       path: "/article",
       name: "article",
       component: ()=>import('../components/Vditor.vue')
-  },
-    // {
-    //     path: "/test",
-    //     name: "test",
-    //     component: () => import('../components/index.vue')
-    // },
+   },
+    {
+        path: "/detail/:id",
+        name: "show-article",
+        component: () => import('../views/blog/article.vue')
+    },
     {
         path: "/todo",
         name: "todo",
@@ -26,15 +26,22 @@ const routes = [
         path: "/blogs",
         name: "blogs",
         component:  () => import('../views/index/blogs.vue'),
-        children: [
-          {
-             path: "timeline",
-             name: "timeline",
-             component: () => import('../views/blog/timeline.vue'),
-             props: true,
-             meta: {title: "首页"}
-          }
-        ]
+        // children: [
+        //   {
+        //      path: "timeline",
+        //      name: "timeline",
+        //      component: () => import('../views/blog/timeline.vue'),
+        //      props: true,
+        //      meta: {title: "首页"}
+        //   }
+        // ]
+    },
+    {
+        path: "/blogs/timeline",
+        name: "timeline",
+        component: () => import('../views/blog/timeline.vue'),
+        //props: true,
+        //meta: {title: "首页"}
     },
     {
         path: "/navi",
