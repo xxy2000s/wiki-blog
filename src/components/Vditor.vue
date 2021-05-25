@@ -32,7 +32,9 @@
     </el-checkbox-group>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="onSubmit(1, form.title, 'test');dialogFormVisible=false">立即创建</el-button>
+    <router-link to="/blogs">
+    <el-button type="primary" @click="onSubmit(1, form.title, 'test');dialogFormVisible=false;open()">立即创建</el-button>
+    </router-link>
     <el-button @click="dialogFormVisible = false;test()">取消</el-button>
   </el-form-item>
   </el-form>
@@ -44,6 +46,7 @@
 import Vditor from "vditor"
 import "vditor/dist/index.css"
 import {createArticle} from "../api/createArticle.js"
+import { ElMessage } from 'element-plus'
 export default {
     // setup() {
     //   let category_id = ref("1")
@@ -66,6 +69,7 @@ export default {
     data(){
         return{
             contentEditor:"",
+            //id: "",
             dialogFormVisible: false,
             form: {
               title: '',
@@ -124,7 +128,13 @@ export default {
         },
         test(params){
             console.log(this.contentEditor.getValue())
-        }
+        },
+        open() {
+          ElMessage.success({
+            message: '文章创建成功',
+            type: 'success'
+          });
+        },
         
     }
 }

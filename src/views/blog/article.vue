@@ -2,7 +2,7 @@
   <div>
     <!-- <h3 style="text-align: center">{{title}}</h3> -->
     <div id="vditor" class="vditor"></div>
-    <el-button type="primary" @click="show()">查看</el-button>
+    <!-- <el-button type="primary" @click="show()">查看</el-button> -->
   </div>
 </template>
   
@@ -46,6 +46,7 @@ export default {
             },
             after:()=>{
                 this.contentEditor.setValue("hello test")
+                this.show()
             }
         })
     },
