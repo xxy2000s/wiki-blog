@@ -1,51 +1,46 @@
 <template>
 <!-- <div data-v-08a6127f="" class="header-wrap"><div data-v-344d2c7f="" data-v-08a6127f=""><div data-v-344d2c7f="" class="container"><div data-v-344d2c7f="" class="menu-wrap"><div data-v-344d2c7f="" class="logo"></div><div data-v-b6465d22="" data-v-344d2c7f="" class="menu-item-wrap menu-item"><div data-v-b6465d22="" class="top">文章</div><div data-v-b6465d22="" class="bottom"><div data-v-b6465d22="" class="blue"></div></div></div><div data-v-b6465d22="" data-v-344d2c7f="" class="menu-item-wrap menu-item"><div data-v-b6465d22="" class="top">关于我</div><div data-v-b6465d22="" class="bottom"><div data-v-b6465d22="" class="blue"></div></div></div><div data-v-b6465d22="" data-v-344d2c7f="" class="menu-item-wrap menu-item"><div data-v-b6465d22="" class="top">留言墙</div><div data-v-b6465d22="" class="bottom"><div data-v-b6465d22="" class="blue"></div></div></div><div data-v-344d2c7f="" class="right"><div data-v-344d2c7f="" class="login-area-wrap"><div data-v-344d2c7f="" class="login">登录</div><div data-v-344d2c7f="" class="arrow"></div></div></div></div></div></div></div> -->
-
-
+<div class="header-nav">
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="1">
-    <router-link to="/" ><el-button type="primary" round>主页</el-button></router-link>
+  <el-menu-item index="1" >
+    <router-link to="/"><el-button type="primary" icon="el-icon-s-home" plain round>主页</el-button></router-link>
   </el-menu-item>
 
   <el-menu-item index="2">
-    <router-link to="/navi" ><el-button type="primary" round>导航</el-button></router-link>
+    <router-link to="/navi" ><el-button type="primary" icon="el-icon-odometer" plain round>导航</el-button></router-link>
   </el-menu-item>
 
   <el-menu-item index="3">
-      <router-link to="/todo"><el-button type="primary" round>待办</el-button></router-link>
+      <router-link to="/todo"><el-button type="primary" icon="el-icon-date" plain round>待办</el-button></router-link>
   </el-menu-item>
 
   <el-menu-item index="4">
-      <router-link to="/blogs"><el-button type="primary" @click="show()" round>文章</el-button></router-link>
+      <router-link to="/blogs"><el-button type="primary" @click="show()" icon="el-icon-collection" plain round>文章</el-button></router-link>
   </el-menu-item>
+
+  <el-avatar :src="pic" class="header-user-avatar"></el-avatar>
+
 </el-menu>
-<div class="line"></div>
-
-
-  <!-- <el-container class="box-shadow">
-    <nav>
-    <router-link to="/" ><el-button type="primary" round>主页</el-button></router-link>
-    <router-link to="/navi" ><el-button type="primary" round>导航</el-button></router-link>
-    <router-link to="/todo"><el-button type="primary" round>待办</el-button></router-link>
-    <router-link to="/test"><el-button type="primary" round>文章</el-button></router-link>
-    </nav>
-  </el-container> -->
-
+</div>
+  <div class="line"></div>
   <router-view></router-view>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3.0 + Vite" /> -->
 
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
 import {getArticleList} from "./api/getArticleList.js"
-
+import profile from "./assets/imgs/profile.jpg"
 export default {
   name: 'App',
   // components: {
   //   HelloWorld
   // }
+  data(){
+      return {
+          pic:profile
+      }
+  },
   methods:{
       show(){
           getArticleList(1)
@@ -65,6 +60,22 @@ export default {
       margin: 0 0rem;
     }
 
+.header-nav {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;  /*水平居中*/
+}
+
+.header-user-avatar {
+    position: relative;
+    float: right;
+    margin-left: 19px;
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
 
 /* .header-wrap[data-v-08a6127f] {
     top: 0;

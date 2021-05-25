@@ -38,8 +38,8 @@
 </div>
 
 <div>
-<el-row :gutter="24" v-for="ID in article.length" :key=ID >
-  <el-col :span="24">
+<el-row :gutter="12" v-for="ID in article.length" :key=ID >
+  <el-col :span="12" class="article-center">
     <router-link :to="{path: '/detail/' + article[ID-1]}">
     <el-card shadow="hover" style="text-align: center" id="card">
       {{title[ID-1]}}
@@ -113,6 +113,12 @@ import { showArticle } from '../../api/showArticle.js';
         height: 120px;
         margin-bottom: 15px;
     }
+
+.article-center{
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
 
 /* 下面两个样式用于消除router link下划线 */
 a {
