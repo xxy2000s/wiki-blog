@@ -1,6 +1,6 @@
 
 <template>
-<div class="main">
+<div >
 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">
     <router-link to="/blogs/timeline">
@@ -34,20 +34,18 @@
   </el-menu-item>
 
   </el-menu>
-
 </div>
 
-<div>
+<div class="img-background">
 <el-row :gutter="12" v-for="ID in article.length" :key=ID >
   <el-col :span="12" class="article-center">
     <router-link :to="{path: '/detail/' + article[ID-1]}">
-    <el-card shadow="hover" style="text-align: center" id="card">
-      {{title[ID-1]}}
+    <el-card shadow="hover" style="text-align: center;color: #409EFF;opacity: 0.85" id="card">
+      <h2>{{title[ID-1]}}</h2>
     </el-card>
     </router-link>
   </el-col>
 </el-row>
-
 </div>
 
   <router-view></router-view>
@@ -119,6 +117,15 @@ import { showArticle } from '../../api/showArticle.js';
     margin-right: 25%;
 }
 
+.img-background{
+    width: 100%;
+    height: 100%;
+    background: url("https://img.susundingkai.cn:8888/images/2021/05/25/59190594_p0.jpg");
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-size: cover;
+    
+}
 
 /* 下面两个样式用于消除router link下划线 */
 a {
