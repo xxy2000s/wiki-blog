@@ -6,6 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@vitejs/plugin-vue": "^1.2.2",
     "ant-design-vue": "^2.1.6",
     "axios": "^0.21.1",
     "element-plus": "^1.0.2-beta.44",
@@ -16,9 +17,8 @@
     "vue-router": "^4.0.8"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.2",
     "@vue/compiler-sfc": "^3.0.4",
     "less": "^4.1.1",
-    "vite": "^1.0.0-rc.13"
+    "vite": "^2.3.3"
   }
 }
