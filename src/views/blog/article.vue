@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-button class="update-pos" type="primary" @click="update();show();">提交修改</el-button>
     <!-- <h3 style="text-align: center">{{title}}</h3> -->
     <div id="vditor" class="vditor"></div>
     <!-- <el-button type="primary" @click="show()">查看</el-button> -->
@@ -8,6 +9,8 @@
   
 <script>
 import {showArticle} from "../../api/showArticle.js"
+import {updateArticle} from "../../api/updateArticle.js"
+import { ElMessage } from 'element-plus'
 import Vditor from "vditor"
 import "vditor/dist/index.css"
 
@@ -45,7 +48,7 @@ export default {
                 type: "text",
             },
             after:()=>{
-                this.contentEditor.setValue("hello test")
+                //this.contentEditor.setValue("hello test")
                 this.show()
             }
         })
@@ -62,14 +65,32 @@ export default {
             .catch((err)=>{
                 console.log(err)
             })
-
         },
+        open() {
+          ElMessage.success({
+            message: '文章修改成功',
+            type: 'success'
+          });
+        },
+        update(){
+            updateArticle(this.$route.params.id, this.contentEditor.getValue())
+            .then((res)=>{
+                this.content = res.content
+                this.open()
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        },
+        
     },
 
 }
 </script>
 
 <style lang="less" scoped>
-
+  .update-pos{
+      float: left;
+  }
 
 </style>

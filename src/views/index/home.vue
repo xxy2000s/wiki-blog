@@ -1,4 +1,6 @@
 <template>
+<div class="header-margin">
+</div>
   <el-carousel :interval="1600000" type="card" height="520px">
     <el-carousel-item v-for="(item, index) in links" :key="item" >
     <div class="block" >
@@ -42,6 +44,9 @@ export default{
 </script>
 
 <style>
+.header-margin{
+    margin-top: 10px;
+}
 .el-image__inner{
     width: 880px;
 }
