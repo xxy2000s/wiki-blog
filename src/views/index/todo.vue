@@ -104,7 +104,7 @@ import { LoginPop, LogoutPop,graphClient } from "../../api/graph/auth.js";
           this.account = sessionStorage.getItem("msalAccount");
           console.log(this.account);
           await this.get_task_list();
-          await this.get_task()
+          
 
         //   let userDetails =await client.api("/me").get();
         },
@@ -117,11 +117,14 @@ import { LoginPop, LogoutPop,graphClient } from "../../api/graph/auth.js";
           .get().then((res)=>{
           // console.log(res);
           var dataList=res["value"];
+          console.log(dataList)
           for (let index = 0; index < dataList.length; index++) {
             if(dataList[index].wellknownListName!="defaultList"){
               continue
             }else{
               self.taskListID=dataList[index].id
+              this.get_task()
+              
             }
             
           }      

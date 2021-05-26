@@ -5,9 +5,9 @@
 
 export const msalConfig = {
     auth: {
-      clientId: "4e32a383-f87b-4dc9-9fd3-5c55856509dc",
-      redirectUri: "http://localhost:3000 /todo",
-      authority: "https://login.microsoftonline.com/consumers/",
+      clientId: "db576d9e-a6ca-4b99-af61-0741d4bcc8ed",
+      redirectUri: "http://localhost:3000/todo",
+      authority: "https://login.microsoftonline.com/consumers/"
     },
     cache: {
       cacheLocation: "localStorage",
@@ -20,6 +20,7 @@ export const msalConfig = {
       "mailboxsettings.read",
       "calendars.readwrite",
       "tasks.readwrite",
+      "Calendars.ReadWrite",
     ],
   };
   // </msalConfigSnippet>

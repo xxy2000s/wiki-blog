@@ -23,8 +23,7 @@
 </el-menu>
 </div>
   <div class="line"></div>
-  <h3>test3</h3>
-  <router-view></router-view>
+    <router-view></router-view>
 
 </template>
 

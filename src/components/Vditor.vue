@@ -14,7 +14,7 @@
   <el-form ref="form" :model="form" label-width="80px">
   <el-form-item label="分类">
     <el-select v-model="form.type" placeholder="请选择类别">
-      <el-option label="力扣" value="leetcode"></el-option>
+      <el-option label="力扣" value="leetcode" @click="show(form.type)"></el-option>
       <el-option label="后端" value="backend"></el-option>
     </el-select>
   </el-form-item>
@@ -135,6 +135,10 @@ export default {
             type: 'success'
           });
         },
+
+        show(params){
+            console.log(params)
+        }
         
     }
 }

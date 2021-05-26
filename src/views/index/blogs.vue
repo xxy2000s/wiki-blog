@@ -33,6 +33,13 @@
       </router-link>
   </el-menu-item>
 
+<div class="manage-right">
+  <el-menu-item index="5">
+      <router-link to="/management">
+          <el-button type="success" plain>后台管理</el-button>
+      </router-link>
+  </el-menu-item>
+</div>
   </el-menu>
 </div>
 
@@ -111,6 +118,10 @@ import { showArticle } from '../../api/showArticle.js';
         height: 120px;
         margin-bottom: 15px;
     }
+
+.manage-right{
+    float:right
+}
 
 .article-center{
     margin-left: 25%;
