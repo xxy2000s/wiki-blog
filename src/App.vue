@@ -18,6 +18,10 @@
       <router-link to="/blogs"><el-button type="primary" @click="show()" icon="el-icon-collection" plain round>文章</el-button></router-link>
   </el-menu-item>
 
+  <el-menu-item index="5">
+      <router-link to="/task"><el-button type="primary" @click="show()" icon="el-icon-collection" plain round>任务</el-button></router-link>
+  </el-menu-item>  
+
   <el-avatar :src="pic" class="header-user-avatar"></el-avatar>
 
 </el-menu>

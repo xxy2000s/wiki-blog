@@ -42,6 +42,11 @@ const routes = [
         // ]
     },
     {
+        path: "/task",
+        name: "task",
+        component:  () => import('../views/index/task.vue'),
+    },
+    {
         path: "/blogs/timeline",
         name: "timeline",
         component: () => import('../views/blog/timeline.vue'),
