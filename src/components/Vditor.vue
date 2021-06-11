@@ -1,7 +1,7 @@
 <template>
 <div data-v-dc4b8ea2="" class="header">
   <div data-v-dc4b8ea2="" class="title-input">
-    <input data-v-f291f354="" data-v-dc4b8ea2="" placeholder="请输入文章标题" class="input-size__normal" v-model="form.title">
+    <input data-v-f291f354="" placeholder="请输入文章标题" class="input-size__normal" v-model="form.title">
   </div>
   <div data-v-dc4b8ea2="" class="push-article">
     <div data-v-eaa3c7a0="" data-v-dc4b8ea2="" class="button-main button__bounce button-type__primary button-size__normal">
@@ -40,7 +40,9 @@
   </el-form>
 </el-dialog>
 
-  <div id="vditor" class="vditor"></div>
+
+
+<div id="vditor" class="vditor readme md crispy" style="padding:20px"></div>
 </template>
 <script>
 import Vditor from "vditor"
@@ -83,7 +85,7 @@ export default {
     mounted(){
         let self = this
         this.contentEditor = new Vditor("vditor",{
-            height:650,
+            height:630,
             //width:'auto',
             toolbarConfig:{
                 pin:true
@@ -163,17 +165,50 @@ export default {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
     }
 
     .title-input[data-v-dc4b8ea2] {
-    margin-left: 20px;
+    margin-left: 45px;
     height: 36px;
-    width: 90%;
+    width: 85%;
     display: inline-block;
     }
     .input-size__normal[data-v-f291f354] {
     height: 30px;
     font-size: 14px;
     width: 95%;
+}
+
+
+//扒的样式 内容显示
+.readme {
+    max-width: 95%;//修改为95%
+    padding: 24px 32px;
+    border-radius: 24px;
+    margin: 0 auto 48px;
+}
+.md {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    color: #24292e;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.md img {
+    max-width: 100%;
+    box-sizing: content-box;
+    box-sizing: initial;
+    background-color: #fff;
+}
+
+  .crispy {
+    border: 1px solid rgba(0,0,80,.08);
+    box-shadow: 0 2px 10px rgb(0 20 80 / 10%);
+    background: #fff;
 }
 </style>

@@ -10,7 +10,7 @@ const routes = [
     {
         path: "/management",
         name: "management",
-        component: () => import('../views/blog/manage.vue')
+        component: () => import('../Manage.vue')
     },
     {
       path: "/article",
@@ -51,7 +51,40 @@ const routes = [
     {
         path: "/navi",
         name: "navi",
+        redirect: "/navi/backend",
         component: () => import('../views/index/navi.vue'),
+        children:[
+          {
+              path:"links",
+              name:"links",
+              component: ()=>import('../Manage.vue')
+          },
+          {
+              path: "tools",
+              name: "tools",
+              component: () => import('../views/navi/tools.vue'),
+          },
+          {
+              path: "cs",
+              name: "cs",
+              component: () => import('../views/navi/cs.vue'),
+          },
+          {
+              path: "frontend",
+              name: "frontend",
+              component: () => import('../views/navi/frontend.vue'),
+          },
+          {
+              path: "backend",
+              name: "backend",
+              component: () => import('../views/navi/backend.vue'),
+          },
+          {
+            path: "projects",
+            name: "projects",
+            component: () => import('../views/navi/projects.vue'),
+          },
+        ]
     //     children: [
     //       {
     //           path: "tools",
@@ -79,26 +112,31 @@ const routes = [
 
     //navi的兄弟
 
-    {
-        path: "/navi/tools",
-        name: "tools",
-        component: () => import('../views/navi/tools.vue'),
-    },
-    {
-      path: "/navi/cs",
-      name: "cs",
-      component: () => import('../views/navi/cs.vue'),
-    },
-    {
-      path: "/navi/frontend",
-      name: "frontend",
-      component: () => import('../views/navi/frontend.vue'),
-    },
-    {
-      path: "/navi/backend",
-      name: "backend",
-      component: () => import('../views/navi/backend.vue'),
-    },
+  //   {
+  //       path: "/navi/tools",
+  //       name: "tools",
+  //       component: () => import('../views/navi/tools.vue'),
+  //   },
+  //   {
+  //     path: "/navi/projects",
+  //     name: "projects",
+  //     component: () => import('../views/navi/projects.vue'),
+  // },
+  //   {
+  //     path: "/navi/cs",
+  //     name: "cs",
+  //     component: () => import('../views/navi/cs.vue'),
+  //   },
+  //   {
+  //     path: "/navi/frontend",
+  //     name: "frontend",
+  //     component: () => import('../views/navi/frontend.vue'),
+  //   },
+  //   {
+  //     path: "/navi/backend",
+  //     name: "backend",
+  //     component: () => import('../views/navi/backend.vue'),
+  //   },
 
 
 

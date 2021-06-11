@@ -1,29 +1,39 @@
 <template>
-<!-- <div data-v-08a6127f="" class="header-wrap"><div data-v-344d2c7f="" data-v-08a6127f=""><div data-v-344d2c7f="" class="container"><div data-v-344d2c7f="" class="menu-wrap"><div data-v-344d2c7f="" class="logo"></div><div data-v-b6465d22="" data-v-344d2c7f="" class="menu-item-wrap menu-item"><div data-v-b6465d22="" class="top">文章</div><div data-v-b6465d22="" class="bottom"><div data-v-b6465d22="" class="blue"></div></div></div><div data-v-b6465d22="" data-v-344d2c7f="" class="menu-item-wrap menu-item"><div data-v-b6465d22="" class="top">关于我</div><div data-v-b6465d22="" class="bottom"><div data-v-b6465d22="" class="blue"></div></div></div><div data-v-b6465d22="" data-v-344d2c7f="" class="menu-item-wrap menu-item"><div data-v-b6465d22="" class="top">留言墙</div><div data-v-b6465d22="" class="bottom"><div data-v-b6465d22="" class="blue"></div></div></div><div data-v-344d2c7f="" class="right"><div data-v-344d2c7f="" class="login-area-wrap"><div data-v-344d2c7f="" class="login">登录</div><div data-v-344d2c7f="" class="arrow"></div></div></div></div></div></div></div> -->
-<div class="header-nav">
-<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="1" >
-    <router-link to="/"><el-button type="primary" icon="el-icon-s-home" plain round>主页</el-button></router-link>
-  </el-menu-item>
+<el-container>
+  <div>
+ <el-header class="header-wrap" style="opacity: 0.98;">
+   <div class="site-branding">
+   <span class="logolink moe-mashiro">
+      <a href="https://2heng.xin" alt="樱花庄的白猫"> <ruby><span class="sakuraso">BUPT</span><span class="no">の</span><span class="shironeko">Coder</span><rp></rp><rt class="chinese-font">北大软微</rt><rp></rp></ruby> </a>
+  </span>
+   </div>
+  <el-menu :default-active="activeIndex" class="el-menu-demo header-nav" mode="horizontal" @select="handleSelect">
+    <el-menu-item index="1" >
+      <router-link to="/"><el-button type="primary" icon="el-icon-s-home" plain round>主页</el-button></router-link>
+    </el-menu-item>
 
-  <el-menu-item index="2">
-    <router-link to="/navi" ><el-button type="primary" icon="el-icon-odometer" plain round>导航</el-button></router-link>
-  </el-menu-item>
+    <el-menu-item index="2">
+      <router-link to="/navi" ><el-button type="primary" icon="el-icon-odometer" plain round>导航</el-button></router-link>
+    </el-menu-item>
 
-  <el-menu-item index="3">
-      <router-link to="/todo"><el-button type="primary" icon="el-icon-date" plain round>待办</el-button></router-link>
-  </el-menu-item>
+    <el-menu-item index="3">
+        <router-link to="/todo"><el-button type="primary" icon="el-icon-date" plain round>待办</el-button></router-link>
+    </el-menu-item>
 
-  <el-menu-item index="4">
-      <router-link to="/blogs"><el-button type="primary" @click="show()" icon="el-icon-collection" plain round>文章</el-button></router-link>
-  </el-menu-item>
+    <el-menu-item index="4">
+        <router-link to="/blogs"><el-button type="primary" @click="show()" icon="el-icon-collection" plain round>文章</el-button></router-link>
+    </el-menu-item>
 
-  <el-avatar :src="pic" class="header-user-avatar"></el-avatar>
+    <el-avatar :src="pic" class="header-user-avatar"></el-avatar>
 
-</el-menu>
-</div>
-  <div class="line"></div>
-    <router-view></router-view>
+  </el-menu>
+</el-header>
+  </div>
+<el-main>
+  <router-view />
+</el-main>
+
+</el-container>
 
 </template>
 
@@ -56,17 +66,202 @@ export default {
 }
 </script>
 <style scoped="scoped">
+.moe-mashiro {
+    font-family: 'Moe-Mashiro','Merriweather Sans',Helvetica,Tahoma,Arial,'PingFang SC','Hiragino Sans GB','Microsoft Yahei','WenQuanYi Micro Hei',sans-serif;
+}
+
+.serif {
+    font-family: 'Noto Serif SC','Source Han Serif SC','Source Han Serif','source-han-serif-sc','PT Serif','SongTi SC','MicroSoft Yahei',Georgia,serif;
+}
+.chinese-font {
+    font-family: 'Merriweather Sans',Helvetica,Tahoma,Arial,'PingFang SC','Hiragino Sans GB','Microsoft Yahei','WenQuanYi Micro Hei',sans-serif;
+}
+.site-branding {
+    float: left;
+    position: relative;
+    height: 75px;
+    line-height: 75px;
+    margin-left: -6px;
+    z-index: 9999;
+}
+.logolink.moe-mashiro .sakuraso, .logolink.moe-mashiro .no {
+    /* display: relative; */
+    font-size: 22px;
+    border-radius: 9px;
+    padding-bottom: 10  px;
+    padding-top: 5px;
+}
+
+.logolink a {
+    color: #464646;
+    float: left;
+    font-size: 20px;
+    font-weight: 800;
+    height: 56px;
+    /* line-height: 56px; */
+    padding-left: 35px;
+    padding-right: 15px;
+    padding-top: 11px;
+    text-decoration-line: none;
+}
+.logolink .sakuraso {
+    background-color: rgba(255,255,255,.5);
+    border-radius: 5px;
+    color: #464646;
+    height: auto;
+    line-height: 25px;
+    margin-right: 0;
+    padding-bottom: 0;
+    padding-top: 1px;
+    text-size-adjust: 100%;
+    width: auto;
+}
+.logolink.moe-mashiro .no {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.logolink ruby rt {
+    font-size: 10px;
+    transform: translateY(+45px);
+    opacity: 0;
+    transition-duration: .5s,.5s;
+}
+
+.logolink a:hover ruby rt {
+    opacity: 1;
+    transition-duration: .5s,.5s;
+    color:#FE9600;
+}
+
+.logolink a:hover .sakuraso {
+      transition-duration: .5s,.5s;
+
+    background-color: orange;
+    color: #fff;
+}
+
+.logolink a:hover ruby {
+    transition-duration: .5s,.5s;
+    color:#FE9600;
+}
+
+
+@-webkit-keyframes spin {
+                from {
+                    -webkit-transform: rotate(0deg);
+                }
+                to {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+            
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.logolink a:hover .no {
+    -webkit-animation: spin 1.5s linear infinite;
+    animation: spin 1.5s linear infinite;
+}
+
+
+.logolink.moe-mashiro a {
+    color: #464646;
+    float: left;
+    font-size: 25px;
+    font-weight: 800;
+    height: 56px;
+    line-height: 6px;
+    padding-left: 46px;
+    padding-right: 15px;
+    padding-top: 25px;
+    text-decoration-line: none;
+    z-index: 9999;
+}
+.moe-mashiro {
+    font-family: 'Moe-Mashiro','Merriweather Sans',Helvetica,Tahoma,Arial,'PingFang SC','Hiragino Sans GB','Microsoft Yahei','WenQuanYi Micro Hei',sans-serif;
+}
+
     a{
       margin: 0 0rem;
     }
 
-.header-nav {
+
+/* #content {
+    animation: main 1s;
+}
+.sabit {
+    top: 0;
+    z-index: 9999;
+}
+.gizle {
+    top: -100px;
+    top: 0;
+    z-index: 9999;
+}
+.site-header {
+    width: 100%;
+    height: 75px;
+    background: 0 0;
+    -webkit-transition: all .4s ease;
+    transition: all .4s ease;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+}
+.site-content {
+    max-width: 800px;
+    padding: 0 10px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255,255,255,.8);
+}
+.wrapper {
+    animation: fade-in;
+    animation-duration: .5s;
+    -webkit-animation: fade-in .5s;
+}
+
+.nav-bottom{
+    display: flex;
+        position: fixed;
+        top: 30px;
     width: 100%;
     height: 5%;
+} */
+.el-main{
+    padding-top: 65px !important;
+    padding-bottom: 0px !important;    
+
+    padding: 0px; 
+    /* padding-left: -5px;
+    padding-right: 0px;
+    padding-bottom: 0px; */
+    /* overflow-x: hidden;
+    overflow-y: hidden; */
+    overflow: visible;
+}
+
+
+.el-menu-demo.header-nav {
+    
+    width: 100%;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content: center;  /*水平居中*/
+    position: fixed;
+    top: 0px;
+    z-index:9998;
+    /* box-shadow:0 1px 40px -8px rgb(0 0 0 / 50%); */
 }
+
 
 .header-user-avatar {
     position: relative;
@@ -77,13 +272,27 @@ export default {
     margin-bottom: 15px;
 }
 
-/* .header-wrap[data-v-08a6127f] {
-    top: 0;
-    left: 0;
-    z-index: 999;
-    position: fixed;
-    width: 100%;
+
+.el-header{
+    padding: 0px !important;
 }
+.header-wrap{
+    width: 100%;
+    /* height: 7%; */
+    /* display: flex;
+    align-items: center;
+    justify-content: center;  */
+    position: fixed;
+    top: 0px;
+    z-index:9998;
+    background: rgba(255,255,255,.95);
+    box-shadow: 0 1px 40px -8px rgb(0 0 0 / 50%);
+}
+.header-wrap:hover {
+    background-color: #fff;
+}
+
+/* 
 
 .container[data-v-344d2c7f] {
     background-color: #fff;

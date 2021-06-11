@@ -47,7 +47,7 @@
 <el-row :gutter="12" v-for="ID in article.length" :key=ID >
   <el-col :span="12" class="article-center">
     <router-link :to="{path: '/detail/' + article[ID-1]}">
-    <el-card shadow="hover" style="text-align: center;color: #409EFF;opacity: 0.85" id="card">
+    <el-card shadow="hover" class="self-hover root" id="card">
       <h2>{{title[ID-1]}}</h2>
     </el-card>
     </router-link>
@@ -113,7 +113,16 @@ import { showArticle } from '../../api/showArticle.js';
   }
 </script>
 
+
+
 <style scope="scoped">
+
+.self-hover{
+  text-align: center;color: #409EFF;opacity: 0.85; border-radius: 24px;
+}
+:root{
+    --article-shadow-hover: 0 4px 60px 0 rgb(0 0 0 / 83%);
+}
     #card{
         height: 120px;
         margin-bottom: 15px;
@@ -130,12 +139,12 @@ import { showArticle } from '../../api/showArticle.js';
 
 .img-background{
     width: 100%;
-    height: 100%;
+    height: 110%;
     background: url("https://img.susundingkai.cn:8888/images/2021/05/25/59190594_p0.jpg");
     background-position: center center;
     background-repeat:  no-repeat;
     background-size: cover;
-    
+    overflow-x: hidden;
 }
 
 /* 下面两个样式用于消除router link下划线 */
