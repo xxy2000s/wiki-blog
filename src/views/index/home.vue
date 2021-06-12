@@ -135,7 +135,7 @@
             <a href="https://www.baidu.com"
                class="m-article-card__picture-link"></a>
             <img class="m-article-card__picture-background"
-                 :src="'src/assets/imgs/article.jpg'"
+                 :src="'src/assets/imgs/back0.jpg'"
                  loading="lazy">
           </div>
 
@@ -643,7 +643,7 @@ export default{
 }
 
 /*button 样式和hover设置 */
-.m-button {
+/* .m-button {
   display: inline-block;
   color: #333;
   text-align: center;
@@ -672,7 +672,7 @@ export default{
 }
 
 /*描述样式 */
-.m-hero-description {
+/* .m-hero-description {
   letter-spacing: 0.2px;
   line-height: 1.5;
   font-size: 0.938rem;
@@ -688,10 +688,10 @@ export default{
   .m-hero-description.bigger {
     font-size: 1.375rem;
   }
-}
+} */
 
 /*标题样式 */
-.m-hero-title {
+/* .m-hero-title {
   color: var(--titles-color);
   letter-spacing: 0.4px;
   line-height: 1.3;
@@ -705,19 +705,19 @@ export default{
     font-size: 3.25rem;
     margin-bottom: 10px;
   }
-}
+} */
 
 /*内容样式 */
-.m-hero__content {
+/* .m-hero__content {
   position: relative;
   text-align: center;
   padding: 0 20px;
   z-index: 2;
-}
+} */
 
 /*图片适配样式 */
 
-.m-hero {
+/* .m-hero {
   position: relative;
   flex-direction: column;
   min-height: 365px;
@@ -746,7 +746,7 @@ export default{
   height: 90%;
   z-index: 1;
   opacity: 0.7;
-}
+}  */
 
 a {
   text-decoration: none;

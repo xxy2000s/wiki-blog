@@ -8,7 +8,9 @@
           <template #title><i class="el-icon-message"></i>计算机基础</template>
           <el-submenu index="1-1">
             <template #title>专业课</template>
+            <router-link to="menu1-1">
             <el-menu-item index="1-1-1">计网</el-menu-item>
+            </router-link>
             <el-menu-item index="1-1-2">操作系统</el-menu-item>
             <el-menu-item index="1-1-3">数据结构</el-menu-item>
 

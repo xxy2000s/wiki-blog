@@ -55,6 +55,11 @@ const routes = [
         component: () => import('../views/index/navi.vue'),
         children:[
           {
+              path:"menu1-1",
+              name:"计网",
+              component: () => import('../views/navi/menu1/menu1-1.vue')
+          },
+          {
               path:"links",
               name:"links",
               component: ()=>import('../Manage.vue')
