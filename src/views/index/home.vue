@@ -557,6 +557,8 @@ export default{
   overflow: hidden;
   border-radius: 0 0 20px 20px;
   background-color: #fff;
+  border: 0.1px solid #ebeef5;
+  box-shadow: 0 10px 10px rgb(0 0 0 / 8%)
 }
 
 @media only screen and (min-width: 48rem) {
@@ -599,10 +601,9 @@ export default{
   position: relative;
   margin-bottom: 20px;
   height: 400px;
-  box-shadow: 0 1px 20px -6px #606266;
   opacity: 0.95;
   background-color: var(--background-color);
-  border-radius: 10px;
+  border-radius: 20px;
   border: 1px solid var(--secondary-border-color);
   z-index: 1;
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);

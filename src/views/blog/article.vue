@@ -1,7 +1,8 @@
 <template>
   <div>
-      <el-backtop target="" :bottom="100">
-        <div style="
+    <el-backtop target=""
+                :bottom="100">
+      <div style="
         height: 100%;
         width: 100%;
         background-color: #f2f5f6;
@@ -10,30 +11,42 @@
         line-height: 40px;
         color: #1989fa;
       ">
-          UP
-        </div>
-      </el-backtop>
+        UP
+      </div>
+    </el-backtop>
+
+    <div class="pattern-center ">
+      <div class="pattern-attachment-img"> <img src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
+             data-src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
+             class="lazyload"
+             onerror="imgError(this,3)"
+             style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></div>
+             <header class="pattern-header "><h1 class="entry-title">{{title}}</h1></header>
+    </div>
 
     <!-- <el-button class="update-pos" type="primary" @click="update();show();">提交修改</el-button> -->
     <!-- <h3 style="text-align: center">{{title}}</h3> -->
     <!-- <div id="vditor" class="vditor"></div> -->
-            <h1 style="text-align: center" class="title">{{title}}</h1>
+    <h1 style="text-align: center"
+        class="title">&nbsp;</h1>
     <div class="container-sm">
-      <div class="split-layout">    
-      <div class="content-details">
-      <div id="vditorPreview" class="readme md crispy"></div>
-      </div>
-      <div class="repo-details">
-            <!-- <el-button class="update-pos" type="primary" @click="update();show();">提交修改</el-button> -->
+      <div class="split-layout">
+        <div class="content-details">
+          <div id="vditorPreview"
+               class="readme md crispy"></div>
+        </div>
+        <div class="repo-details">
+          <!-- <el-button class="update-pos" type="primary" @click="update();show();">提交修改</el-button> -->
 
           <!-- <div class="title-desc-box"><h1>{{title}}</h1></div> -->
-          <div class="related-links">        
-            <div id="vditorOutline" class="crispy outline"></div>
+          <div class="related-links">
+            <div id="vditorOutline"
+                 class="crispy outline"></div>
           </div>
-      </div>
+        </div>
 
-      <!-- <div id="vditorOutline" class="outline crispy"></div> -->
-    </div>
+        <!-- <div id="vditorOutline" class="outline crispy"></div> -->
+      </div>
     </div>
 
   </div>
@@ -184,106 +197,151 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.pattern-center {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.pattern-attachment-img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-origin: border-box;
+  width: 100%;
+  height: 400px;
+}
+.lazyload {
+  -webkit-filter: blur(0px);
+  -moz-filter: blur(0px);
+  -ms-filter: blur(0px);
+  filter: blur(0px);
+  -webkit-transition: 0.3s -webkit-filter linear;
+  -moz-transition: 0.3s -moz-filter linear;
+  -moz-transition: 0.3s filter linear;
+  -ms-transition: 0.3s -ms-filter linear;
+  -o-transition: 0.3s -o-filter linear;
+  transition: 0.3s filter linear, 0.3s -webkit-filter linear;
+}
+.pattern-center header.pattern-header {
+    position: absolute;
+    top: 45%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 10px #000;
+    z-index: 1;
+}
+.pattern-center h1.cat-title, .pattern-center h1.entry-title {
+    color: #fff;
+    font-size: 40px;
+    font-weight: 500;
+    width: 80%;
+    margin: auto;
+    padding: 0;
+    border: 0;
+} 
+
 .related-links {
-    max-width: 1000px;
-    margin: 0 auto;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 80px;
-    height: 720px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+  height: 720px;
 }
 .container-sm {
-    max-width: 1250px;
-    margin: 0 auto;
+  max-width: 1250px;
+  margin: 0 auto;
 }
 .repo-details {
-    margin: 0 24px;
-    width: 300px;
+  margin: 0 24px;
+  width: 300px;
 }
 .split-layout {
-    display: flex;
-    justify-content: center;
-    max-width: 1250px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  max-width: 1250px;
+  margin: 0 auto;
 }
 
-.el-main{
-    overflow: visible !important;
+.el-main {
+  overflow: visible !important;
 }
-  .update-pos{
-      float: left;
-  }
-
-.outline{
-    // font: 400 16px/1.8 "Open Sans","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
-    top: 30px;
-    //right: 120px;
-    width: 280px;
-    // height: 85%;
-    max-height: 100%;
-    padding: 0 5px;
-    overflow-y: auto;
-    border-radius: 24px;
-    position: sticky;
-
+.update-pos {
+  float: left;
 }
-.title{
-    margin-left: 400px;
-    margin-right: 400px;
+
+.outline {
+  // font: 400 16px/1.8 "Open Sans","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+  top: 30px;
+  //right: 120px;
+  width: 280px;
+  // height: 85%;
+  max-height: 100%;
+  padding: 0 5px;
+  overflow-y: auto;
+  border-radius: 24px;
+  position: sticky;
+}
+.title {
+  margin-left: 400px;
+  margin-right: 400px;
 }
 
 .repo-details {
-    margin: 0 24px;
-    width: 300px;
+  margin: 0 24px;
+  width: 300px;
 }
-  .title-desc-box {
-    width: 100%;
-    margin: 0 auto 32px;
+.title-desc-box {
+  width: 100%;
+  margin: 0 auto 32px;
 }
 .title-desc-box h1 {
-    margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 
 h2 {
-    margin-top: 4px;
-    font-size: 16px;
-    font-weight: 400;
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 400;
 }
-
-
 
 .readme {
-    max-width: 900px;
-    width: 90%;
-    padding: 24px 32px;
-    border-radius: 24px;
-    margin: 0 auto 48px;
+  max-width: 900px;
+  width: 90%;
+  padding: 24px 32px;
+  border-radius: 24px;
+  margin: 0 auto 48px;
 }
 .md {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    color: #24292e;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
-    font-size: 16px;
-    line-height: 1.5;
-    word-wrap: break-word;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #24292e;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
 }
 
 .md img {
-    max-width: 100%;
-    box-sizing: content-box;
-    box-sizing: initial;
-    background-color: #fff;
+  max-width: 100%;
+  box-sizing: content-box;
+  box-sizing: initial;
+  background-color: #fff;
 }
 
-  .crispy {
-    border: 1px solid rgba(0,0,80,.08);
-    box-shadow: 0 2px 10px rgb(0 20 80 / 10%);
-    background: #fff;//fff
+.crispy {
+  border: 1px solid rgba(0, 0, 80, 0.08);
+  box-shadow: 0 2px 10px rgb(0 20 80 / 10%);
+  background: #fff; //fff
 }
-.content-details{
-    margin: 0 24px;
-    width: 100%;
-    position: sticky;
+.content-details {
+  margin: 0 24px;
+  width: 100%;
+  position: sticky;
 }
 </style>

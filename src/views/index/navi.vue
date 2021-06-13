@@ -60,8 +60,8 @@
           <template #title><i class="el-icon-share"></i>外链</template>
           <el-submenu index="3-1">
             <template #title>领域</template>
-            <el-menu-item index="3-1-1">后端</el-menu-item>
-            <el-menu-item index="3-1-2">前端</el-menu-item>
+            <router-link to="/navi/backend"><el-menu-item index="3-1-1">后端</el-menu-item></router-link>
+            <router-link to="/navi/frontend"><el-menu-item index="3-1-2">前端</el-menu-item></router-link>
           </el-submenu>
           <router-link to="/navi/tools">
           <el-menu-item index="3-2">
@@ -73,19 +73,19 @@
               <template #title>教程</template>
             </el-menu-item>
           </router-link>
-          <router-link to="/navi/frontend">
-            <el-menu-item index="3-4">
-              <template #title>前端</template>
-            </el-menu-item>
-          </router-link>
-          <router-link to="/navi/backend">
-            <el-menu-item index="3-4">
-              <template #title>后端</template>
-            </el-menu-item>
-          </router-link>
           <router-link to="/navi/projects">
-            <el-menu-item index="3-5">
+            <el-menu-item index="3-4">
               <template #title>项目</template>
+            </el-menu-item>
+          </router-link>
+          <router-link to="/navi/life">
+            <el-menu-item index="3-5">
+              <template #title>生活</template>
+            </el-menu-item>
+          </router-link>
+          <router-link to="/navi/menu3-6">
+            <el-menu-item index="3-6">
+              <template #title>番组</template>
             </el-menu-item>
           </router-link>
         </el-submenu>

@@ -65,6 +65,11 @@ const routes = [
               component: ()=>import('../Manage.vue')
           },
           {
+              path:"menu3-6",
+              name:"episodes",
+              component: ()=>import('../views/navi/menu3/menu3-6.vue')
+          },
+          {
               path: "tools",
               name: "tools",
               component: () => import('../views/navi/tools.vue'),

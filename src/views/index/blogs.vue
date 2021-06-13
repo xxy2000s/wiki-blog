@@ -59,7 +59,13 @@
 </el-row>
 </div> -->
 
-
+    <div class="pattern-center ">
+      <div class="pattern-attachment-img"> <img src="../../assets/imgs/list-background.jpg"
+             class="lazyload"
+             onerror="imgError(this,3)"
+             style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></div>
+             <header class="pattern-header "><h1 class="entry-title">文章随笔</h1></header>
+    </div>
   <div class="l-content">
     <div class="l-wrapper">
       <div class="l-grid">
@@ -69,7 +75,7 @@
           <router-link :to="{path: '/detail/' + article[ID-1]}">
             <div class="m-article-card__picture">
               <img class="m-article-card__picture-background"
-                   :src="'src/assets/imgs/back'+(ID%4)+'.jpg'"
+                   :src="'src/assets/imgs/url'+(ID%10)+'.jpg'"
                    loading="lazy">
             </div>
 
@@ -160,6 +166,8 @@ import { showArticle } from '../../api/showArticle.js';
 
 
 <style scoped src='../../assets/css/article.css'></style>
+<style scoped src='../../assets/css/img-header-background.css'></style>
+
 <style scoped>
 .router-link-active {
   text-decoration: #409eff;
@@ -170,9 +178,7 @@ import { showArticle } from '../../api/showArticle.js';
   opacity: 0.85;
   border-radius: 24px;
 }
-:root {
-  --article-shadow-hover: 0 4px 60px 0 rgb(0 0 0 / 83%);
-}
+
 #card {
   height: 120px;
   margin-bottom: 15px;
