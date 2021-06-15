@@ -30,7 +30,7 @@
 
 .m-article-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 10px 5px rgb(110 110 110 / 40%);
+  box-shadow: 0 5px 40px 5px rgb(110 110 110 / 40%);
 }
 
 :after,

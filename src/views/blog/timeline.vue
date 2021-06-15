@@ -11,6 +11,11 @@
     </el-timeline-item>
   </el-timeline>
 </div>
+<!-- <body onscroll="scroll()">
+          <div style="height: 2000px;background-color: aqua;" ></div>
+
+</body> -->
+
 </template>
 
 <script>
@@ -43,7 +48,13 @@ export default{
           .catch((err)=>{
               console.log(err)
           })
-      }
+      },
+       scroll(){
+                //console.log("打印log日志");实时看下效果
+                console.log("开始滚动！");
+                // window.addEventListener('scroll',()=>{console.log(window.scrollY)})
+            }
+            
   }
 }
 </script>

@@ -21,7 +21,12 @@
              class="lazyload"
              onerror="imgError(this,3)"
              style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></div>
-             <header class="pattern-header "><h1 class="entry-title">{{title}}</h1></header>
+      <header class="pattern-header ">
+        <h1 class="entry-title">{{title}}</h1>
+        <router-link to="/article">
+          <h3 class="m-button">编辑文章</h3>
+        </router-link>
+      </header>
     </div>
 
     <!-- <el-button class="update-pos" type="primary" @click="update();show();">提交修改</el-button> -->
@@ -196,7 +201,9 @@ export default {
 }
 </script>
 
+<style scoped src='../../assets/css/m-button.css'></style>
 <style lang="less" scoped>
+
 .pattern-center {
   position: relative;
   top: 0;
@@ -225,24 +232,25 @@ export default {
   transition: 0.3s filter linear, 0.3s -webkit-filter linear;
 }
 .pattern-center header.pattern-header {
-    position: absolute;
-    top: 45%;
-    left: 0;
-    right: 0;
-    text-align: center;
-    color: #fff;
-    text-shadow: 2px 2px 10px #000;
-    z-index: 1;
+  position: absolute;
+  top: 45%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 10px #000;
+  z-index: 1;
 }
-.pattern-center h1.cat-title, .pattern-center h1.entry-title {
-    color: #fff;
-    font-size: 40px;
-    font-weight: 500;
-    width: 80%;
-    margin: auto;
-    padding: 0;
-    border: 0;
-} 
+.pattern-center h1.cat-title,
+.pattern-center h1.entry-title {
+  color: #fff;
+  font-size: 40px;
+  font-weight: 500;
+  width: 80%;
+  margin: auto;
+  padding: 0;
+  border: 0;
+}
 
 .related-links {
   max-width: 1000px;

@@ -151,7 +151,12 @@ export default {
     .vditor /deep/ .vditor-ir pre.vditor-reset{
         padding: 10px 300px !important;      
     }
-
+    .vditor{
+        padding: 0px !important;
+    }
+    .vditor /deep/ .vditor-toolbar--pin{
+    border-radius: 10px;
+}
     .word{
         text-align: center;
     }
@@ -166,7 +171,7 @@ export default {
     -ms-flex-align: center;
     align-items: center;
     margin-top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     }
 
     .title-input[data-v-dc4b8ea2] {

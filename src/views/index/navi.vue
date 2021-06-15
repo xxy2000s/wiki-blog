@@ -1,18 +1,23 @@
 
 <template>
+<!-- <el=menu :default-openeds="['1', ]"> 自动展开-->
   <el-container style="height: 740px; border: 1px solid #eee">
     <el-aside width="200px"
               style="overflow-x:hidden;background-color: rgb(238, 241, 246)">
-      <el-menu :default-openeds="['1', ]">
+      <el-menu > 
         <el-submenu index="1">
           <template #title><i class="el-icon-message"></i>计算机基础</template>
           <el-submenu index="1-1">
             <template #title>专业课</template>
-            <router-link to="menu1-1">
-            <el-menu-item index="1-1-1">计网</el-menu-item>
+            <router-link to="menu1-1-1">
+              <el-menu-item index="1-1-1">计网</el-menu-item>
             </router-link>
-            <el-menu-item index="1-1-2">操作系统</el-menu-item>
-            <el-menu-item index="1-1-3">数据结构</el-menu-item>
+            <router-link to="menu1-1-2">
+              <el-menu-item index="1-1-2">操作系统</el-menu-item>
+            </router-link>
+            <router-link to="menu1-1-3">
+              <el-menu-item index="1-1-3">数据结构</el-menu-item>
+            </router-link>
 
           </el-submenu>
           <el-submenu index="1-2">
@@ -36,21 +41,31 @@
             <el-menu-item index="2-1-4">redis</el-menu-item>
             <el-menu-item index="2-1-4">语言</el-menu-item>
           </el-submenu>
-          <el-submenu index="2-2">
+          <el-menu-item index="2-2">
             <template #title>刷题</template>
-            <el-menu-item index="2-2-1">leetcode</el-menu-item>
+            <!-- <el-menu-item index="2-2-1">leetcode</el-menu-item>
             <el-menu-item index="2-2-2">牛客</el-menu-item>
             <el-menu-item index="2-2-3">PAT</el-menu-item>
             <el-menu-item index="2-2-4">acwing</el-menu-item>
-            <el-menu-item index="2-2-4">算法仓库</el-menu-item>
-          </el-submenu>
+            <el-menu-item index="2-2-4">算法仓库</el-menu-item> -->
+          </el-menu-item>
           <el-submenu index="2-3">
             <template #title>项目</template>
-            <el-menu-item index="2-3-1">写个raft</el-menu-item>
-            <el-menu-item index="2-3-2">博客</el-menu-item>
-            <el-menu-item index="2-3-3">找个秒杀商城</el-menu-item>
-            <el-menu-item index="2-3-4">DNS</el-menu-item>
-            <el-menu-item index="2-3-4">项目仓库</el-menu-item>
+            <router-link to="menu2-3-1">
+              <el-menu-item index="2-3-1">写个raft</el-menu-item>
+            </router-link>
+            <router-link to="menu2-3-2">
+              <el-menu-item index="2-3-2">博客</el-menu-item>
+            </router-link>
+            <router-link to="menu2-3-3">
+              <el-menu-item index="2-3-3">找个秒杀商城</el-menu-item>
+            </router-link>
+            <router-link to="menu2-3-4">
+              <el-menu-item index="2-3-4">DNS</el-menu-item>
+            </router-link>
+            <router-link to="menu2-3-5">
+              <el-menu-item index="2-3-5">项目仓库</el-menu-item>
+            </router-link>
           </el-submenu>
           <el-menu-item index="2-4">
             <template #title>简历</template>
@@ -60,30 +75,34 @@
           <template #title><i class="el-icon-share"></i>外链</template>
           <el-submenu index="3-1">
             <template #title>领域</template>
-            <router-link to="/navi/backend"><el-menu-item index="3-1-1">后端</el-menu-item></router-link>
-            <router-link to="/navi/frontend"><el-menu-item index="3-1-2">前端</el-menu-item></router-link>
+            <router-link to="menu3-1-1">
+              <el-menu-item index="3-1-1">后端</el-menu-item>
+            </router-link>
+            <router-link to="menu3-1-2">
+              <el-menu-item index="3-1-2">前端</el-menu-item>
+            </router-link>
           </el-submenu>
-          <router-link to="/navi/tools">
-          <el-menu-item index="3-2">
-            <template #title>工具</template>
-          </el-menu-item>
+          <router-link to="menu3-2">
+            <el-menu-item index="3-2">
+              <template #title>工具</template>
+            </el-menu-item>
           </router-link>
-          <router-link to="/navi/cs">
+          <router-link to="menu3-3">
             <el-menu-item index="3-3">
               <template #title>教程</template>
             </el-menu-item>
           </router-link>
-          <router-link to="/navi/projects">
+          <router-link to="menu3-4">
             <el-menu-item index="3-4">
               <template #title>项目</template>
             </el-menu-item>
           </router-link>
-          <router-link to="/navi/life">
+          <router-link to="menu3-5">
             <el-menu-item index="3-5">
               <template #title>生活</template>
             </el-menu-item>
           </router-link>
-          <router-link to="/navi/menu3-6">
+          <router-link to="menu3-6">
             <el-menu-item index="3-6">
               <template #title>番组</template>
             </el-menu-item>
@@ -134,56 +153,6 @@
   </el-container> -->
   </el-container>
 
-  <!-- <el-row :gutter="24" style="text-align:center;overflow-x:hidden">
-  <el-col :span="5">
-    <div class="grid-content">
-    <router-link to="/navi/cs">
-        <el-button type="primary" icon="el-icon-folder">计算机专业课</el-button>
-    </router-link>
-    </div>
-  </el-col>
-  <el-col :span="5">
-    <div class="grid-content">
-    <router-link to="/navi/tools">
-        <el-button type="primary" icon="el-icon-folder">工具</el-button>
-    </router-link>
-    </div>
-  </el-col>
-  <el-col :span="5">
-    <div class="grid-content">
-    <router-link to="/navi/frontend">
-        <el-button type="primary" icon="el-icon-folder">前端</el-button>
-    </router-link>
-    </div>
-  </el-col>
-  <el-col :span="5">
-    <div class="grid-content">
-    <router-link to="/navi/backend">
-        <el-button type="primary" icon="el-icon-folder">后端</el-button>
-    </router-link>
-    </div>
-  </el-col>
-    <el-col :span="4">
-    <div class="grid-content">
-    <router-link to="/navi/projects">
-        <el-button type="primary" icon="el-icon-folder">项目</el-button>
-    </router-link>
-    </div>
-  </el-col>
-</el-row> -->
-
-  <!-- <router-view></router-view> -->
-
-  <!-- <el-row :gutter="20">
-  <el-col :span="6">
-    <div class="grid-content">
-    <el-button type="primary" icon="el-icon-folder">计算机专业课</el-button>
-    </div>
-  </el-col>
-  <el-col :span="6"><div class="grid-content bg-purple">工具类</div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple">前端</div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple">后端</div></el-col>
-</el-row> -->
 </template>
 
 <script>

@@ -1,51 +1,5 @@
 
 <template>
-  <div>
-    <!-- <el-menu :default-active="activeIndex"
-             class="el-menu-demo"
-             mode="horizontal"
-             @select="handleSelect">
-      <el-menu-item index="1">
-        <router-link to="/blogs/timeline">
-          时间戳
-        </router-link>
-      </el-menu-item>
-      <el-submenu index="2">
-        <template #title>力扣相关</template>
-        <el-menu-item index="2-1">树</el-menu-item>
-        <el-menu-item index="2-2">图</el-menu-item>
-        <el-menu-item index="2-3">搜索</el-menu-item>
-        <el-submenu index="2-4">
-          <template #title>排序</template>
-          <el-menu-item index="2-4-1">堆排</el-menu-item>
-          <el-menu-item index="2-4-2">快排</el-menu-item>
-          <el-menu-item index="2-4-3">选择排序</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-
-      <el-submenu index="3">
-        <template #title>后端</template>
-        <el-menu-item index="3-1">go基础</el-menu-item>
-        <el-menu-item index="3-2">go算法</el-menu-item>
-        <el-menu-item index="3-3">go实例</el-menu-item>
-      </el-submenu>
-
-      <el-menu-item index="4">
-        <router-link to="/article">
-          <el-button type="success">写文章</el-button>
-        </router-link>
-      </el-menu-item>
-
-      <div class="manage-right">
-        <el-menu-item index="5">
-          <router-link to="/management">
-            <el-button type="success"
-                       plain>后台管理</el-button>
-          </router-link>
-        </el-menu-item>
-      </div>
-    </el-menu> -->
-  </div>
 
   <!-- <div class="img-background">
 <el-row :gutter="12" v-for="ID in article.length" :key=ID >
@@ -59,13 +13,26 @@
 </el-row>
 </div> -->
 
-    <div class="pattern-center ">
-      <div class="pattern-attachment-img"> <img src="../../assets/imgs/list-background.jpg"
-             class="lazyload"
-             onerror="imgError(this,3)"
-             style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></div>
-             <header class="pattern-header "><h1 class="entry-title">文章随笔</h1></header>
-    </div>
+  <div class="pattern-center ">
+    <div class="pattern-attachment-img"> <img src="../../assets/imgs/list-background.jpg"
+           class="lazyload"
+           onerror="imgError(this,3)"
+           style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></div>
+    <header class="pattern-header ">
+      <h1 class="entry-title">文章随笔</h1>
+      <router-link to="/article">
+        <h3 class="m-button">写文章</h3>
+      </router-link>
+      <router-link to="/timeline"
+                   style="padding-left:30px;">
+        <h3 class="m-button">时间戳</h3>
+      </router-link>
+      <router-link to="/management"
+                   style="padding-left:30px;">
+        <h3 class="m-button">后台管理</h3>
+      </router-link>
+    </header>
+  </div>
   <div class="l-content">
     <div class="l-wrapper">
       <div class="l-grid">
@@ -167,8 +134,11 @@ import { showArticle } from '../../api/showArticle.js';
 
 <style scoped src='../../assets/css/article.css'></style>
 <style scoped src='../../assets/css/img-header-background.css'></style>
+<style scoped src='../../assets/css/m-button.css'></style>
+
 
 <style scoped>
+
 .router-link-active {
   text-decoration: #409eff;
 }
