@@ -39,12 +39,7 @@
   vertical-align: inherit;
 }
 
-*,
-:after,
-:before {
-  background-repeat: no-repeat;
-  /* box-sizing: border-box; */
-}
+
 .m-article-card:before {
   content: '';
   position: absolute;

@@ -1,4 +1,7 @@
 <template>
+<div class="blank"
+       style="padding-top: 75px;"></div>
+
   <div>
     <el-backtop target=""
                 :bottom="100">
@@ -15,7 +18,7 @@
       </div>
     </el-backtop>
 
-    <div class="pattern-center ">
+    <div id="content-down" class="pattern-center ">
       <div class="pattern-attachment-img"> <img src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
              data-src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
              class="lazyload"
@@ -34,7 +37,7 @@
     <!-- <div id="vditor" class="vditor"></div> -->
     <h1 style="text-align: center"
         class="title">&nbsp;</h1>
-    <div class="container-sm">
+    <div id="content" class="container-sm">
       <div class="split-layout">
         <div class="content-details">
           <div id="vditorPreview"
@@ -202,6 +205,8 @@ export default {
 </script>
 
 <style scoped src='../../assets/css/m-button.css'></style>
+<style scoped src='../../assets/css/slide-animation.css'></style>
+
 <style lang="less" scoped>
 
 .pattern-center {

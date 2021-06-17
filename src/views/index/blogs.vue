@@ -1,6 +1,7 @@
 
 <template>
-
+<div class="blank"
+       style="padding-top: 75px;"></div>
   <!-- <div class="img-background">
 <el-row :gutter="12" v-for="ID in article.length" :key=ID >
   <el-col :span="12" class="article-center">
@@ -13,7 +14,7 @@
 </el-row>
 </div> -->
 
-  <div class="pattern-center ">
+  <div id="content-down" class="pattern-center ">
     <div class="pattern-attachment-img"> <img src="../../assets/imgs/list-background.jpg"
            class="lazyload"
            onerror="imgError(this,3)"
@@ -33,7 +34,7 @@
       </router-link>
     </header>
   </div>
-  <div class="l-content">
+  <div id="content" class="l-content">
     <div class="l-wrapper">
       <div class="l-grid">
         <article class="m-article-card"
@@ -135,6 +136,7 @@ import { showArticle } from '../../api/showArticle.js';
 <style scoped src='../../assets/css/article.css'></style>
 <style scoped src='../../assets/css/img-header-background.css'></style>
 <style scoped src='../../assets/css/m-button.css'></style>
+<style scoped src='../../assets/css/slide-animation.css'></style>
 
 
 <style scoped>

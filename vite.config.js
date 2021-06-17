@@ -43,6 +43,7 @@ export default {
   },
   plugins: [vue()],
   server: {
+    host: true,
     cors: true,
     proxy: {
       // 字符串简写写法

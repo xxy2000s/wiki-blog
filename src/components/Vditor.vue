@@ -1,4 +1,7 @@
 <template>
+
+<div class="blank"
+       style="padding-top: 75px;"></div>
 <div data-v-dc4b8ea2="" class="header">
   <div data-v-dc4b8ea2="" class="title-input">
     <input data-v-f291f354="" placeholder="请输入文章标题" class="input-size__normal" v-model="form.title">

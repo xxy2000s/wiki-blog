@@ -51,7 +51,7 @@ const routes = [
   {
     path: "/navi",
     name: "navi",
-    redirect: "/navi/menu3-1-1",
+    redirect: "/navi/menu1-1-1",
     component: () => import("../views/index/navi.vue"),
     children: [
       {

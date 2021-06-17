@@ -1,4 +1,6 @@
 <template>
+<div class="blank"
+       style="padding-top: 75px;"></div>
 <div class="block img-background">
   <el-timeline v-for="idx in title.length" :key=idx>
     <el-timeline-item :timestamp="createList[idx-1]" placement="top">

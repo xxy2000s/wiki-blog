@@ -1,12 +1,18 @@
 
 <template>
-<!-- <el=menu :default-openeds="['1', ]"> 自动展开-->
+  <!-- <el=menu :default-openeds="['1', ]"> 自动展开-->
+  <div class="blank"
+       style="padding-top: 75px;"></div>
+
   <el-container style="height: 740px; border: 1px solid #eee">
-    <el-aside width="200px"
+    <el-aside :class="[isCollapse?'width-hide':'width-show']"
               style="overflow-x:hidden;background-color: rgb(238, 241, 246)">
-      <el-menu > 
+              <el-radio-group v-model="isCollapse">
+  <el-radio-button :label="!isCollapse">展开</el-radio-button>
+</el-radio-group>
+      <el-menu  @open="handleOpen" @close="handleClose" :collapse="isCollapse">
         <el-submenu index="1">
-          <template #title><i class="el-icon-message"></i>计算机基础</template>
+          <template #title><i class="el-icon-message"></i><span>计算机基础</span></template>
           <el-submenu index="1-1">
             <template #title>专业课</template>
             <router-link to="menu1-1-1">
@@ -32,7 +38,7 @@
           </el-submenu>
         </el-submenu>
         <el-submenu index="2">
-          <template #title><i class="el-icon-menu"></i>工作</template>
+          <template #title><i class="el-icon-menu"></i><span>工作</span></template>
           <el-submenu index="2-1">
             <template #title>八股文</template>
             <el-menu-item index="2-1-1">计网</el-menu-item>
@@ -72,7 +78,7 @@
           </el-menu-item>
         </el-submenu>
         <el-submenu index="3">
-          <template #title><i class="el-icon-share"></i>外链</template>
+          <template #title><i class="el-icon-share"></i><span>外链</span></template>
           <el-submenu index="3-1">
             <template #title>领域</template>
             <router-link to="menu3-1-1">
@@ -112,65 +118,38 @@
     </el-aside>
 
     <router-view />
-    <!-- <el-container>
-   <el-row :gutter="60" style="text-align:center;overflow-x:hidden">
-  <el-col :span="6">
-    <div class="grid-content">
-    <router-link to="/navi/cs">
-        <el-button type="primary" icon="el-icon-folder">计算机专业课</el-button>
-    </router-link>
-    </div>
-  </el-col>
-  <el-col :span="6">
-    <div class="grid-content">
-    <router-link to="/navi/tools">
-        <el-button type="primary" icon="el-icon-folder">工具</el-button>
-    </router-link>
-    </div>
-  </el-col>
-  <el-col :span="5">
-    <div class="grid-content">
-    <router-link to="/navi/frontend">
-        <el-button type="primary" icon="el-icon-folder">前端</el-button>
-    </router-link>
-    </div>
-  </el-col>
-  <el-col :span="5">
-    <div class="grid-content">
-    <router-link to="/navi/backend">
-        <el-button type="primary" icon="el-icon-folder">后端</el-button>
-    </router-link>
-    </div>
-  </el-col>
-    <el-col :span="4">
-    <div class="grid-content">
-    <router-link to="/navi/projects">
-        <el-button type="primary" icon="el-icon-folder">项目</el-button>
-    </router-link>
-    </div>
-  </el-col>
-</el-row>
-  </el-container> -->
   </el-container>
 
 </template>
 
 <script>
    export default {
-    // data() {
-    //   const item = {
-    //     date: '2016-05-02',
-    //     name: '王小虎',
-    //     address: '上海市普陀区金沙江路 1518 弄'
-    //   };
-    //   return {
-    //     tableData: Array(20).fill(item)
-    //   }
-    // }
+     data(){
+       return{
+          isCollapse: true,
+       }
+     },
+    methods: {
+      handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+    }
   };
 </script>
 
 <style scoped>
+.width-hide{
+    width:auto !important;
+}
+.width-show{
+    width:200px !important;
+}
+.el-menu--collapse{
+    width: auto;
+}
 .el-container {
   overflow: hidden;
 }

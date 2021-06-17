@@ -501,3 +501,5 @@ p {
   min-height: 1px;
 }
 </style>
+
+<style scoped src='../../../assets/css/progress-card.css'></style>
