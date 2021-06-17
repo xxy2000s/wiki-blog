@@ -103,10 +103,8 @@
       </div>
     </div>
 
-    <a href="https://github.com/xxy2000s/wiki-blog"><img class="github-card" src="https://gh-card.dev/repos/xxy2000s/wiki-blog.svg"></a>
-
     <h2 style="text-align:center">编程语言</h2>
-    <div style="width: 500px;margin: auto;">
+    <div style="width: 500px;margin: auto; margin-bottom: 50px;">
       <el-progress :text-inside="true"
                    :stroke-width="30"
                    :percentage="javascript"
@@ -152,6 +150,9 @@
         <span>{{vue}}%</span>
       </el-progress>
     </div>
+    <h2 style="text-align:center">GithubCard</h2>
+
+    <a href="https://github.com/xxy2000s/wiki-blog"><img class="github-card" style="margin-bottom:30px;margin-top:10px"  src="https://gh-card.dev/repos/xxy2000s/wiki-blog.svg"></a>
   </div>
 
 </template>

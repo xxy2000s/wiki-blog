@@ -26,7 +26,7 @@
                 class="menu">
               <li><a href="/"><span class="faa-parent animated-hover"><i class="fa fa-fort-awesome faa-horizontal"
                        aria-hidden="true"></i> 首页</span></a></li>
-              <li><a href="/navi"><span> <i class="fa-solid fa-compass"></i> 导航</span></a>
+              <li><a href="/navi"><span class="faa-parent animated-hover"> <i class="fa-solid fa-compass faa-horizontal"></i> 导航</span></a>
                 <ul class="sub-menu">
                   <li><a href="https://2heng.xin/archives/hacking/"><i class="fa fa-terminal"
                          aria-hidden="true"></i> 极客</a></li>
@@ -43,8 +43,8 @@
                 </ul>
               </li>
 
-              <li><a href="/todo"><span><i class="fa-regular fa-calendar"></i> 待办</span></a></li>
-              <li><a href="/blogs"><span class="faa-parent animated-hover"><i class="fa-solid fa-book"></i> 文章</span></a></li>
+              <li><a href="/todo"><span class="faa-parent animated-hover"><i class="fa-solid fa-calendar faa-horizontal"></i> 待办</span></a></li>
+              <li><a href="/blogs"><span class="faa-parent animated-hover"><i class="fa-solid fa-book faa-horizontal"></i> 文章</span></a></li>
 
             </ul>
           </nav>
@@ -173,6 +173,65 @@ export default {
   }
 }
 
+.fa-solid {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.faa-horizontal.animated,
+.faa-horizontal.animated-hover:hover,
+.faa-parent.animated-hover:hover > .faa-horizontal {
+  -webkit-animation: horizontal 2s ease infinite;
+  animation: horizontal 2s ease infinite;
+}
+
+.faa-horizontal.animated,
+.faa-horizontal.animated-hover:hover,
+.faa-parent.animated-hover:hover > .faa-horizontal {
+  -webkit-animation: horizontal 2s ease infinite;
+  animation: horizontal 2s ease infinite;
+}
+@keyframes horizontal {
+  0% {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  6% {
+    -webkit-transform: translate(5px, 0);
+    -ms-transform: translate(5px, 0);
+    transform: translate(5px, 0);
+  }
+  12% {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  18% {
+    -webkit-transform: translate(5px, 0);
+    -ms-transform: translate(5px, 0);
+    transform: translate(5px, 0);
+  }
+  24% {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  30% {
+    -webkit-transform: translate(5px, 0);
+    -ms-transform: translate(5px, 0);
+    transform: translate(5px, 0);
+  }
+  100%,
+  36% {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+}
 .fa-book:before {
   content: '\1f4d4';
 }
@@ -571,10 +630,10 @@ a {
 .site-branding {
   animation: sitetop 1s;
 }
-@media (max-width: 860px){
-    .site-branding{
-        display: none;
-    }
+@media (max-width: 860px) {
+  .site-branding {
+    display: none;
+  }
 }
 @keyframes searchbox {
   0% {
