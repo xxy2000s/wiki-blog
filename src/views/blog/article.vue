@@ -1,22 +1,6 @@
 <template>
-<div class="blank"
-       style="padding-top: 75px;"></div>
 
   <div>
-    <el-backtop target=""
-                :bottom="100">
-      <div style="
-        height: 100%;
-        width: 100%;
-        background-color: #f2f5f6;
-        box-shadow: 0 0 6px rgba(0,0,0, .12);
-        text-align: center;
-        line-height: 40px;
-        color: #1989fa;
-      ">
-        UP
-      </div>
-    </el-backtop>
 
     <div id="content-down" class="pattern-center ">
       <div class="pattern-attachment-img"> <img src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"

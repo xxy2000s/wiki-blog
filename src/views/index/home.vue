@@ -49,7 +49,8 @@
       </div>
     </figure>
   </div>
-
+<!-- <div id="banner_wave_1"></div>
+<div id="banner_wave_2" ></div> -->
   <div id="content"
        class="site-content">
     <div class="top-feature-row">
@@ -91,14 +92,47 @@
 
     <h1 class="fes-title"
         style="font-family: 'Ubuntu', sans-serif;padding-top: 40px"><i class="fa fa-anchor"
-         aria-hidden="true"></i> START:DASH!!</h1>
+         aria-hidden="true"></i> START:CONTENTS!!</h1>
+
+    <div class="info-wrapper">
+
+      <h3><i class="el-icon-menu
+"></i>Categories</h3>
+      <ul class="category-wrapper">
+
+        <li class="category-item" v-for="(value,index) in categories_name" :key=value><a :href="'/blogs/categories/' +categories_id[index]"
+             class=""><span class="category-name">{{categories_name[index]}}</span> <span class="post-num"
+                  style="background-color: #1cbbb4;">{{categories_count[index]}}</span></a></li>
+      </ul>
+      <hr>
+      <h3><i class="el-icon-price-tag
+
+"></i>Tags</h3>
+      <div data-v-125939b4=""
+           class="tags" >
+           <span  data-v-125939b4=""
+              class=""
+              style="background-color: #0081ff;" v-for="(value, index) in tags_id" :key=value><a :href="'/blogs/tag/'+tags_id[index]">{{tags_name[index]}}</a></span>
+              <!-- <span data-v-125939b4=""
+              class=""
+              style="background-color: rgb(242, 109, 109);">JavaScript</span><span data-v-125939b4=""
+              class=""
+              style="background-color: rgb(132, 155, 135);">ES6</span><span data-v-125939b4=""
+              class=""
+              style="background-color: rgb(132, 155, 135);">Vue</span><span data-v-125939b4=""
+              class=""
+              style="background-color: rgb(225, 91, 100);">VuePress</span><span data-v-125939b4=""
+              class=""
+              style="background-color: rgb(248, 178, 106);">VueProject</span> -->
+              </div>
+    </div>
 
     <div class="entry-content">
       <div class="poem-wrap">
         <div class="poem-border poem-left"></div>
         <div class="poem-border poem-right"></div>
         <h1>念两句诗</h1>
-        <p id="poem">湖上西风斜日，荷花落尽红英。</p>
+        <p id="poem">我们自古以来，就有埋头苦干的人，有拼命硬干的人，有为民请命的人，有舍身求法的人。</p>
         <p id="info">【宋代】晏殊《破阵子》</p>
       </div>
     </div>
@@ -152,15 +186,30 @@
     </div>
     <h2 style="text-align:center">GithubCard</h2>
 
-    <a href="https://github.com/xxy2000s/wiki-blog"><img class="github-card" style="margin-bottom:30px;margin-top:10px"  src="https://gh-card.dev/repos/xxy2000s/wiki-blog.svg"></a>
+    <a href="https://github.com/xxy2000s/wiki-blog"><img class="github-card"
+           style="margin-bottom:30px;margin-top:10px"
+           src="https://gh-card.dev/repos/xxy2000s/wiki-blog.svg"></a>
+
+
   </div>
 
 </template>
 
 <script>
+import {getTags} from '../../api/Tag.js'
+import {getCategories} from '../../api/Category.js'
+import html2canvas from 'html2canvas';
+
 export default {
   data() {
       return {
+        tags_name:[],
+        tags_id:[],
+        tags_num:[],
+        categories_name:[],
+        categories_count:[],
+        categories_parent:[],
+        categories_id:[],
         percentage: 10,
         colors: [
           {color: '#f56c6c', percentage: 20},
@@ -177,6 +226,52 @@ export default {
         vue: 70,
       };
     },
+    mounted(){
+        this.showTag();
+        this.showCategory();
+//         html2canvas(document.getElementById('capture'), {
+//   onrendered: function(canvas) {
+//     var url = canvas.toDataURL("https://baidu.com");//图片地址
+//     document.body.appendChild(canvas);
+//   },
+//   width: 300,
+//   height: 300
+// });
+
+
+    }
+    ,
+    methods:{
+        showTag(){
+            getTags()
+            .then((res=>{
+                for(let i=0;i<res.length;i++){
+                    this.tags_name.push(res[i].name)
+                    this.tags_id.push(res[i].id)
+                    this.tags_num.push(res[i].count)
+                }
+            }))
+            .catch((err)=>{
+                console.log("get tags error")
+            })
+        },
+        showCategory(){
+            getCategories()
+            .then((res)=>{
+                for(let i=0;i<res.length;i++){
+                    this.categories_name.push(res[i].name);
+                    this.categories_count.push(res[i].count);
+                    this.categories_parent.push(res[i].parent);
+                    this.categories_id.push(res[i].id)
+                }
+            })
+            .catch((err)=>{
+                console.log("get categories error")
+            })
+        },
+        
+        
+    }
 }
 </script>
 
@@ -185,13 +280,89 @@ export default {
 <style scoped src="../../assets/css/poem.css">
 </style>
 <style scoped>
-.el-progress{
-    margin: 10px;
+hr {
+  border: 0;
+  border-top: 1px solid #eaecef;
 }
-.github-card{
-    display: flex;
-    justify-content: center;
-    margin: auto;
+.tags span[data-v-125939b4] {
+  vertical-align: middle;
+  margin: 4px 4px 10px;
+  padding: 4px 8px;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background: #fff;
+  color: #fff;
+  line-height: 13px;
+  font-size: 13px;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.5s;
+}
+.tags span a{
+    text-decoration: none;
+    color: #fff;
+}
+.tags[data-v-125939b4] {
+  margin: 30px 0;
+}
+
+.info-wrapper .category-wrapper .category-item a .post-num {
+  width: 1.6rem;
+  height: 1.6rem;
+  text-align: center;
+  line-height: 1.6rem;
+  border-radius: 0.25rem;
+  background: #eee;
+  font-size: 13px;
+  color: #fff;
+}
+ul {
+  line-height: 2.2;
+}
+.info-wrapper .category-wrapper {
+  list-style: none;
+  padding-left: 0;
+}
+.info-wrapper .category-wrapper .category-item a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #242424;
+}
+.info-wrapper .category-wrapper .category-item:hover {
+  transform: scale(1.04);
+}
+.info-wrapper .category-wrapper .category-item {
+  margin-bottom: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.5s;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.info-wrapper {
+  /* position: sticky; */
+  top: 70px;
+  overflow: hidden;
+  transition: all 0.3s;
+  margin-left: 15px;
+  flex: 0 0 300px;
+  height: auto;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  padding: 0 15px;
+  background: #fff;
+}
+
+.el-progress {
+  margin: 10px;
+}
+.github-card {
+  display: flex;
+  justify-content: center;
+  margin: auto;
 }
 .is-homepage {
   opacity: 0 !important;
@@ -207,7 +378,32 @@ export default {
   background-size: cover;
   z-index: -1;
 }
-
+#banner_wave_2 {
+    width: auto;
+    height: 80px;
+    background: url("https://cdn.jsdelivr.net/gh/moezx/cdn@3.5.1/img/Sakura/images/wave2.png") repeat-x;
+    _filter: alpha(opacity=80);
+    position: absolute;
+    bottom: 0;
+    width: 130%;
+    left: -30%;
+    z-index: 4;
+    opacity: 1;
+    transition-duration: .4s,.4s;
+}
+#banner_wave_1 {
+    width: auto;
+    height: 65px;
+    background: url("https://cdn.jsdelivr.net/gh/moezx/cdn@3.5.1/img/Sakura/images/wave1.png") repeat-x;
+    _filter: alpha(opacity=80);
+    position: absolute;
+    bottom: 0;
+    width: 120%;
+    left: -20%;
+    z-index: 5;
+    opacity: 1;
+    transition-duration: .4s,.4s;
+}
 .centerbg {
   background-image: url('src/assets/imgs/back3.jpg');
   background-position: center center;

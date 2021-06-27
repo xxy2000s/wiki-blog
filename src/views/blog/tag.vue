@@ -49,7 +49,11 @@
             </div>
 
             <div class="m-article-card__info">
-              <a class="m-article-card__tag">工具利器</a>
+                <template  v-if="loadFlag.value">
+              <a class="m-article-card__tag"
+                 v-for="value in tags[ID-1]"
+                 :key=value>{{value}}</a>
+                 </template>
               <a class="m-article-card__info-link"
                  aria-label="十佳 AI 产品工具，为生活添彩">
                 <div>
@@ -90,8 +94,11 @@
 <script>
 import {getArticleList} from "../../api/getArticleList.js"
 import { showArticle } from '../../api/showArticle.js';
-import {getArticleByCategory} from '../../api/Article.js'
+import {getArticleByCategory, getArticleByTag} from '../../api/Article.js'
 import {getACategory} from '../../api/Category.js'
+import {getMetas} from '../../api/Meta.js'
+import {getTagName} from '../../api/Tag.js'
+import {ref} from 'vue'
   export default {
     data() {
       return {
@@ -103,37 +110,90 @@ import {getACategory} from '../../api/Category.js'
         content:[],
         category_id:[],
         category_name: [],
+        tags_map: new Map(),
+        tags:[],
+        loadFlag:ref(false),
+        
       };
     },
     mounted(){
         this.init()
     },
+    watch:{
+      loadFlag( newval, oldval){
+          console.log(newval)
+          console.log(oldval)
+      }
+    },
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
       },
-      showArticleByCategory(){
-          getArticleByCategory(this.$route.params.id)
-          .then((res)=>{
-            for(var i=0;i<=res.length;i++){
-                  this.article.push(res[i].id)
-                  this.title.push(res[i].title)
-                  this.createTime.push(res[i].created_at)
-                  this.content.push(res[i].content)
-                  this.category_id.push(res[i].category_id)
-                  getACategory(res[i].category_id)
-                  .then((res2)=>{
-                      this.category_name.push(res2.name)
-                  })
-                  .catch((err)=>{
-                      console.log("get category by id error")
-                  })
-              }
-          })
-          .catch((error)=>{
-              console.log("get article by category error")
-          })
-      },
+      showArticleByTag(){
+        getArticleByTag(this.$route.params.id)
+        .then((res)=>{
+          for(let i=0;i<res.length;i++){
+              this.article.push(res[i].aid)
+              showArticle(res[i].aid)
+              .then((res2)=>{
+                  this.title.push(res2.title)
+                  this.createTime.push(res2.created_at)
+                  this.category_name.push(res2.Category.name)
+
+              })
+              .catch((err2)=>{
+                  console.log("get article info by tag error")
+              })
+              getMetas(res[i].aid)
+              .then((res3)=>{
+                  let tag_name_tmp = []
+                  for(let j=0;j<res3.length;j++){
+                      getTagName(res3[j])
+                      .then((res4)=>{
+                          tag_name_tmp.push(res4.name)
+                      })
+                      .catch((err)=>{
+                          console.log("get tag name error")
+                      })
+                  }
+                  this.tags_map.set(res[i].aid, tag_name_tmp)
+                  this.tags.push(tag_name_tmp)
+                  this.loadFlag=true;
+                  
+              })
+              .catch((err3)=>{
+                  console.log("get article tags error")
+              })
+          }
+            
+        })
+        .catch((err)=>{
+            console.log("get article by tag error")
+        })
+      }
+      ,
+      // showArticleByCategory(){
+      //     getArticleByCategory(this.$route.params.id)
+      //     .then((res)=>{
+      //       for(var i=0;i<=res.length;i++){
+      //             this.article.push(res[i].id)
+      //             this.title.push(res[i].title)
+      //             this.createTime.push(res[i].created_at)
+      //             this.content.push(res[i].content)
+      //             this.category_id.push(res[i].category_id)
+      //             getACategory(res[i].category_id)
+      //             .then((res2)=>{
+      //                 this.category_name.push(res2.name)
+      //             })
+      //             .catch((err)=>{
+      //                 console.log("get category by id error")
+      //             })
+      //         }
+      //     })
+      //     .catch((error)=>{
+      //         console.log("get article by category error")
+      //     })
+      // },
       showArticleList(){
           getArticleList(1)
           .then((res)=>{
@@ -174,8 +234,7 @@ import {getACategory} from '../../api/Category.js'
               this.showArticleList()
           }
           else{
-          this.showArticleByCategory()
-
+          this.showArticleByTag()
           }
       }
     },
@@ -183,10 +242,10 @@ import {getACategory} from '../../api/Category.js'
 </script>
 
 
-<style scoped src='../../assets/css/article.css'></style>
-<style scoped src='../../assets/css/img-header-background.css'></style>
-<style scoped src='../../assets/css/m-button.css'></style>
-<style scoped src='../../assets/css/slide-animation.css'></style>
+<style  src='../../assets/css/article.css'></style>
+<style  src='../../assets/css/img-header-background.css'></style>
+<style  src='../../assets/css/m-button.css'></style>
+<style  src='../../assets/css/slide-animation.css'></style>
 
 
 <style scoped>
@@ -198,8 +257,8 @@ import {getACategory} from '../../api/Category.js'
   padding: 0 15px 25px;
   text-align: right;
 }
-.item-meta-cat{
-    margin-right:10px
+.item-meta-cat {
+  margin-right: 10px;
 }
 .item-category {
   display: flex;

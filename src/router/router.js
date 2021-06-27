@@ -10,7 +10,25 @@ const routes = [
   {
     path: "/management",
     name: "management",
+    redirect: "/management/articles",
     component: () => import("../views/Manage.vue"),
+    children: [
+      {
+        path: "articles",
+        name: "articleManagement",
+        component: () => import("../views/backend/articleManagement.vue"),
+      },
+      {
+        path: "categories",
+        name: "categoryManagement",
+        component: () => import("../views/backend/categoryManagement.vue"),
+      },
+      {
+        path: "tags",
+        name: "tagManagement",
+        component: () => import("../views/backend/tagManagement.vue"),
+      },
+    ],
   },
   {
     path: "/article",
@@ -28,18 +46,20 @@ const routes = [
     component: () => import("../views/index/todo.vue"),
   },
   {
-    path: "/blogs",
+    path: "/blogs/categories/:id",
     name: "blogs",
     component: () => import("../views/index/blogs.vue"),
-    // children: [
-    //   {
-    //      path: "timeline",
-    //      name: "timeline",
-    //      component: () => import('../views/blog/timeline.vue'),
-    //      props: true,
-    //      meta: {title: "首页"}
-    //   }
-    // ]
+  },
+
+  {
+      path:"/test",
+      name:"test",
+      component: ()=>import('../views/index/test.vue')
+  },
+  {
+    path: "/blogs/tag/:id",
+    name: "tags",
+    component: () => import("../views/blog/tag.vue"),
   },
   {
     path: "/timeline",
@@ -71,7 +91,7 @@ const routes = [
       },
       {
         path: "menu3-1-1",
-         name: "backend",
+        name: "backend",
         component: () => import("../views/navi/menu3/menu3-1-1.vue"),
       },
       {
@@ -104,67 +124,8 @@ const routes = [
         name: "episodes",
         component: () => import("../views/navi/menu3/menu3-6.vue"),
       },
-      // {
-      //   path: "links",
-      //   name: "links",
-      //   component: () => import("../Manage.vue"),
-      // },
-      // {
-      //   path: "tools",
-      //   name: "tools",
-      //   component: () => import("../views/navi/tools.vue"),
-      // },
-      // {
-      //   path: "cs",
-      //   name: "cs",
-      //   component: () => import("../views/navi/cs.vue"),
-      // },
-      // {
-      //   path: "frontend",
-      //   name: "frontend",
-      //   component: () => import("../views/navi/frontend.vue"),
-      // },
-      // {
-      //   path: "backend",
-      //   name: "backend",
-      //   component: () => import("../views/navi/backend.vue"),
-      // },
-      // {
-      //   path: "projects",
-      //   name: "projects",
-      //   component: () => import("../views/navi/projects.vue"),
-      // },
     ],
   },
-
-  //navi的兄弟
-
-  //   {
-  //       path: "/navi/tools",
-  //       name: "tools",
-  //       component: () => import('../views/navi/tools.vue'),
-  //   },
-  //   {
-  //     path: "/navi/projects",
-  //     name: "projects",
-  //     component: () => import('../views/navi/projects.vue'),
-  // },
-  //   {
-  //     path: "/navi/cs",
-  //     name: "cs",
-  //     component: () => import('../views/navi/cs.vue'),
-  //   },
-  //   {
-  //     path: "/navi/frontend",
-  //     name: "frontend",
-  //     component: () => import('../views/navi/frontend.vue'),
-  //   },
-  //   {
-  //     path: "/navi/backend",
-  //     name: "backend",
-  //     component: () => import('../views/navi/backend.vue'),
-  //   },
-
   //没有当前的路径的话，就404
   {
     path: "/:catchAll(.*)",
@@ -179,15 +140,15 @@ const router = createRouter({
 });
 //让不同路由切换时都自动到返回到页面顶部 参考https://www.cnblogs.com/dfyg-xiaoxiao/p/10337557.html
 router.afterEach((to, from) => {
-  let bodySrcollTop = document.body.scrollTop
+  let bodySrcollTop = document.body.scrollTop;
   if (bodySrcollTop !== 0) {
-    document.body.scrollTop = 0
-    return
+    document.body.scrollTop = 0;
+    return;
   }
-  let docSrcollTop = document.documentElement.scrollTop
+  let docSrcollTop = document.documentElement.scrollTop;
   if (docSrcollTop !== 0) {
-    document.documentElement.scrollTop = 0
+    document.documentElement.scrollTop = 0;
   }
-})
+});
 
 export default router;

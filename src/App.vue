@@ -1,6 +1,8 @@
 <template>
-  <header class="site-header no-select is-homepage gizle"
-          v-bind:class="{'sabit': !scrollFlag, 'yya':scrollFlag}">
+  <header class="site-header no-select gizle"
+          v-bind:class="{'sabit': !scrollFlag, 'yya':scrollFlag, 'top-fixed-down': hideHeader&(route['path'].substr(0, 7)=='/detail' || route['path'].substr(0, 6)=='/blogs')}"
+          @mouseover="hov"
+          @mouseleave="hovl">
     <div class="site-top">
       <div class="site-branding">
         <span class="logolink moe-mashiro">
@@ -13,7 +15,8 @@
         </span>
       </div>
 
-      <div class="lower-cantiner">
+      <div class="lower-cantiner"
+           v-bind:class="{'is-homepage': route['path']=='/'&(!scrollFlag&!hovFlag)}">
         <div class="lower">
           <div id="show-nav"
                class="showNav mobile-fit">
@@ -29,22 +32,22 @@
               <li><a href="/navi"><span class="faa-parent animated-hover"> <i class="fa-solid fa-compass faa-horizontal"></i> 导航</span></a>
                 <ul class="sub-menu">
                   <li><a href="https://2heng.xin/archives/hacking/"><i class="fa fa-terminal"
-                         aria-hidden="true"></i> 极客</a></li>
+                         aria-hidden="true"></i> 前端</a></li>
                   <li><a href="https://2heng.xin/archives/article/"><i class="fa fa-file-text-o"
-                         aria-hidden="true"></i> 文章</a></li>
-                  <li><a href="https://2heng.xin/archives/review/"><i class="fa fa-quote-right"
-                         aria-hidden="true"></i> 影评</a></li>
+                         aria-hidden="true"></i> 后端</a></li>
+                  <li><a href="https://www.kwgg2020.com/"><i class="fa fa-quote-right"
+                         aria-hidden="true"></i> 工具</a></li>
                   <li><a href="https://2heng.xin/archives/thingking/"><i class="fa fa-commenting-o"
-                         aria-hidden="true"></i> 随想</a></li>
-                  <li><a target="_blank"
-                       rel="noopener noreferrer"
-                       href="https://mashiro.top/"><i class="fa fa-book"
                          aria-hidden="true"></i> 笔记</a></li>
+                  <li><a href="https://mashiro.top/"><i class="fa fa-book"
+                         aria-hidden="true"></i> 面经</a></li>
                 </ul>
               </li>
 
               <li><a href="/todo"><span class="faa-parent animated-hover"><i class="fa-solid fa-calendar faa-horizontal"></i> 待办</span></a></li>
-              <li><a href="/blogs"><span class="faa-parent animated-hover"><i class="fa-solid fa-book faa-horizontal"></i> 文章</span></a></li>
+              <li><a href="/blogs/categories/0"><span class="faa-parent animated-hover"><i class="fa-solid fa-book faa-horizontal"></i> 文章</span></a></li>
+
+              <li><a href="/test"><span class="faa-parent animated-hover"><i class="fa-solid fa-book faa-horizontal"></i> test</span></a></li>
 
             </ul>
           </nav>
@@ -62,9 +65,16 @@
       <div class="icon"></div>
     </div>
   </div> -->
+  <div v-if="route['path']!='/'"
+       class="blank"
+       style="padding-top: 70px;"></div>
+
   <div id="page"
        class="wrapper">
-
+    <a @click="scrollSmoothTo(0)"
+       class="cd-top"
+       :style="{top:backTop}">
+    </a>
     <router-view />
   </div>
 
@@ -74,21 +84,37 @@
 //import HelloWorld from './components/HelloWorld.vue'
 import {getArticleList} from "./api/getArticleList.js"
 import profile from "./assets/imgs/profile.jpg"
+import { useRoute } from 'vue-router'
+import {ref, watch} from 'vue'
 export default {
   name: 'App',
   // components: {
   //   HelloWorld
   // }
+  setup(){
+    const route = useRoute()
+    watch(route,(newpath, oldpath)=>{
+      console.log(route['path'])
+    })
+    
+    return{
+      route,
+    }
+
+  },
   data(){
       return {
           pic:profile,
           scrollFlag: false,
-          path: this.$route.path
+          hoverFlag:false,
+          hovFlag:false,
+          backTop:'-900px',
+          hideHeader: false,
       }
   },
   mounted(){
     window.addEventListener('scroll', this.handleScroll)
-    console.log(this.path)
+
   },
   methods:{
       show(){
@@ -109,6 +135,43 @@ export default {
         }else{
           _this.scrollFlag=false
         }
+        if(window.pageYOffset>150){
+            this.hideHeader = true;
+            this.backTop = '-137px'
+        }else{
+            this.hideHeader = false;
+            this.backTop = '-900px'
+        }
+
+      },
+       hov(){
+        this.hovFlag =  true
+      },
+        hovl(){
+          this.hovFlag = false
+      },
+      scrollSmoothTo(position){
+         if (!window.requestAnimationFrame) {
+            window.requestAnimationFrame = function(callback, element) {
+            return setTimeout(callback, 17);
+          };
+        }
+        // 当前滚动高度
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        // 滚动step方法
+        var step = function () {
+            // 距离目标滚动距离
+            var distance = position - scrollTop;
+            // 目标滚动位置
+            scrollTop = scrollTop + distance / 5;
+            if (Math.abs(distance) < 1) {
+                window.scrollTo(0, position);
+            } else {
+                window.scrollTo(0, scrollTop);
+                requestAnimationFrame(step);
+            }
+        };
+        step();
       }
       
   }
@@ -116,6 +179,36 @@ export default {
 </script>
 
 <style scoped>
+.top-fixed-down {
+  margin-top: -70px;
+}
+
+.cd-top {
+  position: fixed;
+  right: 25px;
+  top: -900px;
+  z-index: 99;
+  width: 70px;
+  height: 900px;
+  background: url('https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/scroll.png')
+    no-repeat center;
+  background-size: contain;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  cursor: url('https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/No_Disponible.cur'),
+    auto;
+  opacity: 1;
+}
+a {
+  transition-delay: 5ms;
+}
+.is-homepage {
+  display: none;
+}
+.is-homepage:hover {
+  display: block;
+}
+
 @media (max-width: 860px) {
   .openNav {
     transition-duration: 0.5s;
@@ -251,7 +344,7 @@ export default {
   content: '';
   display: block;
   position: absolute;
-  bottom: -16px;
+  bottom: -14px;
   height: 6px;
   background-color: #fe9600;
   width: 100%;
@@ -295,7 +388,6 @@ export default {
   min-width: 758.4px;
   pointer-events: none;
 }
-
 .site-top .lower {
   display: inline-block;
   margin: 15px 0 0 10px;
@@ -370,7 +462,7 @@ export default {
 }
 .site-header {
   width: 100%;
-  height: 75px;
+  height: 70px;
   background: 0 0;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;

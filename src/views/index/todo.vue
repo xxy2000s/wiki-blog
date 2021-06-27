@@ -1,7 +1,5 @@
 
 <template>
-    <div class="blank"
-         style="padding-top: 75px;"></div>
 
 <el-button type="primary" round @click="login">登录</el-button>
 <el-button type="primary" round @click="logout">登出</el-button>

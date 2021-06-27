@@ -1,7 +1,5 @@
 <template>
 
-<div class="blank"
-       style="padding-top: 75px;"></div>
 <div data-v-dc4b8ea2="" class="header">
   <div data-v-dc4b8ea2="" class="title-input">
     <input data-v-f291f354="" placeholder="请输入文章标题" class="input-size__normal" v-model="form.title">
@@ -16,29 +14,28 @@
 <el-dialog v-model="dialogFormVisible">
   <el-form ref="form" :model="form" label-width="80px">
   <el-form-item label="分类">
-    <el-select v-model="form.type" placeholder="请选择类别">
-      <el-option label="力扣" value="leetcode" @click="show(form.type)"></el-option>
-      <el-option label="后端" value="backend"></el-option>
+    <el-select v-model="form.category" placeholder="请选择类别">
+      <el-option v-for="(value, index) in categories_id" :key=value :label="categories_name[index]" :value="categories_id[index]"></el-option>
     </el-select>
   </el-form-item>
   <el-form-item label="标签">
-    <el-checkbox-group v-model="form.label">
-      <el-checkbox label="后端" name="label"></el-checkbox>
-      <el-checkbox label="前端" name="label"></el-checkbox>
+    <el-checkbox-group v-model="form.tags">
+      <el-checkbox v-for="(value,index) in tags_id" :key=value :label="tags_name[index]" ></el-checkbox>
+      <!-- <el-checkbox label="前端" name="label"></el-checkbox>
       <el-checkbox label="算法" name="label"></el-checkbox>
       <el-checkbox label="Go" name="label"></el-checkbox>
       <el-checkbox label="Vue" name="label"></el-checkbox>
       <el-checkbox label="计算机基础" name="label"></el-checkbox>
       <el-checkbox label="工具" name="label"></el-checkbox>
-      <el-checkbox label="实习" name="label"></el-checkbox>
+      <el-checkbox label="实习" name="label"></el-checkbox> -->
 
     </el-checkbox-group>
   </el-form-item>
   <el-form-item>
-    <router-link to="/blogs">
-    <el-button type="primary" @click="onSubmit(1, form.title, 'test');dialogFormVisible=false;open()">立即创建</el-button>
+    <router-link to="/blogs/categories/0">
+    <el-button type="primary" @click="onSubmit(form.category, form.title, 'test', form.tags);dialogFormVisible=false;open()">立即创建</el-button>
     </router-link>
-    <el-button @click="dialogFormVisible = false;test()">取消</el-button>
+    <el-button @click="dialogFormVisible = false;test(form.tags);">取消</el-button>
   </el-form-item>
   </el-form>
 </el-dialog>
@@ -52,6 +49,9 @@ import Vditor from "vditor"
 import "vditor/dist/index.css"
 import {createArticle} from "../api/createArticle.js"
 import { ElMessage } from 'element-plus'
+import {getCategories} from '../api/Category.js'
+import {getTags, getATag} from '../api/Tag.js'
+import {createMeta} from "../api/Meta.js"
 export default {
     // setup() {
     //   let category_id = ref("1")
@@ -76,11 +76,16 @@ export default {
             contentEditor:"",
             //id: "",
             dialogFormVisible: false,
+            categories_name:[],
+            categories_id:[],
+            tags_name:[],
+            tags_id:[],
+            tag_tmp:'',
             form: {
               title: '',
-              type: '',
-              label: [],
+              tags: [],
               content: "",
+              category: '',
           },
           formLabelWidth: '120px'
         }
@@ -117,13 +122,34 @@ export default {
                 //console.log(this.contentEditor.getValue())
                 //content=this.contentEditor.getValue()
             }
-        })
+        });
+        this.ShowCategories()
+        this.ShowTags()
     },
     methods:{
-        onSubmit(category_id, title, head_img){
+        metaSubmit(aid, tid){
+                createMeta(aid, tid)
+                .then((res)=>{
+                    console.log("successfully create meta "+ tid)
+                })
+                .catch((err)=>{
+                    console.log("create meta error")
+                })
+        },
+        onSubmit(category_id, title, head_img, tags){
             createArticle(category_id, title, head_img, this.contentEditor.getValue())
             .then((res)=>{
                 console.log(res)
+                for(let i=0;i<tags.length;i++){
+                  getATag(tags[i])
+                  .then((res2)=>{
+                      this.tag_tmp = res2.id
+                      this.metaSubmit(res.id, this.tag_tmp)
+                  })
+                  .catch((err)=>{
+                      console.log("get tag by name error ")
+                  })
+                }
             })
             .catch((err)=>{
                 console.log("发布错误 ", err.data)
@@ -133,6 +159,7 @@ export default {
         },
         test(params){
             console.log(this.contentEditor.getValue())
+            console.log(params)
         },
         open() {
           ElMessage.success({
@@ -140,7 +167,31 @@ export default {
             type: 'success'
           });
         },
-
+        ShowCategories(){
+            getCategories()
+            .then((res)=>{
+              for(let i=0;i<res.length;i++){
+                this.categories_name.push(res[i].name)
+                this.categories_id.push(res[i].id)
+              }
+            })
+            .catch((err)=>{
+                console.log("get categories error")
+            })
+        },
+        ShowTags(){
+            getTags()
+            .then((res)=>{
+                for(let i=0;i<res.length;i++){
+                    this.tags_name.push(res[i].name)
+                    this.tags_id.push(res[i].id)
+                }
+            })
+            .catch((err)=>{
+                console.log("get tags error")
+            })
+        }
+        ,
         show(params){
             console.log(params)
         }

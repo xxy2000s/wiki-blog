@@ -1,16 +1,21 @@
 
 <template>
   <!-- <el=menu :default-openeds="['1', ]"> 自动展开-->
-  <div class="blank"
-       style="padding-top: 75px;"></div>
+
 
   <el-container style="height: 740px; border: 1px solid #eee">
     <el-aside :class="[isCollapse?'width-hide':'width-show']"
               style="overflow-x:hidden;background-color: rgb(238, 241, 246)">
-              <el-radio-group v-model="isCollapse">
-  <el-radio-button :label="!isCollapse">展开</el-radio-button>
-</el-radio-group>
-      <el-menu  @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+
+      <el-menu @open="handleOpen"
+               @close="handleClose"
+               :collapse="isCollapse">
+        <el-menu-item @click="clp()"
+                      :label="!isCollapse">
+          <el-radio-group v-model="isCollapse">
+            <div><i :class="[isCollapse?'el-icon-s-unfold':'el-icon-s-fold']"></i></div>
+          </el-radio-group>
+        </el-menu-item>
         <el-submenu index="1">
           <template #title><i class="el-icon-message"></i><span>计算机基础</span></template>
           <el-submenu index="1-1">
@@ -130,25 +135,22 @@
        }
      },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+      clp(){
+          this.isCollapse = !this.isCollapse
       }
     }
   };
 </script>
 
 <style scoped>
-.width-hide{
-    width:auto !important;
+.width-hide {
+  width: auto !important;
 }
-.width-show{
-    width:200px !important;
+.width-show {
+  width: 200px !important;
 }
-.el-menu--collapse{
-    width: auto;
+.el-menu--collapse {
+  width: 70px;
 }
 .el-container {
   overflow: hidden;

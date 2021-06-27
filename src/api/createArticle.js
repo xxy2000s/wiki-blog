@@ -22,8 +22,7 @@ export async function createArticle(category_id,title,head_img,content) {
       }
     )
     .then(async (res) => {
-      console.log(res.data.code);
-      return res.data.msg;
+      return res.data.data.post;
     });
   return resData;
 }

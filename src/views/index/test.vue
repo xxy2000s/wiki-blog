@@ -1,8 +1,4 @@
 <template>
-  <div>cs61a</div>
-  <div>cs61b</div>
-  <div>cs61c</div>
-  
 </template>
 
 <script>

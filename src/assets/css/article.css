@@ -1,6 +1,10 @@
 .m-article-card__tag {
-  position: absolute;
-  top: 20px;
+
+  /* position: absolute;
+    top: 20px; */
+    margin-right: 20px; 
+  position: relative;
+  top:-30px;
   left: 20px;
   right: 20px;
   color: #2c3e50;
@@ -16,6 +20,8 @@
   font-size: 1.25rem;
   font-weight: 600;
   margin: 15px;
+  position: relative;
+    top: -30px;
 }
 .m-article-card__author-stats,
 .m-article-card__timestamp {
@@ -24,7 +30,6 @@
   color: #333;
   letter-spacing: 0.2px;
   font-size: 0.875rem;
-  margin-top: 80px;
   margin-left: 20px;
 }
 
@@ -48,7 +53,7 @@
   bottom: 0;
   left: 10px;
   border-radius: 10px;
-  box-shadow: var(--article-shadow-normal), 0 0 0 transparent;
+  box-shadow: #f4f8fd, 0 0 0 transparent;
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
 }
 

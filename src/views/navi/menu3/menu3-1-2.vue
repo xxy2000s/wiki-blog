@@ -104,7 +104,7 @@
         </a>
       </div><div class="col s12 m6"
            id="bangumi-274646">
-           <a href="https://v3.cn.vuejs.org/guide/introduction.html">
+           <a href="https://waptv.2345.com/xl/1131.html">
         <div class="card hoverable">
           <div class="card-image waves-effect waves-block waves-light">
             <div class="activator itempic lazyload"
@@ -112,8 +112,8 @@
                  data-src="https://lain.bgm.tv/pic/cover/l/b0/09/274646_yTEYw.jpg"></div>
           </div>
           <div class="card-content">
-            <div class="card-title should-ellipsis activator grey-text text-darken-4">Vue官方文档</div>
-            <p class="should-ellipsis-full" style="color: #2c3e50;">官方教程</p>
+            <div class="card-title should-ellipsis activator grey-text text-darken-4">鬼吹灯系列</div>
+            <p class="should-ellipsis-full" style="color: #2c3e50;">鬼吹灯</p>
             <ul class="skill-list">
               <li class="skill">
                 <div>追番进度：3/13</div> <progress class="skill-1"

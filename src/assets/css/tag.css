@@ -1,0 +1,50 @@
+.tag-wrap {
+  display: inline-block;
+  margin-right: 5px;
+}
+.green .arrow {
+  border-color: transparent #07c145 transparent transparent;
+}
+
+.tag-wrap .arrow{
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-width: 9px;
+  border-style: solid;
+  border-color: transparent #1da1f2 transparent transparent;
+}
+.green .dot-wrap, .green .tag-text-wrap{
+  background-color: #07c145;
+}
+.tag-wrap .dot-wrap{
+  display: inline-block;
+  width: 6px;
+  height: 18px;
+  background-color: #1da1f2;
+}
+
+.tag-wrap .dot-wrap .dot{
+  background-color: #fff;
+  margin-top: 7px;
+  vertical-align: center;
+  height: 4px;
+  width: 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 0 0 1px rgb(0 0 0 / 30%);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 30%);
+  border-radius: 50%;
+}
+
+
+.tag-wrap .tag-text-wrap{
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+  padding: 0 5px;
+  height: 18px;
+  line-height: 18px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
