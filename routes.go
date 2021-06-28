@@ -17,7 +17,9 @@ func CollectRoute(r *gin.Engine) *gin.Engine{
 	categoryRoutes.POST("", categoryController.Create)
 	categoryRoutes.PUT("/:id", categoryController.Update) //替换
 	categoryRoutes.GET("/:id", categoryController.Show)
+	categoryRoutes.GET("/name/:name", categoryController.ShowByName)
 	categoryRoutes.DELETE("/:id", categoryController.Delete)
+	categoryRoutes.GET("", categoryController.ShowAllCategories)
 
 	postRoutes := r.Group("/posts")
 	//postRoutes.Use(middleware.AuthMiddleware())
@@ -25,8 +27,26 @@ func CollectRoute(r *gin.Engine) *gin.Engine{
 	postRoutes.POST("", postController.Create)
 	postRoutes.PUT("/:id", postController.Update) //替换
 	postRoutes.GET("/:id", postController.Show)
+	postRoutes.GET("/categories/:cid", postController.ShowC)
 	postRoutes.DELETE("/:id", postController.Delete)
 	postRoutes.POST("/page/list", postController.PageList)
 
+
+	metaRoutes := r.Group("/metas")
+	metaController := controller.NewMetaController()
+	metaRoutes.POST("", metaController.Create)
+	metaRoutes.PUT("/:id/:tid", metaController.Update)
+	metaRoutes.GET("/:id", metaController.Show)
+	metaRoutes.GET("/tag/:tid", metaController.ShowByTag)
+	metaRoutes.DELETE("/:id/:tid", metaController.Delete)
+
+	tagRoutes := r.Group("/tags")
+	tagController := controller.NewTagController()
+	tagRoutes.POST("", tagController.Create)
+	tagRoutes.PUT("/:id", tagController.Update)
+	tagRoutes.GET("/:id", tagController.Show)
+	tagRoutes.GET("/name/:name", tagController.ShowByName)
+	tagRoutes.DELETE("/:id", tagController.Delete)
+	tagRoutes.GET("", tagController.ShowAll)
 	return r
 }

@@ -14,6 +14,7 @@ import (
 type IPostController interface {
 	RestController
 	PageList(ctx *gin.Context)
+	ShowC(ctx *gin.Context)
 }
 
 type PostController struct {
@@ -40,19 +41,20 @@ func (p PostController) Create(ctx *gin.Context) {
 		HeadImg:    requestPost.HeadImg,
 		Content:    requestPost.Content,
 	}
-
 	// 插入数据
 	if err := p.DB.Create(&post).Error; err != nil {
 		panic(err)
 		return
 	}
-
+	c := NewCategoryController()
+	var category model.Category
+	c.DB.Model(&category).Where("id = ?", post.CategoryId).Update("count", gorm.Expr("count+ ?", 1))
 	// 成功
-	response.Success(ctx, nil, "创建成功")
+	response.Success(ctx, gin.H{"post":post}, "创建成功")
 }
 
 func (p PostController) Update(ctx *gin.Context) {
-	var requestPost vo.CreatePostRequest
+	var requestPost vo.UpdatePostRequest
 	// 数据验证
 	if err := ctx.ShouldBind(&requestPost); err != nil {
 		log.Print(err.Error())
@@ -71,12 +73,12 @@ func (p PostController) Update(ctx *gin.Context) {
 
 	// 判断当前用户是否为文章的作者
 	// 获取登录用户
-	user, _ := ctx.Get("user")
-	userId := user.(model.User).ID
-	if userId != post.UserId {
-		response.Fail(ctx, nil, "文章属于您，请勿非法操作")
-		return
-	}
+	//user, _ := ctx.Get("user")
+	//userId := user.(model.User).ID
+	//if userId != post.UserId {
+	//	response.Fail(ctx, nil, "文章属于您，请勿非法操作")
+	//	return
+	//}
 
 	// 更新文章
 	if err := p.DB.Model(&post).Update(requestPost).Error; err != nil {
@@ -100,6 +102,20 @@ func (p PostController) Show(ctx *gin.Context) {
 	response.Success(ctx, gin.H{"post": post}, "成功")
 }
 
+func (p PostController) ShowC(ctx *gin.Context){
+	// 获取path中的id
+	postId := ctx.Params.ByName("cid")
+
+	var posts []model.Post
+	if p.DB.Preload("Category").Where("category_id = ?", postId).First(&posts).RecordNotFound() {
+		response.Fail(ctx, nil, "文章不存在")
+		return
+	}
+	p.DB.Preload("Category").Where("category_id = ?", postId).Find(&posts)
+	response.Success(ctx, gin.H{"posts": posts}, "成功")
+}
+
+
 func (p PostController) Delete(ctx *gin.Context) {
 	// 获取path中的id
 	postId := ctx.Params.ByName("id")
@@ -112,12 +128,15 @@ func (p PostController) Delete(ctx *gin.Context) {
 
 	// 判断当前用户是否为文章的作者
 	// 获取登录用户
-	user, _ := ctx.Get("user")
-	userId := user.(model.User).ID
-	if userId != post.UserId {
-		response.Fail(ctx, nil, "文章属于您，请勿非法操作")
-		return
-	}
+	//user, _ := ctx.Get("user")
+	//userId := user.(model.User).ID
+	//if userId != post.UserId {
+	//	response.Fail(ctx, nil, "文章属于您，请勿非法操作")
+	//	return
+	//}
+	c := NewCategoryController()
+	var category model.Category
+	c.DB.Model(&category).Where("id = ?", post.CategoryId).Update("count", gorm.Expr("count- ?", 1))
 
 	p.DB.Delete(&post)
 
@@ -131,7 +150,7 @@ func (p PostController) PageList(ctx *gin.Context) {
 
 	// 分页
 	var posts []model.Post
-	p.DB.Order("created_at desc").Offset((pageNum - 1) * pageSize).Limit(pageSize).Find(&posts)
+	p.DB.Preload("Category").Order("created_at desc").Offset((pageNum - 1) * pageSize).Limit(pageSize).Find(&posts)
 
 	// 记录的总条数
 	var total int

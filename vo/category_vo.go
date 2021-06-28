@@ -2,5 +2,10 @@ package vo
 
 
 type CreateCategoryRequest struct {
-	Name string `json:"name" binding:"required"`
+	ID uint `json:"id"`
+	Name string `json:"name"`
+	Count     int `json:"count"`
+	Order	  int 	 `json:"order"`
+	Parent	  int 	 `json:"parent"`
 }
+
