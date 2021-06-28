@@ -81,6 +81,7 @@ export default {
             tags_name:[],
             tags_id:[],
             tag_tmp:'',
+            tag_map: new Map(),
             form: {
               title: '',
               tags: [],
@@ -141,14 +142,7 @@ export default {
             .then((res)=>{
                 console.log(res)
                 for(let i=0;i<tags.length;i++){
-                  getATag(tags[i])
-                  .then((res2)=>{
-                      this.tag_tmp = res2.id
-                      this.metaSubmit(res.id, this.tag_tmp)
-                  })
-                  .catch((err)=>{
-                      console.log("get tag by name error ")
-                  })
+                    this.metaSubmit(res.id, this.tag_map.get(tags[i]))
                 }
             })
             .catch((err)=>{
@@ -185,6 +179,7 @@ export default {
                 for(let i=0;i<res.length;i++){
                     this.tags_name.push(res[i].name)
                     this.tags_id.push(res[i].id)
+                    this.tag_map.set(res[i].name, res[i].id)
                 }
             })
             .catch((err)=>{
