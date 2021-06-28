@@ -137,6 +137,8 @@ func (p PostController) Delete(ctx *gin.Context) {
 	c := NewCategoryController()
 	var category model.Category
 	c.DB.Model(&category).Where("id = ?", post.CategoryId).Update("count", gorm.Expr("count- ?", 1))
+	m := NewMetaController()
+	m.DB.Where("a_id = ?", post.ID).Delete(model.Meta{})
 
 	p.DB.Delete(&post)
 
