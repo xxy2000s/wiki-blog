@@ -108,16 +108,17 @@
               </li>
 
               <li>
-                <a href="/test"
-                  ><span class="faa-parent animated-hover"
-                    ><i class="fa-solid fa-book faa-horizontal"></i> 测试</span
-                  ></a
-                >
+                <a href="/timeline">
+                <span class="faa-parent animated-hover">
+                  <i class="fa-solid fa-briefcase"></i> 归档
+
+                </span>
+                </a>
               </li>
               <li>
                 <a href="/management"
                   ><span class="faa-parent animated-hover"
-                    ><i class="fa-solid fa-book faa-horizontal"></i> 后台</span
+                    ><i class="fa-solid fa-paperclip"></i> 后台</span
                   ></a
                 >
               </li>
@@ -392,6 +393,12 @@ a {
     -ms-transform: translate(0, 0);
     transform: translate(0, 0);
   }
+}
+.fa-paperclip:before{
+    content:"\1f4ce"
+}
+.fa-briefcase:before {
+  content: "\1f4bc";
 }
 .fa-book:before {
   content: "\1f4d4";

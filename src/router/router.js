@@ -64,7 +64,7 @@ const routes = [
   {
     path: "/timeline",
     name: "timeline",
-    component: () => import("../views/blog/timeline.vue"),
+    component: () => import("../views/index/timeline.vue"),
     //props: true,
     //meta: {title: "首页"}
   },
