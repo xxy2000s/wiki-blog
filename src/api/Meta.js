@@ -23,7 +23,7 @@ export async function getMetas(aid){
       apiUrl+'/'+aid,
     )
     .then(async (res)=>{
-        return res.data.data.tags
+        return res.data.data.tagNames
     });
     return resData;
 }

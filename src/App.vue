@@ -1,59 +1,130 @@
 <template>
-  <header class="site-header no-select gizle"
-          v-bind:class="{'sabit': !scrollFlag, 'yya':scrollFlag, 'top-fixed-down': hideHeader&(route['path'].substr(0, 7)=='/detail' || route['path'].substr(0, 6)=='/blogs')}"
-          @mouseover="hov"
-          @mouseleave="hovl">
+  <header
+    class="site-header no-select gizle"
+    v-bind:class="{
+      sabit: !scrollFlag,
+      yya: scrollFlag,
+      'top-fixed-down':
+        hideHeader &
+        (route['path'].substr(0, 7) == '/detail' ||
+          route['path'].substr(0, 6) == '/blogs'),
+    }"
+    @mouseover="hov"
+    @mouseleave="hovl"
+  >
     <div class="site-top">
       <div class="site-branding">
         <span class="logolink moe-mashiro">
-          <a href="https://2heng.xin"
-             alt="樱花庄的白猫"> <ruby><span class="sakuraso">BUPT</span><span class="no">の</span><span class="shironeko">Coder</span>
+          <a href="https://2heng.xin" alt="樱花庄的白猫">
+            <ruby
+              ><span class="sakuraso">BUPT</span><span class="no">の</span
+              ><span class="shironeko">Coder</span>
               <rp></rp>
               <rt class="chinese-font">北大软微</rt>
               <rp></rp>
-            </ruby> </a>
+            </ruby>
+          </a>
         </span>
       </div>
 
-      <div class="lower-cantiner"
-           v-bind:class="{'is-homepage': route['path']=='/'&(!scrollFlag&!hovFlag)}">
+      <div
+        class="lower-cantiner"
+        v-bind:class="{
+          'is-homepage': (route['path'] == '/') & (!scrollFlag & !hovFlag),
+        }"
+      >
         <div class="lower">
-          <div id="show-nav"
-               class="showNav mobile-fit">
+          <div id="show-nav" class="showNav mobile-fit">
             <div class="line line1"></div>
             <div class="line line2"></div>
             <div class="line line3"></div>
           </div>
           <nav class="mobile-fit-control hide">
-            <ul id="menu-new"
-                class="menu">
-              <li><a href="/"><span class="faa-parent animated-hover"><i class="fa fa-fort-awesome faa-horizontal"
-                       aria-hidden="true"></i> 首页</span></a></li>
-              <li><a href="/navi"><span class="faa-parent animated-hover"> <i class="fa-solid fa-compass faa-horizontal"></i> 导航</span></a>
+            <ul id="menu-new" class="menu">
+              <li>
+                <a href="/"
+                  ><span class="faa-parent animated-hover"
+                    ><i
+                      class="fa fa-fort-awesome faa-horizontal"
+                      aria-hidden="true"
+                    ></i>
+                    首页</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="/navi"
+                  ><span class="faa-parent animated-hover">
+                    <i class="fa-solid fa-compass faa-horizontal"></i>
+                    导航</span
+                  ></a
+                >
                 <ul class="sub-menu">
-                  <li><a href="https://2heng.xin/archives/hacking/"><i class="fa fa-terminal"
-                         aria-hidden="true"></i> 前端</a></li>
-                  <li><a href="https://2heng.xin/archives/article/"><i class="fa fa-file-text-o"
-                         aria-hidden="true"></i> 后端</a></li>
-                  <li><a href="https://www.kwgg2020.com/"><i class="fa fa-quote-right"
-                         aria-hidden="true"></i> 工具</a></li>
-                  <li><a href="https://2heng.xin/archives/thingking/"><i class="fa fa-commenting-o"
-                         aria-hidden="true"></i> 笔记</a></li>
-                  <li><a href="https://mashiro.top/"><i class="fa fa-book"
-                         aria-hidden="true"></i> 面经</a></li>
+                  <li>
+                    <a href="https://2heng.xin/archives/hacking/"
+                      ><i class="fa fa-terminal" aria-hidden="true"></i> 前端</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://2heng.xin/archives/article/"
+                      ><i class="fa fa-file-text-o" aria-hidden="true"></i>
+                      后端</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://www.kwgg2020.com/"
+                      ><i class="fa fa-quote-right" aria-hidden="true"></i>
+                      工具</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://2heng.xin/archives/thingking/"
+                      ><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                      笔记</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://mashiro.top/"
+                      ><i class="fa fa-book" aria-hidden="true"></i> 面经</a
+                    >
+                  </li>
                 </ul>
               </li>
 
-              <li><a href="/todo"><span class="faa-parent animated-hover"><i class="fa-solid fa-calendar faa-horizontal"></i> 待办</span></a></li>
-              <li><a href="/blogs/categories/0"><span class="faa-parent animated-hover"><i class="fa-solid fa-book faa-horizontal"></i> 文章</span></a></li>
+              <li>
+                <a href="/todo"
+                  ><span class="faa-parent animated-hover"
+                    ><i class="fa-solid fa-calendar faa-horizontal"></i>
+                    待办</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="/blogs/categories/0"
+                  ><span class="faa-parent animated-hover"
+                    ><i class="fa-solid fa-book faa-horizontal"></i> 文章</span
+                  ></a
+                >
+              </li>
 
-              <li><a href="/test"><span class="faa-parent animated-hover"><i class="fa-solid fa-book faa-horizontal"></i> test</span></a></li>
-
+              <li>
+                <a href="/test"
+                  ><span class="faa-parent animated-hover"
+                    ><i class="fa-solid fa-book faa-horizontal"></i> 测试</span
+                  ></a
+                >
+              </li>
+              <li>
+                <a href="/management"
+                  ><span class="faa-parent animated-hover"
+                    ><i class="fa-solid fa-book faa-horizontal"></i> 后台</span
+                  ></a
+                >
+              </li>
             </ul>
           </nav>
         </div>
-        <el-avatar :src="pic"
-                   class="header-user-avatar"></el-avatar>
+        <el-avatar :src="pic" class="header-user-avatar"></el-avatar>
       </div>
     </div>
   </header>
@@ -65,117 +136,114 @@
       <div class="icon"></div>
     </div>
   </div> -->
-  <div v-if="route['path']!='/'"
-       class="blank"
-       style="padding-top: 70px;"></div>
+  <div
+    v-if="route['path'] != '/'"
+    class="blank"
+    style="padding-top: 70px"
+  ></div>
 
-  <div id="page"
-       class="wrapper">
-    <a @click="scrollSmoothTo(0)"
-       class="cd-top"
-       :style="{top:backTop}">
-    </a>
+  <div id="page" class="wrapper">
+    <a @click="scrollSmoothTo(0)" class="cd-top" :style="{ top: backTop }"> </a>
     <router-view />
   </div>
-
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-import {getArticleList} from "./api/getArticleList.js"
-import profile from "./assets/imgs/profile.jpg"
-import { useRoute } from 'vue-router'
-import {ref, watch} from 'vue'
+import { getArticleList } from "./api/getArticleList.js";
+import profile from "./assets/imgs/profile.jpg";
+import { useRoute } from "vue-router";
+import { ref, watch } from "vue";
 export default {
-  name: 'App',
+  name: "App",
   // components: {
   //   HelloWorld
   // }
-  setup(){
-    const route = useRoute()
-    watch(route,(newpath, oldpath)=>{
-      console.log(route['path'])
-    })
-    
-    return{
+  setup() {
+    const route = useRoute();
+    watch(route, (newpath, oldpath) => {
+      console.log(route["path"]);
+    });
+
+    return {
       route,
-    }
-
+    };
   },
-  data(){
-      return {
-          pic:profile,
-          scrollFlag: false,
-          hoverFlag:false,
-          hovFlag:false,
-          backTop:'-900px',
-          hideHeader: false,
+  data() {
+    return {
+      pic: profile,
+      scrollFlag: false,
+      hoverFlag: false,
+      hovFlag: false,
+      backTop: "-900px",
+      hideHeader: false,
+    };
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    show() {
+      getArticleList(1)
+        .then((res) => {
+          console.log(res[0].id);
+        })
+        .catch((err) => {
+          console.log(err.data);
+        });
+    },
+    handleScroll() {
+      let _this = this;
+      var scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      // console.log(scrollTop)
+      if (scrollTop) {
+        _this.scrollFlag = true;
+      } else {
+        _this.scrollFlag = false;
       }
-  },
-  mounted(){
-    window.addEventListener('scroll', this.handleScroll)
-
-  },
-  methods:{
-      show(){
-          getArticleList(1)
-          .then((res)=>{
-              console.log(res[0].id)
-          })
-          .catch((err)=>{
-              console.log(err.data)
-          })
-      },
-      handleScroll () {
-        let _this=this;
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-        // console.log(scrollTop)
-        if(scrollTop){
-          _this.scrollFlag=true
-        }else{
-          _this.scrollFlag=false
-        }
-        if(window.pageYOffset>150){
-            this.hideHeader = true;
-            this.backTop = '-137px'
-        }else{
-            this.hideHeader = false;
-            this.backTop = '-900px'
-        }
-
-      },
-       hov(){
-        this.hovFlag =  true
-      },
-        hovl(){
-          this.hovFlag = false
-      },
-      scrollSmoothTo(position){
-         if (!window.requestAnimationFrame) {
-            window.requestAnimationFrame = function(callback, element) {
-            return setTimeout(callback, 17);
-          };
-        }
-        // 当前滚动高度
-        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        // 滚动step方法
-        var step = function () {
-            // 距离目标滚动距离
-            var distance = position - scrollTop;
-            // 目标滚动位置
-            scrollTop = scrollTop + distance / 5;
-            if (Math.abs(distance) < 1) {
-                window.scrollTo(0, position);
-            } else {
-                window.scrollTo(0, scrollTop);
-                requestAnimationFrame(step);
-            }
+      if (window.pageYOffset > 150) {
+        this.hideHeader = true;
+        this.backTop = "-137px";
+      } else {
+        this.hideHeader = false;
+        this.backTop = "-900px";
+      }
+    },
+    hov() {
+      this.hovFlag = true;
+    },
+    hovl() {
+      this.hovFlag = false;
+    },
+    scrollSmoothTo(position) {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = function (callback, element) {
+          return setTimeout(callback, 17);
         };
-        step();
       }
-      
-  }
-}
+      // 当前滚动高度
+      var scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      // 滚动step方法
+      var step = function () {
+        // 距离目标滚动距离
+        var distance = position - scrollTop;
+        // 目标滚动位置
+        scrollTop = scrollTop + distance / 5;
+        if (Math.abs(distance) < 1) {
+          window.scrollTo(0, position);
+        } else {
+          window.scrollTo(0, scrollTop);
+          requestAnimationFrame(step);
+        }
+      };
+      step();
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -190,12 +258,12 @@ export default {
   z-index: 99;
   width: 70px;
   height: 900px;
-  background: url('https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/scroll.png')
+  background: url("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/scroll.png")
     no-repeat center;
   background-size: contain;
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
-  cursor: url('https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/No_Disponible.cur'),
+  cursor: url("https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/cursor/No_Disponible.cur"),
     auto;
   opacity: 1;
 }
@@ -259,7 +327,7 @@ a {
     transition-duration: 0.5s;
     background-color: #333;
     position: absolute;
-    content: '';
+    content: "";
     width: 30px;
     height: 3px;
     left: 0;
@@ -326,22 +394,22 @@ a {
   }
 }
 .fa-book:before {
-  content: '\1f4d4';
+  content: "\1f4d4";
 }
 .fa-calendar:before {
-  content: '\1f4c5';
+  content: "\1f4c5";
 }
 .fa-fort-awesome:before {
-  content: '\1f3e0';
+  content: "\1f3e0";
 }
 .fa-compass:before {
-  content: '\1f9ed';
+  content: "\1f9ed";
 }
 .site-top ul li a:hover:after {
   max-width: 100%;
 }
 .site-top ul li a:after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   bottom: -14px;
@@ -393,7 +461,7 @@ a {
   margin: 15px 0 0 10px;
   font-size: 16px;
   position: relative;
-  left: -35%;
+  left: -50%;
   pointer-events: auto !important;
 }
 .site-top .lower nav {
@@ -505,24 +573,24 @@ a {
   margin: 15px 0 0 10px;
   font-size: 16px;
   position: relative;
-  left: -35%;
+  left: -50%;
   pointer-events: auto !important;
 }
 
 .moe-mashiro {
-  font-family: 'Moe-Mashiro', 'Merriweather Sans', Helvetica, Tahoma, Arial,
-    'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',
+  font-family: "Moe-Mashiro", "Merriweather Sans", Helvetica, Tahoma, Arial,
+    "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei",
     sans-serif;
 }
 
 .serif {
-  font-family: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif',
-    'source-han-serif-sc', 'PT Serif', 'SongTi SC', 'MicroSoft Yahei', Georgia,
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Source Han Serif",
+    "source-han-serif-sc", "PT Serif", "SongTi SC", "MicroSoft Yahei", Georgia,
     serif;
 }
 .chinese-font {
-  font-family: 'Merriweather Sans', Helvetica, Tahoma, Arial, 'PingFang SC',
-    'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei', sans-serif;
+  font-family: "Merriweather Sans", Helvetica, Tahoma, Arial, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei", sans-serif;
 }
 .site-branding {
   float: left;
@@ -632,8 +700,8 @@ a {
   z-index: 9999;
 }
 .moe-mashiro {
-  font-family: 'Moe-Mashiro', 'Merriweather Sans', Helvetica, Tahoma, Arial,
-    'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei',
+  font-family: "Moe-Mashiro", "Merriweather Sans", Helvetica, Tahoma, Arial,
+    "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei",
     sans-serif;
 }
 

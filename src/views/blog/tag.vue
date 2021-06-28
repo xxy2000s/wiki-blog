@@ -1,6 +1,4 @@
-
 <template>
-
   <!-- <div class="img-background">
 <el-row :gutter="12" v-for="ID in article.length" :key=ID >
   <el-col :span="12" class="article-center">
@@ -13,69 +11,91 @@
 </el-row>
 </div> -->
 
-  <div id="content-down"
-       class="pattern-center ">
-    <div class="pattern-attachment-img"> <img src="../../assets/imgs/list-background.jpg"
-           class="lazyload"
-           onerror="imgError(this,3)"
-           style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></div>
-    <header class="pattern-header ">
+  <div id="content-down" class="pattern-center">
+    <div class="pattern-attachment-img">
+      <img
+        src="../../assets/imgs/list-background.jpg"
+        class="lazyload"
+        onerror="imgError(this,3)"
+        style="
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          pointer-events: none;
+        "
+      />
+    </div>
+    <header class="pattern-header">
       <h1 class="entry-title">文章随笔</h1>
       <router-link to="/article">
         <h3 class="m-button">写文章</h3>
       </router-link>
-      <router-link to="/timeline"
-                   style="padding-left:30px;">
+      <router-link to="/timeline" style="padding-left: 30px">
         <h3 class="m-button">时间戳</h3>
       </router-link>
-      <router-link to="/management"
-                   style="padding-left:30px;">
+      <router-link to="/management" style="padding-left: 30px">
         <h3 class="m-button">后台管理</h3>
       </router-link>
     </header>
   </div>
-  <div id="content"
-       class="l-content">
+  <div id="content" class="l-content">
     <div class="l-wrapper">
       <div class="l-grid">
-        <article class="m-article-card"
-                 v-for="ID in article.length"
-                 :key=ID>
-          <router-link :to="{path: '/detail/' + article[ID-1]}">
+        <article class="m-article-card" v-for="ID in article.length" :key="ID">
+          <router-link :to="{ path: '/detail/' + article[ID - 1] }">
             <div class="m-article-card__picture">
-              <img class="m-article-card__picture-background"
-                   :src="'/src/assets/imgs/url'+(ID%10)+'.jpg'"
-                   loading="lazy">
+              <img
+                class="m-article-card__picture-background"
+                :src="'/src/assets/imgs/url' + (ID % 10) + '.jpg'"
+                loading="lazy"
+              />
             </div>
 
             <div class="m-article-card__info">
-                <template  v-if="loadFlag.value">
-              <a class="m-article-card__tag"
-                 v-for="value in tags[ID-1]"
-                 :key=value>{{value}}</a>
-                 </template>
-              <a class="m-article-card__info-link"
-                 aria-label="十佳 AI 产品工具，为生活添彩">
+              <a
+                class="m-article-card__tag"
+                v-for="value in tags_map.get(article[ID-1])"
+                :key="value"
+                >{{ value }}</a
+              >
+              <a
+                class="m-article-card__info-link"
+                aria-label="十佳 AI 产品工具，为生活添彩"
+              >
                 <div>
-                  <h2 class="m-article-card__title js-article-card-title "
-                      title="{{title[ID-1]}}"
-                      style="">
-                    {{title[ID-1]}}
+                  <h2
+                    class="m-article-card__title js-article-card-title"
+                    title="{{title[ID-1]}}"
+                    style=""
+                  >
+                    {{ title[ID - 1] }}
                   </h2>
                 </div>
                 <div class="item-category">
                   <span>
-                    <div class="item-meta-cat"><a href="https://code.xiaxuyang.com">{{category_name[ID-1]}}</a></div>
+                    <div class="item-meta-cat">
+                      <a href="https://code.xiaxuyang.com">{{
+                        category_name[ID - 1]
+                      }}</a>
+                    </div>
                   </span>
                   <span>
-                    <div class="item-meta-ico bg-ico-note"
-                         style="background: url(https://me.ursb.me/usr/themes/pinghsu/images/bg-ico.png) no-repeat;background-size: 40px auto;"><a href="https://code.xiaxuyang.com"></a></div>
+                    <div
+                      class="item-meta-ico bg-ico-note"
+                      style="
+                        background: url(https://me.ursb.me/usr/themes/pinghsu/images/bg-ico.png)
+                          no-repeat;
+                        background-size: 40px auto;
+                      "
+                    >
+                      <a href="https://code.xiaxuyang.com"></a>
+                    </div>
                   </span>
                 </div>
                 <div class="m-article-card__timestamp">
                   <span>发布于</span>
                   <span>&nbsp;•&nbsp;</span>
-                  <span>{{createTime[ID-1]}}</span>
+                  <span>{{ createTime[ID - 1] }}</span>
                 </div>
               </a>
             </div>
@@ -88,165 +108,203 @@
   <router-view></router-view>
 
   <div class="line"></div>
-
 </template>
 
 <script>
-import {getArticleList} from "../../api/getArticleList.js"
-import { showArticle } from '../../api/showArticle.js';
-import {getArticleByCategory, getArticleByTag} from '../../api/Article.js'
-import {getACategory} from '../../api/Category.js'
-import {getMetas} from '../../api/Meta.js'
-import {getTagName} from '../../api/Tag.js'
-import {ref} from 'vue'
-  export default {
-    data() {
-      return {
-        activeIndex: '1',
-        //activeIndex2: '1'
-        article:[],
-        title: [],
-        createTime:[],
-        content:[],
-        category_id:[],
-        category_name: [],
-        tags_map: new Map(),
-        tags:[],
-        loadFlag:ref(false),
-        
-      };
-    },
-    mounted(){
-        this.init()
-    },
-    watch:{
-      loadFlag( newval, oldval){
-          console.log(newval)
-          console.log(oldval)
-      }
-    },
-    methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      showArticleByTag(){
-        getArticleByTag(this.$route.params.id)
-        .then((res)=>{
-          for(let i=0;i<res.length;i++){
-              this.article.push(res[i].aid)
-              showArticle(res[i].aid)
-              .then((res2)=>{
-                  this.title.push(res2.title)
-                  this.createTime.push(res2.created_at)
-                  this.category_name.push(res2.Category.name)
+import { getArticleList } from "../../api/getArticleList.js";
+import { showArticle } from "../../api/showArticle.js";
+import { getArticleByCategory, getArticleByTag } from "../../api/Article.js";
+import { getACategory } from "../../api/Category.js";
+import { getMetas } from "../../api/Meta.js";
+import { getTagName } from "../../api/Tag.js";
+import { ref } from "vue";
+import axios from "axios";
 
-              })
-              .catch((err2)=>{
-                  console.log("get article info by tag error")
-              })
-              getMetas(res[i].aid)
-              .then((res3)=>{
-                  let tag_name_tmp = []
-                  for(let j=0;j<res3.length;j++){
-                      getTagName(res3[j])
-                      .then((res4)=>{
-                          tag_name_tmp.push(res4.name)
-                      })
-                      .catch((err)=>{
-                          console.log("get tag name error")
-                      })
-                  }
-                  this.tags_map.set(res[i].aid, tag_name_tmp)
-                  this.tags.push(tag_name_tmp)
-                  this.loadFlag=true;
-                  
-              })
-              .catch((err3)=>{
-                  console.log("get article tags error")
-              })
+export default {
+  data() {
+    return {
+      activeIndex: "1",
+      //activeIndex2: '1'
+      article: [],
+      title: [],
+      createTime: [],
+      content: [],
+      category_id: [],
+      category_name: [],
+      tags_name: [],
+      tags_map: new Map(),
+      tags: ref([]),
+      loadFlag: ref(false),
+      forFlag: false,
+    };
+  },
+  mounted() {
+    // var promiseArray = [];
+    // const p1 = axios
+    //   .get("/api/metas/tag/" + this.$route.params.id)
+    //   .then(({ data }) => {
+    //     console.log("p1成功啦");
+    //     const res = data.data.metas;
+    //     for (let i = 0; i < res.length; i++) {
+    //       this.article.push(res[i].aid);
+    //     }
+    //     return data.data.metas; //将data.data修改为xxxx.data
+    //   });
+    // const p2 = axios
+    //   .get("/api/posts/" +"1c998c10-263f-4dca-a63b-6173e8acf535")
+    //   .then(({ data }) => {
+    //     console.log("p2成功啦");
+    //     console.log(this.article.length);
+    //     console.log(data)
+    //     console.log(this.article[0])
+    //     const res2 = data.data.post;
+    //     for (let i = 0; i < res2.length; i++) {
+    //         this.title.push(res2.title);
+    //         this.createTime.push(res2.created_at);
+    //         this.category_name.push(res2.Category.name);
+    //     }
+    //     return data.data.post; //将data.data修改为xxxx.data
+    //   });
+    // const p3 = this.article.length;
+    // const p4 = this.showTags();
+    //   promiseArray.push(p2);
+    //   promiseArray.push(p1);
+
+    // const p = Promise.all([p2 ,p1]).then((arr) => {
+    //   console.log(arr);
+    //   console.log("Promise.all成功啦");
+    // });
+    this.init();
+  },
+  watch: {
+    // loadFlag:function(){
+    //   this.$nextTick(function(){
+    //     /*现在数据已经渲染完毕*/
+
+    //   })
+    // },
+    loadFlag(newval, oldval) {
+      console.log(oldval);
+      console.log(newval);
+    },
+  },
+  methods: {
+    // 返回多个promise
+    // createPromise(articleId) {
+    //       var promise;
+    //       promise = axios
+    // .get("/api/posts/"+articleId)
+    // .then(({ data }) => {
+    //           console.log("p2成功啦");
+    //           const res2 = data.data.post;
+    //           for (let i = 0; i < res2.length; i++) {
+    //                         this.title.push(res2.title);
+    //           this.createTime.push(res2.created_at);
+    //           this.category_name.push(res2.Category.name);
+    //           }
+    //           return data.data.post; //将data.data修改为xxxx.data
+    //         })
+    //       return promise;
+    //   },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    showArticleByTag() {
+      getArticleByTag(this.$route.params.id)
+        .then((res) => {
+          for (let i = 0; i < res.length; i++) {
+            this.article.push(res[i].aid);
+            if (i == res.length - 1) {
+              this.getArticle();
+            }
           }
-            
         })
-        .catch((err)=>{
-            console.log("get article by tag error")
-        })
+        .catch((err) => {
+          console.log("get article by tag error");
+        });
+    },
+    getArticle() {
+      for (let i = 0; i < this.article.length; i++) {
+        showArticle(this.article[i])
+          .then((res2) => {
+            this.title.push(res2.title);
+            this.createTime.push(res2.created_at);
+            this.category_name.push(res2.Category.name);
+            if (i == this.article.length - 1) {
+              this.showMetas();
+            }
+          })
+          .catch((err2) => {
+            console.log("get article info by tag error");
+          });
       }
-      ,
-      // showArticleByCategory(){
-      //     getArticleByCategory(this.$route.params.id)
-      //     .then((res)=>{
-      //       for(var i=0;i<=res.length;i++){
-      //             this.article.push(res[i].id)
-      //             this.title.push(res[i].title)
-      //             this.createTime.push(res[i].created_at)
-      //             this.content.push(res[i].content)
-      //             this.category_id.push(res[i].category_id)
-      //             getACategory(res[i].category_id)
-      //             .then((res2)=>{
-      //                 this.category_name.push(res2.name)
-      //             })
-      //             .catch((err)=>{
-      //                 console.log("get category by id error")
-      //             })
-      //         }
-      //     })
-      //     .catch((error)=>{
-      //         console.log("get article by category error")
-      //     })
-      // },
-      showArticleList(){
-          getArticleList(1)
-          .then((res)=>{
-              for(var i=0;i<=res.length;i++){
-                  this.article.push(res[i].id)
-                  this.title.push(res[i].title)
-                  this.createTime.push(res[i].created_at)
-                  this.content.push(res[i].content)
-                  getACategory(res[i].category_id)
-                  .then((res2)=>{
-                      this.category_name.push(res2.name)
-                  })
-                  .catch((err)=>{
-                      console.log("get category by id error")
-                  })
+    },
+    showArticleList() {
+      getArticleList(1)
+        .then((res) => {
+          for (var i = 0; i <= res.length; i++) {
+            this.article.push(res[i].id);
+            this.title.push(res[i].title);
+            this.createTime.push(res[i].created_at);
+            this.content.push(res[i].content);
+            this.category_name.push(res[i].Category.name)
+            if(i==res.length-1){
+              this.showMetas()
+            }
+          }
+
+          console.log(this.article.length);
+        })
+        .catch((err) => {
+          console.log(err.data);
+        });
+    },
+    showMetas() {
+      for (let j = 0; j < this.article.length; j++) {
+        getMetas(this.article[j])
+          .then((res3) => {
+            this.tags = [];
+            for (let i = 0; i < res3.length; i++) {
+              this.tags.push(res3[i].name);
+              if (i == res3.length - 1) {
+                this.tags_name.push(this.tags);
+              this.tags_map.set(this.article[j], this.tags);
 
               }
-              console.log(this.article.length)
+            }
           })
-          .catch((err)=>{
-              console.log(err.data)
-          })
-      },
-      show(id){
-          showArticle(id)
-            .then((res)=>{
-                this.content = (res.content)
-                this.title = res.title
-                this.contentEditor.setValue(this.content)
-                //console.log(res.data.id)
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-      },
-      init(){
-          if(this.$route.params.id==0){
-              this.showArticleList()
-          }
-          else{
-          this.showArticleByTag()
-          }
+          .catch((err3) => {
+            console.log("get article tags error");
+          });
       }
     },
-  }
+    show(id) {
+      showArticle(id)
+        .then((res) => {
+          this.content = res.content;
+          this.title = res.title;
+          this.contentEditor.setValue(this.content);
+          //console.log(res.data.id)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    init() {
+      if (this.$route.params.id == 0) {
+        this.showArticleList();
+      } else {
+        this.showArticleByTag();
+      }
+    },
+  },
+};
 </script>
 
-
-<style  src='../../assets/css/article.css'></style>
-<style  src='../../assets/css/img-header-background.css'></style>
-<style  src='../../assets/css/m-button.css'></style>
-<style  src='../../assets/css/slide-animation.css'></style>
-
+<style src="../../assets/css/article.css"></style>
+<style src="../../assets/css/img-header-background.css"></style>
+<style src="../../assets/css/m-button.css"></style>
+<style src="../../assets/css/slide-animation.css"></style>
 
 <style scoped>
 .item-meta {
