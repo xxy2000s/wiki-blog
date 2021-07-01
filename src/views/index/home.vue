@@ -138,7 +138,7 @@
       <div class="top-feature-v2">
         <div
           class="the-feature square from_left_and_right"
-          style="margin: 0 4.5px"
+          style="margin: 0 12px"
         >
           <a href="/2017/09/19/pixiv/" target="_blank">
             <div class="img">
@@ -168,16 +168,142 @@
           </a>
         </div>
       </div>
+
+      <div class="entry-content">
+        <div class="poem-wrap">
+          <div class="poem-border poem-left"></div>
+          <div class="poem-border poem-right"></div>
+          <h1>念两句诗</h1>
+          <p id="poem">昨夜闲潭梦落花，可怜春半不还家。</p>
+          <p id="info">【唐代】张若虚《春江花月夜》</p>
+        </div>
+      </div>
+
+      <h2 style="text-align: center">技能树</h2>
+
+      <div>
+        <div class="progress-item">
+          <div class="progress-desc">Javascript</div>
+          <el-progress
+            :text-inside="true"
+            :stroke-width="30"
+            :percentage="javascript"
+            class="progress"
+          >
+            <span class="pos-left"></span>
+            <span>{{ javascript }}%</span>
+          </el-progress>
+        </div>
+        <div class="progress-item">
+          <div class="progress-desc">HTML</div>
+          <el-progress
+            :text-inside="true"
+            :stroke-width="30"
+            :percentage="html"
+            status="success"
+            class="progress"
+          >
+            <span class="pos-left"></span>
+            <span>{{ html }}%</span>
+          </el-progress>
+        </div>
+        <div class="progress-item">
+          <div class="progress-desc">CSS</div>
+          <el-progress
+            :text-inside="true"
+            :stroke-width="30"
+            :percentage="css"
+            status="warning"
+            class="progress"
+          >
+            <span class="pos-left"></span>
+            <span>{{ css }}%</span>
+          </el-progress>
+        </div>
+        <div class="progress-item">
+          <div class="progress-desc">Go</div>
+          <el-progress
+            :text-inside="true"
+            :stroke-width="30"
+            :percentage="go"
+            class="progress"
+          >
+            <span class="pos-left"></span>
+            <span>{{ go }}%</span>
+          </el-progress>
+        </div>
+        <div class="progress-item">
+          <div class="progress-desc">Python</div>
+          <el-progress
+            :text-inside="true"
+            :stroke-width="30"
+            :percentage="python"
+            class="progress"
+          >
+            <span class="pos-left"></span>
+            <span>{{ python }}%</span>
+          </el-progress>
+        </div>
+        <div class="progress-item">
+          <div class="progress-desc">Vue</div>
+          <el-progress
+            :text-inside="true"
+            :stroke-width="30"
+            :percentage="vue"
+            class="progress"
+          >
+            <span class="pos-left"></span>
+            <span>{{ vue }}%</span>
+          </el-progress>
+        </div>
+      </div>
     </div>
 
-    <h1
-      class="fes-title"
-      style="font-family: 'Ubuntu', sans-serif; padding-top: 40px"
-    >
-      <i class="fa fa-anchor" aria-hidden="true"></i> START:CONTENTS!!
-    </h1>
-
     <div class="info-wrapper">
+      <div style="padding-top: 50px"></div>
+      <div
+        class="site-author motion-element"
+        itemprop="author"
+        itemscope=""
+        itemtype="http://schema.org/Person"
+      >
+        <img
+          class="site-author-image"
+          itemprop="image"
+          alt="崔庆才"
+          src="/src/assets/imgs/profile.jpg"
+        />
+        <p class="site-author-name" itemprop="name">xxy2000s</p>
+        <div class="site-description" itemprop="description">
+          来自BUPT的Rookie Coder
+        </div>
+      </div>
+
+      <div class="site-state-wrap motion-element">
+        <nav class="site-state">
+          <div class="site-state-item site-state-posts">
+            <a href="/timeline/">
+              <span class="site-state-item-count">{{ article_num }}</span>
+              <span class="site-state-item-name"> 文章</span>
+            </a>
+          </div>
+          <div class="site-state-item site-state-categories">
+            <a href="/blogs/categories/0">
+              <span class="site-state-item-count">
+                {{ categories_id.length }}</span
+              >
+              <span class="site-state-item-name"> 分类</span></a
+            >
+          </div>
+          <div class="site-state-item site-state-tags">
+            <a href="/blogs/tag/0">
+              <span class="site-state-item-count"> {{ tags_id.length }}</span>
+              <span class="site-state-item-name"> 标签</span></a
+            >
+          </div>
+        </nav>
+      </div>
+
       <h3><i class="el-icon-menu"></i>Categories</h3>
       <ul class="category-wrapper">
         <li
@@ -218,98 +344,31 @@
               class=""
               style="background-color: rgb(248, 178, 106);">VueProject</span> -->
       </div>
-    </div>
 
-    <div class="entry-content">
-      <div class="poem-wrap">
-        <div class="poem-border poem-left"></div>
-        <div class="poem-border poem-right"></div>
-        <h1>念两句诗</h1>
-        <p id="poem">
-          我们自古以来，就有埋头苦干的人，有拼命硬干的人，有为民请命的人，有舍身求法的人。
-        </p>
-        <p id="info">【宋代】晏殊《破阵子》</p>
+      <h2 style="text-align: center">GithubCard</h2>
+
+      <div>
+        <a href="https://github.com/xxy2000s/wiki-blog"
+          ><img
+            class="github-card"
+            style="margin-bottom: 30px; margin-top: 10px"
+            src="https://gh-card.dev/repos/xxy2000s/wiki-blog.svg"
+        /></a>
       </div>
     </div>
-
-    <h2 style="text-align: center">编程语言</h2>
-    <div style="width: 500px; margin: auto; margin-bottom: 50px">
-      <el-progress
-        :text-inside="true"
-        :stroke-width="30"
-        :percentage="javascript"
-        class="progress"
-      >
-        <span class="pos-left">javascript</span>
-        <span>{{ javascript }}%</span>
-      </el-progress>
-      <el-progress
-        :text-inside="true"
-        :stroke-width="30"
-        :percentage="html"
-        status="success"
-        class="progress"
-      >
-        <span class="pos-left">html</span>
-        <span>{{ html }}%</span>
-      </el-progress>
-      <el-progress
-        :text-inside="true"
-        :stroke-width="30"
-        :percentage="css"
-        status="warning"
-        class="progress"
-      >
-        <span class="pos-left">css</span>
-        <span>{{ css }}%</span>
-      </el-progress>
-      <el-progress
-        :text-inside="true"
-        :stroke-width="30"
-        :percentage="go"
-        class="progress"
-      >
-        <span class="pos-left">go</span>
-        <span>{{ go }}%</span>
-      </el-progress>
-      <el-progress
-        :text-inside="true"
-        :stroke-width="30"
-        :percentage="python"
-        class="progress"
-      >
-        <span class="pos-left">python</span>
-        <span>{{ python }}%</span>
-      </el-progress>
-      <el-progress
-        :text-inside="true"
-        :stroke-width="30"
-        :percentage="vue"
-        class="progress"
-      >
-        <span class="pos-left">vue</span>
-        <span>{{ vue }}%</span>
-      </el-progress>
-    </div>
-    <h2 style="text-align: center">GithubCard</h2>
-
-    <a href="https://github.com/xxy2000s/wiki-blog"
-      ><img
-        class="github-card"
-        style="margin-bottom: 30px; margin-top: 10px"
-        src="https://gh-card.dev/repos/xxy2000s/wiki-blog.svg"
-    /></a>
   </div>
 </template>
 
 <script>
 import { getTags } from "../../api/Tag.js";
 import { getCategories } from "../../api/Category.js";
+import { getArticleList } from "../../api/getArticleList.js";
 import html2canvas from "html2canvas";
 
 export default {
   data() {
     return {
+      article_num: 0,
       tags_name: [],
       tags_id: [],
       tags_num: [],
@@ -336,6 +395,7 @@ export default {
   mounted() {
     this.showTag();
     this.showCategory();
+    this.getArticleNum();
     //         html2canvas(document.getElementById('capture'), {
     //   onrendered: function(canvas) {
     //     var url = canvas.toDataURL("https://baidu.com");//图片地址
@@ -373,6 +433,15 @@ export default {
           console.log("get categories error");
         });
     },
+    getArticleNum() {
+      getArticleList(1)
+        .then((res) => {
+          this.article_num = res.length;
+        })
+        .catch((err) => {
+          console.log("get article num error");
+        });
+    },
   },
 };
 </script>
@@ -380,6 +449,79 @@ export default {
 <style scoped src="../../assets/css/feature-card.css"></style>
 <style scoped src="../../assets/css/poem.css"></style>
 <style scoped>
+.progress-desc {
+  font-family: "Microsoft Yahei";
+  margin-right: 12px;
+  text-align: center;
+  width: 130px;
+  float: left;
+}
+.progress-item {
+  width: 100%;
+  clear: both;
+  margin-right: auto;
+  margin-left: auto;
+  height: 35px;
+}
+
+.site-state {
+  display: flex;
+  justify-content: center;
+  line-height: 1.4;
+  margin-top: 10px;
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+}
+.site-state-item {
+  padding: 0 10px;
+}
+.site-state-item-count {
+  display: block;
+  font-size: 1em;
+  font-weight: 600;
+  text-align: center;
+  color: #555;
+}
+.site-state-item-name {
+  color: #999;
+  font-size: 0.8125em;
+}
+.sidebar-inner {
+  border-radius: initial;
+  box-shadow: initial;
+  box-sizing: border-box;
+  color: #555;
+  width: 360px;
+  padding: 0;
+}
+.site-author-image:hover {
+  transform: rotate(360deg);
+}
+.site-author-image {
+  border: 1px solid #eee;
+  display: block;
+  margin: 0 auto;
+  max-width: 120px;
+  padding: 2px;
+  border-radius: 50%;
+  transform: rotate(0deg);
+  transition: all ease 1s;
+}
+.site-author-name {
+  color: #555;
+  font-weight: 600;
+  text-align: center;
+}
+.site-description {
+  color: #999;
+  font-size: 1em;
+  margin-top: 0;
+  text-align: center;
+}
+.site-state-item:not(:first-child) {
+  border-left: 1px solid #eee;
+}
 .social-logo {
   display: inline-block;
   vertical-align: middle;
@@ -455,11 +597,12 @@ ul {
 
 .info-wrapper {
   /* position: sticky; */
-  top: 70px;
+  /* top: 70px; */
+  margin-top: 70px;
   overflow: hidden;
   transition: all 0.3s;
   margin-left: 15px;
-  flex: 0 0 300px;
+  flex: 0 0 360px;
   height: auto;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
   border-radius: 0.25rem;

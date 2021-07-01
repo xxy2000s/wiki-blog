@@ -2,7 +2,8 @@
   animation: main 1s;
 }
 .site-content {
-  max-width: 800px;
+  display: flex;
+  max-width: 1200px;
   padding: 0 10px;
   margin-left: auto;
   margin-right: auto;
@@ -12,8 +13,14 @@
 
 .top-feature-row {
   width: 100%;
-  height: auto;
-  margin-top: 55px;
+    height: auto;
+    margin-top: 70px;
+    /* border-radius: 20px; */
+    box-shadow: 0 1px 8px 0 rgb(0 0 0 / 10%);
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    padding: 0 15px;
+    background: #fff;
 }
 
 h1.fes-title, h1.main-title {

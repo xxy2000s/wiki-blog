@@ -137,7 +137,8 @@ export default {
         "https://waptv.2345.com/xl/1131.html",
         "https://element-plus.gitee.io/#/zh-CN/component/layout",
         "http://www.topgoer.com/go%E5%9F%BA%E7%A1%80/",
-        "https://c.runoob.com/"
+        "https://c.runoob.com/",
+        "https://wdxtub.com/work/"
 
 
       ],
@@ -148,11 +149,12 @@ export default {
         "/src/assets/imgs/element.jpg",
         "https://img1.baidu.com/it/u=2494391880,4205279468&fm=26&fmt=auto&gp=0.jpg",
         "https://img1.baidu.com/it/u=2494391880,4205279468&fm=26&fmt=auto&gp=0.jpg",
+        "https://raw.githubusercontent.com/vonzhou/CSAPP/master/csapp.jpg",
 
       ],
-      title: ["Vue官方文档", "菜鸟教程", "鬼吹灯系列", "Element", "Go教程"],
-      desc: ["官方教程", "全栈", "鬼吹灯", "Element UI", "Go"],
-      process: [3, 1, 3, 10, 1],
+      title: ["Vue官方文档", "菜鸟教程", "鬼吹灯系列", "Element", "Go教程", "菜鸟工具","CSAPP"],
+      desc: ["官方教程", "全栈", "鬼吹灯", "Element UI", "Go", "工具","不周山CSAPP"],
+      process: [3, 1, 3, 10, 1, 0, 0],
       isCollapse: true,
       category:["前端","后端","算法"],
     };
