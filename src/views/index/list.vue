@@ -1,16 +1,53 @@
 <template>
-  <el-main>
+<el-container style="height: 740px; border: 1px solid #eee">
+    <el-aside :class="[isCollapse?'width-hide':'width-show']"
+              style="overflow-x:hidden;background-color: rgb(238, 241, 246)">
+      <el-menu :collapse="isCollapse">
+        <el-menu-item @click="clp()"
+                      :label="!isCollapse">
+          <el-radio-group v-model="isCollapse">
+            <div><i :class="[isCollapse?'el-icon-s-unfold':'el-icon-s-fold']"></i></div>
+          </el-radio-group>
+        </el-menu-item>
+        <a href="#frontend">
+          <el-menu-item index="1">
+
+            <i v-if="isCollapse"
+               class="el-icon-notebook-2"></i>
+            <template #title><i class="el-icon-notebook-2"></i><span>前端技术</span></template>
+          </el-menu-item>
+        </a>
+
+        <a href="#backend">
+          <el-menu-item index="2">
+            <div v-if="isCollapse"><i class="el-icon-c-scale-to-original"></i></div>
+            <template #title><i class="el-icon-c-scale-to-original"></i><span>后端技术</span></template>
+          </el-menu-item>
+        </a>
+        <a href="#algorithm">
+          <el-menu-item index="3">
+            <div v-if="isCollapse"><i class="el-icon-price-tag"></i></div>
+            <template #title><i class="el-icon-price-tag"></i><span>算法</span></template>
+          </el-menu-item>
+        </a>
+
+      </el-menu>
+    </el-aside>
+
+
+<el-main>
     <div id="content" class="site-content">
+
       <header class="page-header">
-        <h1 class="cat-title" id="process-card">前端技术</h1>
+        <h1 class="cat-title" id="frontend">前端技术</h1>
         <span class="cat-des"><p>js /vue /react /html /css</p> </span>
       </header>
 
       <div class="row">
         <div
           class="col s12 m6"
-          id="bangumi-274646"
-          v-for="(value, index) in title"
+          id="bangumi-274646" :style="{clear:((index%4)!=0?'none':'left')}"
+          v-for="(value, index) in siteurl"
           :key="value"
         >
           <a :href="siteurl[index]" target="_blank">
@@ -26,7 +63,7 @@
                 <div
                   class="card-title should-ellipsis activator grey-text text-darken-4"
                 >
-                  {{ value }}
+                  {{ title[index] }}
                 </div>
                 <p class="should-ellipsis-full" style="color: #2c3e50">
                   {{ desc[index] }}
@@ -70,15 +107,28 @@
           </a>
         </div>
       </div>
+
+      <header class="page-header" v-for="(value, idx) in category" :key=value>
+        <h1 class="cat-title" id="backend">{{value}}{{idx}}</h1>
+        <span class="cat-des"><p>Go /Java /C++ /node.js /FastApi</p> </span>
+      </header>
+      <header class="page-header">
+        <h1 class="cat-title" id="algorithm">算法</h1>
+        <span class="cat-des"><p>leetcode /poj /pat /DS </p> </span>
+      </header>
     </div>
 
-    <a :href="route['path']+ '/#process-card'">t</a>
-  </el-main>
+          
+</el-main>
+</el-container>
 </template>
 
 <script>
 import  {useRoute } from "vue-router";
 export default {
+  setup(){
+      const route = useRoute();
+  },
   data() {
     return {
       siteurl: [
@@ -86,25 +136,85 @@ export default {
         "https://www.runoob.com/",
         "https://waptv.2345.com/xl/1131.html",
         "https://element-plus.gitee.io/#/zh-CN/component/layout",
+        "http://www.topgoer.com/go%E5%9F%BA%E7%A1%80/",
+        "https://c.runoob.com/"
+
+
       ],
       imgurl: [
         "https://vue3js.cn/docs/logo.png",
         "http://iqu.oss-cn-beijing.aliyuncs.com/setting/1/setting_1570889800.jpg",
         "https://lain.bgm.tv/pic/cover/l/b0/09/274646_yTEYw.jpg",
         "/src/assets/imgs/element.jpg",
+        "https://img1.baidu.com/it/u=2494391880,4205279468&fm=26&fmt=auto&gp=0.jpg",
+        "https://img1.baidu.com/it/u=2494391880,4205279468&fm=26&fmt=auto&gp=0.jpg",
+
       ],
-      title: ["Vue官方文档", "菜鸟教程", "鬼吹灯系列", "Element"],
-      desc: ["官方教程", "全栈", "鬼吹灯", "Element UI"],
-      process: [3, 1, 3, 10],
-      route: useRoute(),
+      title: ["Vue官方文档", "菜鸟教程", "鬼吹灯系列", "Element", "Go教程"],
+      desc: ["官方教程", "全栈", "鬼吹灯", "Element UI", "Go"],
+      process: [3, 1, 3, 10, 1],
+      isCollapse: true,
+      category:["前端","后端","算法"],
     };
   },
+  methods:{
+       clp(){
+          this.isCollapse = !this.isCollapse
+      }
+  }
 };
 </script>
 
-<style scoped src="../../../assets/css/progress-card.css"></style>
+<style src="../../assets/css/progress-card.css"></style>
+
 <style scoped>
+
+
 .el-main {
   overflow-x: hidden;
+}
+.width-hide {
+  width: auto !important;
+}
+.width-show {
+  width: 200px !important;
+}
+.el-menu--collapse {
+  width: 70px;
+}
+.el-container {
+  overflow: hidden;
+}
+/*去掉超链接下划线*/
+a {
+  text-decoration: none;
+  color: #409eff;
+}
+.el-row {
+  margin-bottom: 20px;
+  /* &:last-child {
+      margin-bottom: 0;
+    } */
+  overflow-x: hidden;
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
 }
 </style>

@@ -42,3 +42,21 @@ export async function getArticleByTag(tag_id) {
   });
   return resData;
 }
+
+const deleteId = '/api/posts/'
+export async function deleteArticle(aid){
+    const resData = await axios
+    .delete(
+        deleteId+aid
+    )
+    .then(async(res)=>{
+      if(res.data.data.msg=="成功"){
+         return res.data.data.post
+      }
+        
+    })
+    .catch((err)=>{
+        console.log("删除文章失败")
+    })
+    return resData
+} 

@@ -10,7 +10,7 @@ const routes = [
   {
     path: "/management",
     name: "management",
-    redirect: "/management/articles",
+    redirect: "/management/tags",
     component: () => import("../views/Manage.vue"),
     children: [
       {
@@ -41,6 +41,11 @@ const routes = [
     component: () => import("../views/blog/article.vue"),
   },
   {
+    path: "/editor/:id",
+    name: "editor",
+    component: ()=>import("../views/blog/editor.vue")
+  },
+  {
     path: "/todo",
     name: "todo",
     component: () => import("../views/index/todo.vue"),
@@ -52,9 +57,10 @@ const routes = [
   },
 
   {
-      path:"/test",
-      name:"test",
-      component: ()=>import('../views/index/test.vue')
+      path:"/list",
+      name:"list",
+      // redirect: "/list",
+      component: ()=>import('../views/index/list.vue')
   },
   {
     path: "/blogs/tag/:id",

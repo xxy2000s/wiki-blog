@@ -2,45 +2,9 @@
 
   <div>
 
-    <div id="content-down" class="pattern-center ">
-      <div class="pattern-attachment-img"> <img src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
-             data-src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
-             class="lazyload"
-             onerror="imgError(this,3)"
-             style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></div>
-      <header class="pattern-header ">
-        <h1 class="entry-title">{{title}}</h1>
-        <router-link :to="'/editor/'+aid">
-          <h1 class="m-button">编辑文章</h1>
-        </router-link>
-      </header>
-    </div>
-
-    <!-- <el-button class="update-pos" type="primary" @click="update();show();">提交修改</el-button> -->
-    <!-- <h3 style="text-align: center">{{title}}</h3> -->
-    <!-- <div id="vditor" class="vditor"></div> -->
-    <h1 style="text-align: center"
-        class="title">&nbsp;</h1>
-    <div id="content" class="container-sm">
-      <div class="split-layout">
-        <div class="content-details">
-          <div id="vditorPreview"
-               class="readme md crispy"></div>
-        </div>
-        <div class="repo-details">
-          <!-- <el-button class="update-pos" type="primary" @click="update();show();">提交修改</el-button> -->
-
-          <!-- <div class="title-desc-box"><h1>{{title}}</h1></div> -->
-          <div class="related-links">
-            <div id="vditorOutline"
-                 class="crispy outline"></div>
-          </div>
-        </div>
-
-        <!-- <div id="vditorOutline" class="outline crispy"></div> -->
-      </div>
-    </div>
-
+    <el-button class="update-pos" type="primary" style="float:right" @click="update();show();">提交修改</el-button>
+    <h3 style="text-align: center">{{title}}</h3>
+<div id="vditor" class="vditor readme md crispy" style="padding:20px"></div>
   </div>
 
 </template>
@@ -60,72 +24,72 @@ export default {
           content: "",
           ids:[],
           html:"",
-          aid:'',
       }
     },
     mounted(){
         this.show()
         //vditor 文档地址: https://ld246.com/article/1549638745630#options-toolbar
         //详细配置参考: https://github.com/Vanessa219/vditor/blob/master/src/ts/util/Options.ts?utm_source=ld246.com
-        // this.contentEditor = new Vditor("vditor",{
-        //     height:650,
-        //     //width:'auto',
-        //     toolbarConfig:{
-        //         hide:false,
-        //         pin:true
-        //     },
-        //     // classes:{
-        //     //     preview:"",
-        //     // },
-        //     outline:{
-        //       enable:true
-        //     },
-        //     //mode:"wysiwyg",
-        //     preview: {
-        //       actions: ["desktop", "tablet", "mobile", "mp-wechat", "zhihu"],
-        //       delay: 0,
-        //       mode:"dark",
-        //     },
-        //     theme:"classic",
-        //     toolbar: [
-        //         "fullscreen",
-        //         "preview",
-        //         "content-theme",
-        //         "outline",
-        //         "headings",
-        //         "bold",
-        //         "italic",
-        //         "strike",
-        //         "link",
-        //         "|",
-        //         "list",
-        //         "ordered-list",
-        //         "check",
-        //         "outdent",
-        //         "indent",
-        //         "|",
-        //         "quote",
-        //         "line",
-        //         "code",
-        //         "inline-code",
-        //         "insert-before",
-        //         "insert-after",
-        //         "|",
-        //         "table",
-        //     ],
-        //     cache:{
-        //         enable:false
-        //     },
-        //     counter: {
-        //         enable: true,
-        //         type: "text",
-        //     },
-        //     after:()=>{
-        //         //this.contentEditor.setValue("hello test")
-        //         this.show()
-        //         this.init()
-        //     }
-        // })
+        this.contentEditor = new Vditor("vditor",{
+            height:650,
+            //width:'auto',
+            toolbarConfig:{
+                hide:false,
+                pin:true
+            },
+            // classes:{
+            //     preview:"",
+            // },
+            outline:{
+              enable:true
+            },
+            //mode:"wysiwyg",
+            preview: {
+              actions: ["desktop", "tablet", "mobile", "mp-wechat", "zhihu"],
+              delay: 0,
+              mode:"dark",
+            },
+            theme:"classic",
+            toolbar: [
+                "fullscreen",
+                "preview",
+                "content-theme",
+                "outline",
+                "headings",
+                "bold",
+                "italic",
+                "strike",
+                "link",
+                "|",
+                "list",
+                "ordered-list",
+                "check",
+                "outdent",
+                "indent",
+                "|",
+                "quote",
+                "line",
+                "code",
+                "inline-code",
+                "insert-before",
+                "insert-after",
+                "|",
+                "table",
+            ],
+            cache:{
+                enable:false
+            },
+            counter: {  
+                enable: true,
+                type: "text",
+            },
+            after:()=>{
+                this.contentEditor.setValue("hello test")
+                this.show()
+                //this.init()
+            }
+        })
+        console.log(this.contentEditor)
     },
     methods:{
         show(){
@@ -134,10 +98,9 @@ export default {
                 this.content = (res.content)
                 this.title = res.title
                 console.log(this.title)
-                this.aid = res.id
-                //this.contentEditor.setValue(this.content)
+                this.contentEditor.setValue(this.content)
                 //console.log(res.data.id)
-                this.init()
+                //this.init()
             })
             .catch((err)=>{
                 console.log(err)
@@ -194,6 +157,17 @@ export default {
 <style scoped src='../../assets/css/slide-animation.css'></style>
 
 <style lang="less" scoped>
+    .vditor /deep/ .vditor-ir pre.vditor-reset{
+        padding: 10px 300px !important;      
+    }
+    .vditor{
+        padding: 0px !important;
+    }
+    .vditor /deep/ .vditor-toolbar--pin{
+    border-radius: 10px;
+}
+
+
 
 .pattern-center {
   position: relative;
@@ -308,13 +282,6 @@ h2 {
   font-weight: 400;
 }
 
-.readme {
-  max-width: 900px;
-  width: 90%;
-  padding: 24px 32px;
-  border-radius: 24px;
-  margin: 0 auto 48px;
-}
 .md {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;

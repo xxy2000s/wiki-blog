@@ -233,6 +233,7 @@ export default {
     height: 30px;
     font-size: 14px;
     width: 95%;
+    text-align: center;
 }
 
 

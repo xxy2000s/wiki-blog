@@ -1,4 +1,5 @@
 <template>
+<div><!-- <div class="scrollbar" id="bar" style="width:100%; background: orange;"></div> -->
   <header
     class="site-header no-select gizle"
     v-bind:class="{
@@ -15,7 +16,7 @@
     <div class="site-top">
       <div class="site-branding">
         <span class="logolink moe-mashiro">
-          <a href="https://2heng.xin" alt="樱花庄的白猫">
+          <a href="https://2heng.xin" alt="樱花庄的白猫" target="_blank">
             <ruby
               ><span class="sakuraso">BUPT</span><span class="no">の</span
               ><span class="shironeko">Coder</span>
@@ -61,33 +62,40 @@
                 >
                 <ul class="sub-menu">
                   <li>
-                    <a href="https://2heng.xin/archives/hacking/"
+                    <a href="/navi/menu3-1-2"
                       ><i class="fa fa-terminal" aria-hidden="true"></i> 前端</a
                     >
                   </li>
                   <li>
-                    <a href="https://2heng.xin/archives/article/"
+                    <a href="/navi/menu3-1-1"
                       ><i class="fa fa-file-text-o" aria-hidden="true"></i>
                       后端</a
                     >
                   </li>
                   <li>
-                    <a href="https://www.kwgg2020.com/"
+                    <a href="https://www.kwgg2020.com/" target="_blank"
                       ><i class="fa fa-quote-right" aria-hidden="true"></i>
                       工具</a
                     >
                   </li>
                   <li>
-                    <a href="https://2heng.xin/archives/thingking/"
+                    <a href="https://www.yuque.com/dashboard/my_books" target="_blank"
                       ><i class="fa fa-commenting-o" aria-hidden="true"></i>
                       笔记</a
                     >
                   </li>
                   <li>
-                    <a href="https://mashiro.top/"
-                      ><i class="fa fa-book" aria-hidden="true"></i> 面经</a
+                    <a href="https://interview.xiaxuyang.com/" target="_blank"
+                      ><i class="fa " aria-hidden="true"></i> 面经</a
                     >
                   </li>
+                  <li>
+                    <a href="https://docs.xiaxuyang.com/" target="_blank"
+                      ><i class="fa fa-commenting-o" aria-hidden="true"></i>
+                      算法</a
+                    >
+                  </li>
+                  
                 </ul>
               </li>
 
@@ -108,17 +116,24 @@
               </li>
 
               <li>
+                <a href="/list"
+                  ><span class="faa-parent animated-hover"
+                    ><i class="fa-solid fa-books faa-horizontal"></i> 清单</span
+                  ></a
+                >
+              </li>
+
+              <li>
                 <a href="/timeline">
                 <span class="faa-parent animated-hover">
-                  <i class="fa-solid fa-briefcase"></i> 归档
-
+                  <i class="fa-solid fa-briefcase faa-horizontal"></i> 归档
                 </span>
                 </a>
               </li>
               <li>
                 <a href="/management"
                   ><span class="faa-parent animated-hover"
-                    ><i class="fa-solid fa-paperclip"></i> 后台</span
+                    ><i class="fa-solid fa-paperclip faa-horizontal"></i> 后台</span
                   ></a
                 >
               </li>
@@ -147,6 +162,9 @@
     <a @click="scrollSmoothTo(0)" class="cd-top" :style="{ top: backTop }"> </a>
     <router-view />
   </div>
+
+  </div>
+
 </template>
 
 <script>
@@ -170,6 +188,10 @@ export default {
       route,
     };
   },
+  computed: {
+    
+  }
+  ,
   data() {
     return {
       pic: profile,
@@ -248,6 +270,14 @@ export default {
 </script>
 
 <style scoped>
+.scrollbar {
+    position: fixed;
+    top: 0;
+    height: 3px;
+    background: #bebebe;
+    transition-duration: 1s,1s;
+    z-index: 99999;
+}
 .top-fixed-down {
   margin-top: -70px;
 }
@@ -394,6 +424,9 @@ a {
     transform: translate(0, 0);
   }
 }
+.fa-books:before{
+    content:"\1f4da"
+}
 .fa-paperclip:before{
     content:"\1f4ce"
 }
@@ -423,6 +456,17 @@ a {
   height: 6px;
   background-color: #fe9600;
   width: 100%;
+  max-width: 0;
+  transition: max-width 0.25s ease-in-out;
+}
+.site-top ul li ul li a:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -4px !important;
+  height: 6px !important;
+  background-color: #fe9600;
+  width: 70%;
   max-width: 0;
   transition: max-width 0.25s ease-in-out;
 }
@@ -468,7 +512,7 @@ a {
   margin: 15px 0 0 10px;
   font-size: 16px;
   position: relative;
-  left: -50%;
+  left: -55%;
   pointer-events: auto !important;
 }
 .site-top .lower nav {
