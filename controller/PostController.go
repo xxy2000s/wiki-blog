@@ -106,8 +106,9 @@ func (p PostController) ShowC(ctx *gin.Context){
 	// 获取path中的id
 	postId := ctx.Params.ByName("cid")
 
+	var post [] model.Post
 	var posts []model.Post
-	if p.DB.Preload("Category").Where("category_id = ?", postId).First(&posts).RecordNotFound() {
+	if p.DB.Preload("Category").Where("category_id = ?", postId).First(&post).RecordNotFound() {
 		response.Fail(ctx, nil, "文章不存在")
 		return
 	}

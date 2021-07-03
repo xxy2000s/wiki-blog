@@ -48,5 +48,14 @@ func CollectRoute(r *gin.Engine) *gin.Engine{
 	tagRoutes.GET("/name/:name", tagController.ShowByName)
 	tagRoutes.DELETE("/:id", tagController.Delete)
 	tagRoutes.GET("", tagController.ShowAll)
+
+
+	linkRoutes := r.Group("/links")
+	linkController := controller.NewLinkController()
+	linkRoutes.POST("", linkController.Create)
+	linkRoutes.GET("", linkController.ShowAllLinks)
+	linkRoutes.GET("/sort/:sort", linkController.ShowByS)
+	linkRoutes.GET("/:id", linkController.Show)
+	linkRoutes.PUT("/:id", linkController.Update)
 	return r
 }
