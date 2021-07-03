@@ -59,4 +59,15 @@ export async function updateCategory(category_id){
   });
   return resData;
 }
+
+export async function getAllCategories(){
+    const resData = await axios
+    .get(
+      apiUrl
+    )
+    .then(async(res)=>{
+        return res.data.data.categories
+    })
+    return resData
+}
 // export async function deleteTag(tagName)

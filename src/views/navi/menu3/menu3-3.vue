@@ -46,7 +46,7 @@
 <script>
   import moment from 'moment'
   export default {
-    name: 'submission-chart',
+    name: 'submissionChart',
     data () {
       return {
         dateData: [],

@@ -1,10 +1,11 @@
 <template>
   <div class="headertop filter-dot">
-    <figure id="centerbg" class="centerbg" style="height: 817px">
+    <figure id="centerbg" class="centerbg" style="height: calc(100vh)">
       <div class="focusinfo">
         <h1
           class="center-text glitch is-glitching Ubuntu-font"
           data-text="Hi, xxy2000s!"
+          @click="jump('content-margin')"
         >
           Hi, xxy2000s!
         </h1>
@@ -19,6 +20,16 @@
                 class="flipx"
                 src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.9/img/Sakura/images/next-b.svg"
               />
+            </li>
+            <li>
+              <a
+                class="social-logo"
+                href="https://tophub.today/"
+                rel="nofollow"
+                target="_blank"
+                ><img
+                  src="https://file.ipadown.com/tophub/assets/images/logo.png"
+              /></a>
             </li>
             <li>
               <a
@@ -89,7 +100,7 @@
                 rel="nofollow"
                 target="_blank"
                 ><img
-                  src="https://marketplace.canva.cn/MADRpowy1nw/1/thumbnail_large/canva-MADRpowy1nw.png"
+                  src="https://file.ipadown.com/tophub/assets/images/media/zhihu.com.png_160x160.png"
               /></a>
             </li>
 
@@ -113,250 +124,289 @@
       </div>
     </figure>
   </div>
-  <!-- <div id="banner_wave_1"></div>
-<div id="banner_wave_2" ></div> -->
-  <div id="content" class="site-content">
-    <div class="top-feature-row">
-      <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif">
-        <i class="fa fa-anchor" aria-hidden="true"></i> START:DASH!!
-      </h1>
-      <div class="top-feature-v2">
-        <div class="the-feature square from_left_and_right">
-          <a href="/theme-sakura/" target="_blank">
-            <div class="img">
-              <img
-                src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.3.2/img/other/sakura.md.png"
-              />
+
+  <div id="background">
+    <div id="content-margin" style="padding-top: 10px;opacity:0"></div>
+    <div id="content" class="site-content">
+      <div class="info-wrapper">
+        <div class="sidebar-banner">
+          <div
+            class="site-author motion-element"
+            itemprop="author"
+            itemscope=""
+            itemtype="http://schema.org/Person"
+          >
+            <img
+              class="site-author-image"
+              itemprop="image"
+              alt="xxy2000s"
+              src="/src/assets/imgs/profile.jpg"
+            />
+            <p class="site-author-name" itemprop="name">xxy2000s</p>
+            <div class="site-description" itemprop="description">
+              来自BUPT的Rookie Coder
             </div>
-            <div class="info">
-              <h3>Sakura</h3>
-              <p>本站 WordPress 主题</p>
-            </div>
-          </a>
+          </div>
+
+          <div class="site-state-wrap motion-element">
+            <nav class="site-state">
+              <div class="site-state-item site-state-posts">
+                <a href="/timeline/">
+                  <span class="site-state-item-count">{{ article_num }}</span>
+                  <span class="site-state-item-name"> 文章</span>
+                </a>
+              </div>
+              <div class="site-state-item site-state-categories">
+                <a href="/blogs/categories/0">
+                  <span class="site-state-item-count">
+                    {{ categories_id.length }}</span
+                  >
+                  <span class="site-state-item-name"> 分类</span></a
+                >
+              </div>
+              <div class="site-state-item site-state-tags">
+                <a href="/blogs/tag/0">
+                  <span class="site-state-item-count">
+                    {{ tags_id.length }}</span
+                  >
+                  <span class="site-state-item-name"> 标签</span></a
+                >
+              </div>
+            </nav>
+          </div>
         </div>
-      </div>
-      <div class="top-feature-v2">
-        <div
-          class="the-feature square from_left_and_right"
-          style="margin: 0 12px"
-        >
-          <a href="/2017/09/19/pixiv/" target="_blank">
-            <div class="img">
-              <img
-                src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.6/img/other/th%20(3).jpg"
-              />
-            </div>
-            <div class="info">
-              <h3>Pixiv</h3>
-              <p>P 站的正确打开方式</p>
-            </div>
-          </a>
+
+        <h3><i class="el-icon-menu"></i>Categories</h3>
+        <ul class="category-wrapper">
+          <li
+            class="category-item"
+            v-for="(value, index) in categories_name"
+            :key="value"
+          >
+            <a :href="'/blogs/categories/' + categories_id[index]" class=""
+              ><span class="category-name">{{ categories_name[index] }}</span>
+              <span class="post-num" style="background-color: #1cbbb4">{{
+                categories_count[index]
+              }}</span></a
+            >
+          </li>
+        </ul>
+        <hr />
+        <h3><i class="el-icon-price-tag"></i>Tags</h3>
+        <div data-v-125939b4="" class="tags">
+          <span
+            data-v-125939b4=""
+            class=""
+            style="background-color: #0081ff"
+            v-for="(value, index) in tags_id"
+            :key="value"
+            ><a :href="'/blogs/tag/' + tags_id[index]">{{
+              tags_name[index]
+            }}</a></span
+          >
         </div>
-      </div>
-      <div class="top-feature-v2">
-        <div class="the-feature square from_left_and_right">
-          <a href="https://ak.2heng.xin/" target="_blank">
-            <div class="img">
-              <img
-                src="https://view.moezx.cc/images/2019/06/11/74751807_angel.jpg"
-              />
-            </div>
-            <div class="info">
-              <h3>明日方舟</h3>
-              <p>游戏主界面 H5 复刻</p>
-            </div>
-          </a>
+
+        <h2 style="text-align: center">GithubCard</h2>
+
+        <div>
+          <a href="https://github.com/xxy2000s/wiki-blog"
+            ><img
+              class="github-card"
+              style="margin-bottom: 30px; margin-top: 10px"
+              src="https://gh-card.dev/repos/xxy2000s/wiki-blog.svg"
+          /></a>
         </div>
       </div>
 
-      <div class="entry-content">
-        <div class="poem-wrap">
-          <div class="poem-border poem-left"></div>
-          <div class="poem-border poem-right"></div>
-          <h1>念两句诗</h1>
-          <p id="poem">昨夜闲潭梦落花，可怜春半不还家。</p>
-          <p id="info">【唐代】张若虚《春江花月夜》</p>
-        </div>
-      </div>
-
-      <h2 style="text-align: center">技能树</h2>
-
-      <div>
-        <div class="progress-item">
-          <div class="progress-desc">Javascript</div>
-          <el-progress
-            :text-inside="true"
-            :stroke-width="30"
-            :percentage="javascript"
-            class="progress"
-          >
-            <span class="pos-left"></span>
-            <span>{{ javascript }}%</span>
-          </el-progress>
-        </div>
-        <div class="progress-item">
-          <div class="progress-desc">HTML</div>
-          <el-progress
-            :text-inside="true"
-            :stroke-width="30"
-            :percentage="html"
-            status="success"
-            class="progress"
-          >
-            <span class="pos-left"></span>
-            <span>{{ html }}%</span>
-          </el-progress>
-        </div>
-        <div class="progress-item">
-          <div class="progress-desc">CSS</div>
-          <el-progress
-            :text-inside="true"
-            :stroke-width="30"
-            :percentage="css"
-            status="warning"
-            class="progress"
-          >
-            <span class="pos-left"></span>
-            <span>{{ css }}%</span>
-          </el-progress>
-        </div>
-        <div class="progress-item">
-          <div class="progress-desc">Go</div>
-          <el-progress
-            :text-inside="true"
-            :stroke-width="30"
-            :percentage="go"
-            class="progress"
-          >
-            <span class="pos-left"></span>
-            <span>{{ go }}%</span>
-          </el-progress>
-        </div>
-        <div class="progress-item">
-          <div class="progress-desc">Python</div>
-          <el-progress
-            :text-inside="true"
-            :stroke-width="30"
-            :percentage="python"
-            class="progress"
-          >
-            <span class="pos-left"></span>
-            <span>{{ python }}%</span>
-          </el-progress>
-        </div>
-        <div class="progress-item">
-          <div class="progress-desc">Vue</div>
-          <el-progress
-            :text-inside="true"
-            :stroke-width="30"
-            :percentage="vue"
-            class="progress"
-          >
-            <span class="pos-left"></span>
-            <span>{{ vue }}%</span>
-          </el-progress>
-        </div>
-      </div>
-    </div>
-
-    <div class="info-wrapper">
-      <div style="padding-top: 50px"></div>
-      <div
-        class="site-author motion-element"
-        itemprop="author"
-        itemscope=""
-        itemtype="http://schema.org/Person"
-      >
-        <img
-          class="site-author-image"
-          itemprop="image"
-          alt="崔庆才"
-          src="/src/assets/imgs/profile.jpg"
-        />
-        <p class="site-author-name" itemprop="name">xxy2000s</p>
-        <div class="site-description" itemprop="description">
-          来自BUPT的Rookie Coder
-        </div>
-      </div>
-
-      <div class="site-state-wrap motion-element">
-        <nav class="site-state">
-          <div class="site-state-item site-state-posts">
-            <a href="/timeline/">
-              <span class="site-state-item-count">{{ article_num }}</span>
-              <span class="site-state-item-name"> 文章</span>
+      <div class="top-feature-row">
+        <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif">
+          <i class="fa fa-anchor" aria-hidden="true"></i> START:DASH!!
+        </h1>
+        <div class="top-feature-v2">
+          <div class="the-feature square from_left_and_right">
+            <a
+              href="https://pintia.cn/problem-sets/994805342720868352/problems/type/7?page=0"
+              target="_blank"
+            >
+              <div class="img">
+                <img src="/src/assets/imgs/pta.jpg" />
+              </div>
+              <div class="info">
+                <h3>PTA</h3>
+                <p>155道 PAT甲级真题</p>
+              </div>
             </a>
           </div>
-          <div class="site-state-item site-state-categories">
-            <a href="/blogs/categories/0">
-              <span class="site-state-item-count">
-                {{ categories_id.length }}</span
-              >
-              <span class="site-state-item-name"> 分类</span></a
-            >
-          </div>
-          <div class="site-state-item site-state-tags">
-            <a href="/blogs/tag/0">
-              <span class="site-state-item-count"> {{ tags_id.length }}</span>
-              <span class="site-state-item-name"> 标签</span></a
-            >
-          </div>
-        </nav>
-      </div>
-
-      <h3><i class="el-icon-menu"></i>Categories</h3>
-      <ul class="category-wrapper">
-        <li
-          class="category-item"
-          v-for="(value, index) in categories_name"
-          :key="value"
-        >
-          <a :href="'/blogs/categories/' + categories_id[index]" class=""
-            ><span class="category-name">{{ categories_name[index] }}</span>
-            <span class="post-num" style="background-color: #1cbbb4">{{
-              categories_count[index]
-            }}</span></a
+        </div>
+        <div class="top-feature-v2">
+          <div
+            class="the-feature square from_left_and_right"
+            style="margin: 0 12px"
           >
-        </li>
-      </ul>
-      <hr />
-      <h3><i class="el-icon-price-tag"></i>Tags</h3>
-      <div data-v-125939b4="" class="tags">
-        <span
-          data-v-125939b4=""
-          class=""
-          style="background-color: #0081ff"
-          v-for="(value, index) in tags_id"
-          :key="value"
-          ><a :href="'/blogs/tag/' + tags_id[index]">{{
-            tags_name[index]
-          }}</a></span
-        >
-        <!-- <span data-v-125939b4=""
-              class=""
-              style="background-color: rgb(242, 109, 109);">JavaScript</span><span data-v-125939b4=""
-              class=""
-              style="background-color: rgb(132, 155, 135);">ES6</span><span data-v-125939b4=""
-              class=""
-              style="background-color: rgb(132, 155, 135);">Vue</span><span data-v-125939b4=""
-              class=""
-              style="background-color: rgb(225, 91, 100);">VuePress</span><span data-v-125939b4=""
-              class=""
-              style="background-color: rgb(248, 178, 106);">VueProject</span> -->
-      </div>
+            <a href="https://www.acwing.com/problem" target="_blank">
+              <div class="img">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.1.6/img/other/th%20(3).jpg"
+                />
+              </div>
+              <div class="info">
+                <h3>ACWing</h3>
+                <p>一个很好的练习算法题的平台</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="top-feature-v2">
+          <div class="the-feature square from_left_and_right">
+            <a href="https://app.diagrams.net/?src=about" target="_blank">
+              <div class="img">
+                <img
+                  src="https://view.moezx.cc/images/2019/06/11/74751807_angel.jpg"
+                />
+              </div>
+              <div class="info">
+                <h3>diagram</h3>
+                <p>思维导图</p>
+              </div>
+            </a>
+          </div>
+        </div>
 
-      <h2 style="text-align: center">GithubCard</h2>
 
-      <div>
-        <a href="https://github.com/xxy2000s/wiki-blog"
-          ><img
-            class="github-card"
-            style="margin-bottom: 30px; margin-top: 10px"
-            src="https://gh-card.dev/repos/xxy2000s/wiki-blog.svg"
-        /></a>
+<div style="padding-top: 50px"></div>
+        <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif">
+          <i class="fa fa-anchor" aria-hidden="true"></i> IWHISPER:SO POOR!!
+        </h1>
+        <!-- <div class="entry-content">
+          <div class="poem-wrap">
+            <div class="poem-border poem-left"></div>
+            <div class="poem-border poem-right"></div>
+            <h1>念两句诗</h1>
+            <p id="poem">天若有情天亦老, 人间正道是沧桑。</p>
+            <p id="info">毛泽东《七律·人民解放军占领南京》</p>
+          </div>
+        </div> -->
+
+        <submissionChart></submissionChart>
+        <div style="padding-top: 50px"></div>
+        <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif">
+          <i class="fa fa-anchor" aria-hidden="true"></i> SKILL:I'M SO
+          VEGETABLE!!
+        </h1>
+        <h2 style="text-align: center">技能树</h2>
+
+        <div>
+          <div class="progress-item">
+            <div class="progress-desc">Javascript</div>
+            <el-progress
+              :text-inside="true"
+              :stroke-width="30"
+              :percentage="javascript"
+              class="progress"
+            >
+              <span class="pos-left"></span>
+              <span>{{ javascript }}%</span>
+            </el-progress>
+          </div>
+          <div class="progress-item">
+            <div class="progress-desc">HTML</div>
+            <el-progress
+              :text-inside="true"
+              :stroke-width="30"
+              :percentage="html"
+              status="success"
+              class="progress"
+            >
+              <span class="pos-left"></span>
+              <span>{{ html }}%</span>
+            </el-progress>
+          </div>
+          <div class="progress-item">
+            <div class="progress-desc">CSS</div>
+            <el-progress
+              :text-inside="true"
+              :stroke-width="30"
+              :percentage="css"
+              status="warning"
+              class="progress"
+            >
+              <span class="pos-left"></span>
+              <span>{{ css }}%</span>
+            </el-progress>
+          </div>
+          <div class="progress-item">
+            <div class="progress-desc">Go</div>
+            <el-progress
+              :text-inside="true"
+              :stroke-width="30"
+              :percentage="go"
+              class="progress"
+            >
+              <span class="pos-left"></span>
+              <span>{{ go }}%</span>
+            </el-progress>
+          </div>
+          <div class="progress-item">
+            <div class="progress-desc">Python</div>
+            <el-progress
+              :text-inside="true"
+              :stroke-width="30"
+              :percentage="python"
+              class="progress"
+            >
+              <span class="pos-left"></span>
+              <span>{{ python }}%</span>
+            </el-progress>
+          </div>
+          <div class="progress-item">
+            <div class="progress-desc">Vue</div>
+            <el-progress
+              :text-inside="true"
+              :stroke-width="30"
+              :percentage="vue"
+              class="progress"
+            >
+              <span class="pos-left"></span>
+              <span>{{ vue }}%</span>
+            </el-progress>
+          </div>
+        </div>
+
+        
       </div>
     </div>
+
+    <div class="footer-wrapper" style="margin-top: 10px">
+      <span
+        ><a href="https://github.com/xxy2000s" target="_blank"
+          >github address</a
+        ></span
+      >
+      <span
+        ><a
+          href="http://www.topgoer.com/go%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%BB%E8%A6%81%E7%89%B9%E5%BE%81.html"
+          target="_blank"
+          >Go</a
+        ></span
+      >
+      <span
+        ><a
+          href="https://v3.cn.vuejs.org/guide/introduction.html"
+          target="_blank"
+          >Vue</a
+        ></span
+      >
+      <span
+        ><a
+          href="https://element-plus.gitee.io/#/zh-CN/component/installation"
+          target="_blank"
+          >Element UI</a
+        ></span
+      >
+    </div>
   </div>
+  <!-- <div id="banner_wave_1"></div>
+<div id="banner_wave_2" ></div> -->
 </template>
 
 <script>
@@ -364,8 +414,12 @@ import { getTags } from "../../api/Tag.js";
 import { getCategories } from "../../api/Category.js";
 import { getArticleList } from "../../api/getArticleList.js";
 import html2canvas from "html2canvas";
+import submissionChart from "../navi/menu3/menu3-3.vue";
 
 export default {
+  components: {
+    submissionChart,
+  },
   data() {
     return {
       article_num: 0,
@@ -396,6 +450,7 @@ export default {
     this.showTag();
     this.showCategory();
     this.getArticleNum();
+
     //         html2canvas(document.getElementById('capture'), {
     //   onrendered: function(canvas) {
     //     var url = canvas.toDataURL("https://baidu.com");//图片地址
@@ -442,6 +497,11 @@ export default {
           console.log("get article num error");
         });
     },
+    jump(params) {
+      document.getElementById(params).scrollIntoView({
+        behavior: "smooth", // 平滑过渡
+      });
+    },
   },
 };
 </script>
@@ -449,6 +509,28 @@ export default {
 <style scoped src="../../assets/css/feature-card.css"></style>
 <style scoped src="../../assets/css/poem.css"></style>
 <style scoped>
+#background {
+  /* background-image: url("/src/assets/imgs/home.jpg") */
+
+}
+.sidebar-banner {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.footer-wrapper {
+  padding: 1rem 2.5rem;
+  /* border-top: 1px solid #edeaef; */
+  text-align: center;
+  color: #5b5b5b;
+}
+.footer-wrapper span {
+  padding-left: 20px;
+}
+a {
+  color: rgb(23, 148, 71);
+}
+
 .progress-desc {
   font-family: "Microsoft Yahei";
   margin-right: 12px;
@@ -602,6 +684,7 @@ ul {
   overflow: hidden;
   transition: all 0.3s;
   margin-left: 15px;
+  margin-right: 15px;
   flex: 0 0 360px;
   height: auto;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);

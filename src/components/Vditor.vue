@@ -4,6 +4,8 @@
   <div data-v-dc4b8ea2="" class="title-input">
     <input data-v-f291f354="" placeholder="请输入文章标题" class="input-size__normal" v-model="form.title">
   </div>
+    <el-button type="success" style="float:left" @click="generateTemplate">生成模板</el-button>
+
   <div data-v-dc4b8ea2="" class="push-article">
     <div data-v-eaa3c7a0="" data-v-dc4b8ea2="" class="button-main button__bounce button-type__primary button-size__normal">
       <el-button type="primary" @click="dialogFormVisible = true" round>发布文章</el-button>

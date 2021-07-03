@@ -65,67 +65,7 @@ export default {
     },
     mounted(){
         this.show()
-        //vditor 文档地址: https://ld246.com/article/1549638745630#options-toolbar
-        //详细配置参考: https://github.com/Vanessa219/vditor/blob/master/src/ts/util/Options.ts?utm_source=ld246.com
-        // this.contentEditor = new Vditor("vditor",{
-        //     height:650,
-        //     //width:'auto',
-        //     toolbarConfig:{
-        //         hide:false,
-        //         pin:true
-        //     },
-        //     // classes:{
-        //     //     preview:"",
-        //     // },
-        //     outline:{
-        //       enable:true
-        //     },
-        //     //mode:"wysiwyg",
-        //     preview: {
-        //       actions: ["desktop", "tablet", "mobile", "mp-wechat", "zhihu"],
-        //       delay: 0,
-        //       mode:"dark",
-        //     },
-        //     theme:"classic",
-        //     toolbar: [
-        //         "fullscreen",
-        //         "preview",
-        //         "content-theme",
-        //         "outline",
-        //         "headings",
-        //         "bold",
-        //         "italic",
-        //         "strike",
-        //         "link",
-        //         "|",
-        //         "list",
-        //         "ordered-list",
-        //         "check",
-        //         "outdent",
-        //         "indent",
-        //         "|",
-        //         "quote",
-        //         "line",
-        //         "code",
-        //         "inline-code",
-        //         "insert-before",
-        //         "insert-after",
-        //         "|",
-        //         "table",
-        //     ],
-        //     cache:{
-        //         enable:false
-        //     },
-        //     counter: {
-        //         enable: true,
-        //         type: "text",
-        //     },
-        //     after:()=>{
-        //         //this.contentEditor.setValue("hello test")
-        //         this.show()
-        //         this.init()
-        //     }
-        // })
+       
     },
     methods:{
         show(){
@@ -165,12 +105,16 @@ export default {
                        className: 'preview vditor-reset vditor-reset--anchor',
            hljs: {
            lineNumber: true,
-                    enable: true
+                    enable: true,
+                    style:"xcode", //参考https://xyproto.github.io/splash/docs/longer/all.html?utm_source=ld246.com
            },
            speech: {
-                enable: true,
+                enable: false,
            },
-           anchor: true,
+           markdown:{
+                toc:true,
+           },
+           anchor: false,
            after(){
              const outlineElement = document.getElementById('vditorOutline')
               Vditor.outlineRender(document.getElementById('vditorPreview'), outlineElement)

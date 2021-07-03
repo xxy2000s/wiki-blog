@@ -1,7 +1,7 @@
 <template>
 
   <div>
-
+    <el-button class="update-pos" type="primary" style="float:left" @click="goBack">返回</el-button>
     <el-button class="update-pos" type="primary" style="float:right" @click="update();show();">提交修改</el-button>
     <h3 style="text-align: center">{{title}}</h3>
 <div id="vditor" class="vditor readme md crispy" style="padding:20px"></div>
@@ -24,8 +24,16 @@ export default {
           content: "",
           ids:[],
           html:"",
+          fromPath: "",
+
       }
     },
+      beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      // 通过 `vm` 访问组件实例,将值传入fromPath
+      vm.fromPath = from.path;
+    });
+  },
     mounted(){
         this.show()
         //vditor 文档地址: https://ld246.com/article/1549638745630#options-toolbar
@@ -122,6 +130,11 @@ export default {
                 console.log(err)
             })
         },
+        goBack() {
+      this.$router.push({
+        path: this.fromPath,
+      });
+    },
         init(){
             // this.ids = document.getElementsByClassName("vditor-tooltipped vditor-tooltipped__nw")
           Vditor.preview(document.getElementById('vditorPreview'),this.content,{

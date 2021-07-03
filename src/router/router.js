@@ -10,8 +10,8 @@ const routes = [
   {
     path: "/management",
     name: "management",
-    redirect: "/management/tags",
-    component: () => import("../views/Manage.vue"),
+    redirect: "/management/link",
+    component: () => import("../views/index/manage.vue"),
     children: [
       {
         path: "articles",
@@ -28,6 +28,16 @@ const routes = [
         name: "tagManagement",
         component: () => import("../views/backend/tagManagement.vue"),
       },
+      {
+        path: "links",
+        name: "linkManagement",
+        component: () => import("../views/backend/linkManagement.vue"),
+      },
+      {
+        path:"link",
+        name:"link",
+        component:() => import("../views/backend/link.vue")
+      }
     ],
   },
   {
