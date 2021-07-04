@@ -60,6 +60,7 @@ func (l LinkController) ShowByS(ctx *gin.Context){
 	var links []model.Link
 	if l.DB.Where("sort = ?", sort).First(&link).RecordNotFound(){
 		response.Fail(ctx, nil, "链接类别不存在")
+		return
 	}
 	l.DB.Where("sort = ?", sort).Find(&links)
 	response.Success(ctx, gin.H{"links":links}, "查询类别"+sort+"成功")
@@ -81,8 +82,9 @@ func (l LinkController) Update(ctx *gin.Context){
 	var link model.Link
 	if l.DB.Where("id = ?", linkId).First(&link).RecordNotFound(){
 		response.Fail(ctx, nil, "链接不存在")
+		return
 	}
-	if err:=l.DB.Model(&link).Update(requestLink).Error;err!=nil{
+	if err:=l.DB.Model(&link).Where("id = ?", linkId).Update(requestLink).Error;err!=nil{
 		response.Fail(ctx, nil, "更新失败")
 		return
 	}
@@ -90,7 +92,14 @@ func (l LinkController) Update(ctx *gin.Context){
 }
 
 func (l LinkController) Delete(ctx *gin.Context){
-
+	linkId, _ := strconv.Atoi(ctx.Params.ByName("id"))
+	var link model.Link
+	if l.DB.Where("id = ?", linkId).First(&link).RecordNotFound(){
+		response.Fail(ctx, nil, "链接不存在")
+		return
+	}
+	l.DB.Delete(&link)
+	response.Success(ctx, gin.H{"link":link}, "删除成功")
 }
 
 func NewLinkController() LinkController {

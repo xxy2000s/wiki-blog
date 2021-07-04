@@ -57,5 +57,7 @@ func CollectRoute(r *gin.Engine) *gin.Engine{
 	linkRoutes.GET("/sort/:sort", linkController.ShowByS)
 	linkRoutes.GET("/:id", linkController.Show)
 	linkRoutes.PUT("/:id", linkController.Update)
+	linkRoutes.DELETE("/:id", linkController.Delete)
+
 	return r
 }
