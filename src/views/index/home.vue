@@ -27,6 +27,7 @@
                 href="https://tophub.today/"
                 rel="nofollow"
                 target="_blank"
+                title = "tophub"
                 ><img
                   src="https://file.ipadown.com/tophub/assets/images/logo.png"
               /></a>
@@ -46,7 +47,7 @@
                 href="https://gitmind.cn/app/my"
                 target="_blank"
                 class="social-logo"
-                title="sina"
+                title="git mind"
                 ><img
                   src="https://qncdn.aoscdn.com/local/gitmind.cn/img/logo.svg?ca89f90eced75ceb6767405107511150"
               /></a>
@@ -57,6 +58,7 @@
                 href="https://space.bilibili.com/"
                 rel="nofollow"
                 target="_blank"
+                title="bilibili space"
                 ><img
                   src="https://pic.qqtn.com/up/2018-9/15363723161011365.png"
                 />
@@ -67,7 +69,7 @@
                 href="https://app.gitbook.com/"
                 target="_blank"
                 class="social-logo"
-                title="telegram"
+                title="git book"
                 ><img
                   src="https://www.markdown.xyz/assets/images/tool-icons/gitbook.png"
               /></a>
@@ -88,7 +90,7 @@
                 href="https://leetcode-cn.com/problemset/all/"
                 target="_blank"
                 class="social-logo"
-                title="Twitter"
+                title="leetcode"
                 ><img
                   src="https://user-images.githubusercontent.com/32040901/79929570-197c2480-8414-11ea-9358-c92a53916a7f.png"
               /></a>
@@ -99,6 +101,7 @@
                 href="https://www.zhihu.com/collections/mine"
                 rel="nofollow"
                 target="_blank"
+                title="zhihu"
                 ><img
                   src="https://file.ipadown.com/tophub/assets/images/media/zhihu.com.png_160x160.png"
               /></a>

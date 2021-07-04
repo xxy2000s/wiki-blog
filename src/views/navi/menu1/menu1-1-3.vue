@@ -1,6 +1,6 @@
 <template>
 <el-main>
-      <div id="menu">
+      <!-- <div id="menu">
       <span id="menu-navi">
         <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
         <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
@@ -11,7 +11,7 @@
         </button>
       </span>
       <span id="renderRange" class="render-range"></span>
-    </div>
+    </div> -->
 
   <div id="calendar"
        style="height: 800px;"></div>

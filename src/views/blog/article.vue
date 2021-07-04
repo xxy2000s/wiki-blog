@@ -10,8 +10,11 @@
              style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></div>
       <header class="pattern-header ">
         <h1 class="entry-title">{{title}}</h1>
+        <router-link to="/article">
+          <h1 class="m-button" >写文章</h1>
+        </router-link>
         <router-link :to="'/editor/'+aid">
-          <h1 class="m-button">编辑文章</h1>
+          <h1 class="m-button" style="padding-left: 30px">编辑文章</h1>
         </router-link>
       </header>
     </div>
