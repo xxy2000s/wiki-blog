@@ -93,7 +93,6 @@ import { createMeta } from "../api/Meta.js";
 export default {
   components: {
     PublishButton,
-    ArticleBar,
   },
   data() {
     return {
@@ -168,7 +167,6 @@ export default {
           .then((res) => {
             console.log("successfully create tag " + inputValue);
             this.ShowTags();
-            
           })
           .catch((err) => {
             console.log("create tag " + inputValue + " error");
@@ -222,7 +220,7 @@ export default {
             this.categories_id.push(res[i].id);
           }
         })
-        
+
         .catch((err) => {
           console.log("get categories error");
         });
