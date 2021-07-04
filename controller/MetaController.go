@@ -54,7 +54,7 @@ func (m MetaController) Update(ctx *gin.Context){
 		response.Fail(ctx, nil, "文章标签不存在")
 		return
 	}
-	if err:=m.DB.Model(&meta).Update(requestMeta).Error;err!=nil{
+	if err:=m.DB.Model(&meta).Where("a_id = ?", aid).Where("t_id = ?", tid).Update(requestMeta).Error;err!=nil{
 		response.Fail(ctx, nil, "更新失败")
 	}
 	response.Success(ctx, gin.H{"meta":meta}, "更新成功")
@@ -104,7 +104,7 @@ func (m MetaController) Delete(ctx *gin.Context){
 		response.Fail(ctx, nil, "文章标签不存在")
 		return
 	}
-	m.DB.Where("t_id = ?", tid).Delete(&meta)
+	m.DB.Where("a_id = ?", aid).Where("t_id = ?", tid).Delete(&meta)
 	response.Success(ctx, gin.H{"meta":meta}, "删除成功")
 }
 

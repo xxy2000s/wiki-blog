@@ -56,7 +56,7 @@ func (c CategoryController) Update(ctx *gin.Context){
 		response.Fail(ctx, nil, "分类不存在")
 		return
 	}
-	if err := c.DB.Model(&category).Update(requestCategory).Error;err!=nil{
+	if err := c.DB.Model(&category).Where("id = ?", categoryId).Update(requestCategory).Error;err!=nil{
 		response.Fail(ctx, nil, "更新失败")
 		return
 	}
@@ -98,7 +98,7 @@ func (c CategoryController) Delete(ctx *gin.Context) {
 		response.Fail(ctx, nil, "分类不存在")
 		return
 	}
-	c.DB.Delete(category)
+	c.DB.Where("id = ?", categoryId).Delete(category)
 	response.Success(ctx, gin.H{"category": category}, "成功")
 
 }

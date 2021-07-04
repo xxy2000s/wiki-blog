@@ -79,9 +79,8 @@ func (p PostController) Update(ctx *gin.Context) {
 	//	response.Fail(ctx, nil, "文章属于您，请勿非法操作")
 	//	return
 	//}
-
 	// 更新文章
-	if err := p.DB.Model(&post).Update(requestPost).Error; err != nil {
+	if err := p.DB.Model(&post).Where("id = ?", postId).Update(requestPost).Error; err != nil {
 		response.Fail(ctx, nil, "更新失败")
 		return
 	}

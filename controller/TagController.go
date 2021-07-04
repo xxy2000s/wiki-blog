@@ -55,7 +55,7 @@ func (t TagController) Update(ctx *gin.Context) {
 		response.Fail(ctx, nil, "标签不存在")
 		return
 	}
-	if err:=t.DB.Model(&tag).Update(requestTag).Error; err!=nil{
+	if err:=t.DB.Model(&tag).Where("id = ?", tagId).Update(requestTag).Error; err!=nil{
 		response.Fail(ctx, nil, "更新失败")
 		return
 	}
@@ -101,7 +101,7 @@ func (t TagController) Delete(ctx *gin.Context) {
 		response.Fail(ctx, nil, "标签不存在")
 		return
 	}
-	t.DB.Delete(&tag)
+	t.DB.Where("id = ?", tagId).Delete(&tag)
 	response.Success(ctx, gin.H{"tag": tag}, "删除成功")
 }
 
