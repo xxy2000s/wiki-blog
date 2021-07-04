@@ -1,7 +1,6 @@
 <template>
-  <el-main
-    >
-    <h1 style="text-align:center;color:#2c3e50">为清单提供链接</h1>
+  <el-main>
+    <h1 style="text-align: center; color: #2c3e50">为清单提供链接</h1>
     <el-form
       :model="ruleForm"
       :rules="rules"
@@ -40,13 +39,24 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm',ruleForm.title,ruleForm.url,sort, ruleForm.img, ruleForm.process, ruleForm.desc)"
+        <el-button
+          type="primary"
+          @click="
+            submitForm(
+              'ruleForm',
+              ruleForm.title,
+              ruleForm.url,
+              sort,
+              ruleForm.img,
+              ruleForm.process,
+              ruleForm.desc
+            )
+          "
           >立即创建</el-button
         >
         <el-button @click="resetForm('ruleForm')">重置</el-button>
         <router-link to="/management/links">
-                <el-button type="success" style="float:right">管理链接</el-button>
-
+          <el-button type="success" style="float: right">管理链接</el-button>
         </router-link>
       </el-form-item>
     </el-form></el-main
@@ -78,31 +88,31 @@ export default {
     function showAllLinks() {
       getAllLinks()
         .then((res) => {
-            let result = []
-            let mp = new Map()
-            for(let i=0;i<res.length;i++){
-                if(mp.has(res[i].sort)){
-                    continue;
-                }
-                let tmp = {value: res[i].sort}
-                result.push(tmp)
-                mp.set(res[i].sort, 1)
+          let result = [];
+          let mp = new Map();
+          for (let i = 0; i < res.length; i++) {
+            if (mp.has(res[i].sort)) {
+              continue;
             }
-            restaurants.value = result
-            console.log(restaurants);
+            let tmp = { value: res[i].sort };
+            result.push(tmp);
+            mp.set(res[i].sort, 1);
+          }
+          restaurants.value = result;
+          console.log(restaurants);
         })
         .catch((err) => {
           console.log("get all links error");
         });
     }
     const loadAll = () => {
-      showAllLinks()
+      showAllLinks();
     };
     const handleSelect = (item) => {
       console.log(item);
     };
     onMounted(() => {
-      loadAll()
+      loadAll();
       // restaurants.value = loadAll();
     });
     return {
@@ -129,9 +139,7 @@ export default {
       rules: {
         title: [{ required: true, message: "请输入链接名称", trigger: "blur" }],
         url: [{ required: true, message: "请输入链接地址", trigger: "blur" }],
-        sort: [
-          { message: "请选择链接类别"},
-        ],
+        sort: [{ message: "请选择链接类别" }],
         img: [
           {
             message: "请输入图片地址",
@@ -143,12 +151,12 @@ export default {
     };
   },
   methods: {
-    submitForm(formName, title,url,sort, img, process, desc) {
+    submitForm(formName, title, url, sort, img, process, desc) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log(process);
-          this.send(title,url,sort, img, process, desc)
-          this.resetForm(formName)
+          this.send(title, url, sort, img, process, desc);
+          this.resetForm(formName);
           alert("submit!");
         } else {
           alert("Error!");
@@ -158,18 +166,17 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-
     },
-    send(title,url,sort, img, process, desc){
-        createLink(title,url,sort, img, process, desc)
-        .then((res)=>{
-          console.log('Successfully create link '+title);
+    send(title, url, sort, img, process, desc) {
+      createLink(title, url, sort, img, process, desc)
+        .then((res) => {
+          console.log("Successfully create link " + title);
         })
-        .catch((err)=>{
+        .catch((err) => {
           console.log(err);
-          console.log('create link error');
-        })
-    }
+          console.log("create link error");
+        });
+    },
   },
 };
 </script>

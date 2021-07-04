@@ -18,7 +18,7 @@
       </router-link>
     </div>
     <el-table :data="tableData" ref="tableData" border style="width: 100%">
-      <el-table-column prop="id" label="#" width="60" align="center">
+      <el-table-column prop="indexId" label="#" width="60" align="center">
       </el-table-column>
       <el-table-column prop="title" label="链接名" width="200" align="center">
       </el-table-column>
@@ -46,8 +46,8 @@
             style="padding-right: 20px"
             @click="
               dialogFormVisible = true;
-              test(scope.row.id);
-              showCurrentLink(scope.row.id);
+              test(scope.row.indexId, scope.row.id);
+              showCurrentLink(scope.row.indexId);
             "
             >编辑</el-button
           >
@@ -95,7 +95,6 @@
             @click="
               submitForm(
                 'ruleForm',
-                ruleForm.id,
                 ruleForm.title,
                 ruleForm.url,
                 sort,
@@ -107,6 +106,7 @@
             >提交修改</el-button
           >
           <el-button @click="dialogFormVisible = false">取消</el-button>
+          <el-button type="danger" style="float:right" @click="dialogFormVisible = false;deleteLink()">删除</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { getAllLinks, updateLink } from "../../api/Link.js";
+import { getAllLinks, updateLink,deleteLink } from "../../api/Link.js";
 import { ref, onMounted } from "vue";
 export default {
   setup() {
@@ -178,6 +178,7 @@ export default {
     return {
       tableData: [],
       dialogFormVisible: false,
+      selectId:'',
       ruleForm: {
         title: "",
         url: "",
@@ -193,10 +194,11 @@ export default {
     this.showLinkList();
   },
   methods: {
-    submitForm(formName, id, title, url, sort, img, process, desc) {
+    submitForm(formName, title, url, sort, img, process, desc) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.updateLink(id, title, url, sort, img, process, desc);
+          console.log(this.selectId);
+          this.updateLink(this.selectId, title, url, sort, img, process, desc);
           this.dialogFormVisible = false;
           alert("submit!");
         } else {
@@ -205,8 +207,9 @@ export default {
         }
       });
     },
-    test(id) {
+    test(id, selectId) {
       this.ruleForm.id = id;
+      this.selectId = selectId
       console.log(id);
     },
     showLinkList() {
@@ -214,17 +217,18 @@ export default {
         .then((res) => {
           this.tableData = [];
           for (let i = 0; i < res.length; i++) {
-            let result = new Array();
+            // let result = new Array();
 
-            result["id"] = i + 1;
-            result["title"] = res[i].title;
-            result["url"] = res[i].url;
-            result["img"] = res[i].img;
-            result["sort"] = res[i].sort;
-            result["desc"] = res[i].desc;
-            result["process"] = res[i].process;
-            result["created_at"] = res[i].created_at;
-            this.tableData.push(result);
+            // result["id"] = i + 1;
+            // result["title"] = res[i].title;
+            // result["url"] = res[i].url;
+            // result["img"] = res[i].img;
+            // result["sort"] = res[i].sort;
+            // result["desc"] = res[i].desc;
+            // result["process"] = res[i].process;
+            // result["created_at"] = res[i].created_at;
+            res[i].indexId = i+1;
+            this.tableData.push(res[i]);
           }
         })
         .catch((err) => {
@@ -239,10 +243,12 @@ export default {
           this.showLinkList();
         })
         .catch((err) => {
+          console.log(err);
           console.log("update link error");
         });
     },
     showCurrentLink(id) {
+      console.log(id);
       this.ruleForm.title = this.tableData[id - 1].title;
       this.ruleForm.url = this.tableData[id - 1].url;
       this.ruleForm.img = this.tableData[id - 1].img;
@@ -251,6 +257,16 @@ export default {
       this.ruleForm.process = this.tableData[id - 1].process;
       console.log(this.ruleForm);
     },
+    deleteLink(){
+        deleteLink(this.selectId)
+        .then((res)=>{
+            console.log("Successfully delete link "+ res.title);
+            this.showLinkList();
+        })
+        .catch((err)=>{
+        console.log('delte link error');
+        })
+    }
   },
 };
 </script>

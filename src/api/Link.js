@@ -56,3 +56,15 @@ export async function updateLink(id, title, url, sort, img, process, desc) {
     });
   return resData;
 }
+
+
+export async function deleteLink(id) {
+  const resData = await axios
+    .delete(
+      apiUrl + "/" + id
+    )
+    .then(async (res) => {
+      return res.data.data.link;
+    });
+  return resData;
+}
