@@ -3,6 +3,11 @@ import { createRouter, createWebHistory } from "vue-router";
 // 路由信息
 const routes = [
   {
+      path: "/login",
+      name: "login",
+      component: () => import("../views/login/index.vue")
+  },
+  {
     path: "/",
     name: "home",
     component: () => import("../views/index/home.vue"),
@@ -145,12 +150,13 @@ const routes = [
   //没有当前的路径的话，就404
   {
     path: "/:catchAll(.*)",
-    component: () => import("../views/NotFound.vue"),
+    component: () => import("../views/404.vue"),
   },
 ];
 
 // 导出路由
 const router = createRouter({
+  scrollBehavior: () => ({ y: 0 }),
   history: createWebHistory(),
   routes,
 });
