@@ -7,10 +7,10 @@ import (
 )
 
 func CollectRoute(r *gin.Engine) *gin.Engine{
-	r.Use(middleware.CORSMiddleware(), middleware.RecoveryMiddleware())
-	//r.POST("/api/auth/register", controller.Register)
-	//r.POST("/api/auth/login", controller.Login)
+	//r.POST("/auth/register", controller.Register)
+	r.POST("/auth/login", controller.Login)
 	//r.GET("/api/auth/info", middleware.AuthMiddleware() ,controller.Info)
+	r.Use(middleware.CORSMiddleware(), middleware.RecoveryMiddleware(), middleware.AuthMiddleware())
 
 	categoryRoutes := r.Group("/categories")
 	categoryController := controller.NewCategoryController()
@@ -27,7 +27,7 @@ func CollectRoute(r *gin.Engine) *gin.Engine{
 	postRoutes.POST("", postController.Create)
 	postRoutes.PUT("/:id", postController.Update) //替换
 	postRoutes.GET("/:id", postController.Show)
-	postRoutes.GET("/categories/:cid", postController.ShowC)
+	postRoutes.GET("/categories/:cid", postController.ShowByCategory)
 	postRoutes.DELETE("/:id", postController.Delete)
 	postRoutes.POST("/page/list", postController.PageList)
 

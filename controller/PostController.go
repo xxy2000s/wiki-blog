@@ -14,7 +14,7 @@ import (
 type IPostController interface {
 	RestController
 	PageList(ctx *gin.Context)
-	ShowC(ctx *gin.Context)
+	ShowByCategory(ctx *gin.Context)
 }
 
 type PostController struct {
@@ -101,7 +101,7 @@ func (p PostController) Show(ctx *gin.Context) {
 	response.Success(ctx, gin.H{"post": post}, "成功")
 }
 
-func (p PostController) ShowC(ctx *gin.Context){
+func (p PostController) ShowByCategory(ctx *gin.Context){
 	// 获取path中的id
 	postId := ctx.Params.ByName("cid")
 
@@ -111,7 +111,7 @@ func (p PostController) ShowC(ctx *gin.Context){
 		response.Fail(ctx, nil, "文章不存在")
 		return
 	}
-	p.DB.Preload("Category").Where("category_id = ?", postId).Find(&posts)
+	p.DB.Preload("Category").Where("category_id = ?", postId).Order("created_at desc").Find(&posts)
 	response.Success(ctx, gin.H{"posts": posts}, "成功")
 }
 
@@ -148,7 +148,7 @@ func (p PostController) Delete(ctx *gin.Context) {
 func (p PostController) PageList(ctx *gin.Context) {
 	// 获取分页参数
 	pageNum, _ := strconv.Atoi(ctx.DefaultQuery("pageNum", "1"))
-	pageSize, _ := strconv.Atoi(ctx.DefaultQuery("pageSize", "20"))
+	pageSize, _ := strconv.Atoi(ctx.DefaultQuery("pageSize", "9"))
 
 	// 分页
 	var posts []model.Post
