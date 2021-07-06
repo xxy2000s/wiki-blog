@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import store from '@/store';
+
 // 路由信息
 const routes = [
   {
@@ -160,6 +162,24 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+// 跳转之前进行身份判断
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    next();
+  } else {
+    // console.log(store.state.userModule.token);
+    let token = store.state.userModule.token
+    if (token === null || token === '') {
+      next('/login');
+    } else {
+      next();
+    }
+  }
+
+});
+
+
 //让不同路由切换时都自动到返回到页面顶部 参考https://www.cnblogs.com/dfyg-xiaoxiao/p/10337557.html
 router.afterEach((to, from) => {
   let bodySrcollTop = document.body.scrollTop;
