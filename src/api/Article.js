@@ -1,7 +1,7 @@
-import axios from "axios"
+import request from '@/utils/request'
 const apiUrl = "/api/posts/categories/"
 export async function getArticleByCategory(category_id) {
-  const resData = await axios
+  const resData = await request
   .get(
     apiUrl+category_id
     //用qs.stringify是把传递参数格式化成x-www-form-urlencode 形式传递在url中。我这里后端直接传raw就行
@@ -23,7 +23,7 @@ export async function getArticleByCategory(category_id) {
 
 const apiId = '/api/metas/tag/'
 export async function getArticleByTag(tag_id) {
-  const resData = await axios
+  const resData = await request
   .get(
     apiId+tag_id
     //用qs.stringify是把传递参数格式化成x-www-form-urlencode 形式传递在url中。我这里后端直接传raw就行
@@ -45,7 +45,7 @@ export async function getArticleByTag(tag_id) {
 
 const deleteId = '/api/posts/'
 export async function deleteArticle(aid){
-    const resData = await axios
+    const resData = await request
     .delete(
         deleteId+aid
     )

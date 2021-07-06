@@ -1,9 +1,9 @@
-//post示例import axios from "axios";
-import axios from "axios";
+//post示例import request from "request";
+import request from '@/utils/request'
 //import qs from 'qs'
 const apiUrl = "/api/categories";
 export async function createCategory(categoryName) {
-  const resData = await axios
+  const resData = await request
     .post(
       apiUrl,
       {
@@ -17,7 +17,7 @@ export async function createCategory(categoryName) {
 }
 
 export async function getCategories(){
-    const resData = await axios
+    const resData = await request
     .get(
       apiUrl,
     )
@@ -28,7 +28,7 @@ export async function getCategories(){
 }
 
 export async function getACategory(id){
-  const resData = await axios
+  const resData = await request
   .get(
     apiUrl+'/'+id,
   )
@@ -39,7 +39,7 @@ export async function getACategory(id){
 }
 
 export async function getACategoryByName(name){
-  const resData = await axios
+  const resData = await request
   .get(
     apiUrl+'/name/'+name,
   )
@@ -50,7 +50,7 @@ export async function getACategoryByName(name){
 }
 
 export async function updateCategory(category_id){
-  const resData = await axios
+  const resData = await request
   .put(
     apiUrl+'/'+category_id,
   )
@@ -61,7 +61,7 @@ export async function updateCategory(category_id){
 }
 
 export async function getAllCategories(){
-    const resData = await axios
+    const resData = await request
     .get(
       apiUrl
     )

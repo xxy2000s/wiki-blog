@@ -1,9 +1,9 @@
-//post示例import axios from "axios";
-import axios from "axios";
+//post示例import request from "request";
+import request from '@/utils/request'
 //import qs from 'qs'
 const apiUrl = "/api/metas";
 export async function createMeta(aid, tid) {
-  const resData = await axios
+  const resData = await request
     .post(
       apiUrl,
       {
@@ -18,7 +18,7 @@ export async function createMeta(aid, tid) {
 }
 
 export async function getMetas(aid){
-    const resData = await axios
+    const resData = await request
     .get(
       apiUrl+'/'+aid,
     )

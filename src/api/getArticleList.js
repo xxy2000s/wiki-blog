@@ -1,8 +1,8 @@
-import axios from "axios"
+import request from '@/utils/request'
 const apiUrl = "/api/posts/page/list"
 export async function getArticleList(index) {
     console.log(apiUrl);
-  const resData = await axios
+  const resData = await request
   .post(
     apiUrl,
     //用qs.stringify是把传递参数格式化成x-www-form-urlencode 形式传递在url中。我这里后端直接传raw就行

@@ -1,10 +1,9 @@
-//post示例import axios from "axios";
-import axios from "axios";
+//post示例import request from "request";
+import request from "@/utils/request.js";
 //import qs from 'qs'
 const apiUrl = "/api/tags";
 export async function createTag(tagName) {
-    console.log(tagName);
-  const resData = await axios
+  const resData = await request
     .post(
       apiUrl,
       {
@@ -18,7 +17,7 @@ export async function createTag(tagName) {
 }
 
 export async function getTagName(tid){
-  const resData = await axios
+  const resData = await request
   .get(
     apiUrl+'/'+tid,
   )
@@ -29,7 +28,7 @@ export async function getTagName(tid){
 }
 
 export async function getTags(){
-    const resData = await axios
+    const resData = await request
     .get(
       apiUrl,
     )
@@ -39,7 +38,7 @@ export async function getTags(){
     return resData;
 }
 export async function getATag(name){
-  const resData = await axios
+  const resData = await request
   .get(
     apiUrl+'/name/'+name,
   )
