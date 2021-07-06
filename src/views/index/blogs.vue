@@ -1,16 +1,4 @@
 <template>
-  <!-- <div class="img-background">
-<el-row :gutter="12" v-for="ID in article.length" :key=ID >
-  <el-col :span="12" class="article-center">
-    <router-link :to="{path: '/detail/' + article[ID-1]}">
-    <el-card shadow="hover" class="self-hover root" id="card">
-      <h2>{{title[ID-1]}}</h2>
-    </el-card>
-    </router-link>
-  </el-col>
-</el-row>
-</div> -->
-
   <div id="content-down" class="pattern-center">
     <div class="pattern-attachment-img">
       <img
@@ -38,7 +26,8 @@
       </router-link>
     </header>
   </div>
-  <div id="content" class="l-content">
+  <list-tab style="padding-top:50px"></list-tab>
+  <div v-if="hasArticle" id="content" class="l-content">
     <div class="l-wrapper">
       <div class="l-grid">
         <article class="m-article-card" v-for="ID in article.length" :key="ID">
@@ -54,7 +43,7 @@
             <div class="m-article-card__info">
               <a
                 class="m-article-card__tag"
-                v-for="value in tags_map.get(article[ID-1])"
+                v-for="value in tags_map.get(article[ID - 1])"
                 :key="value"
                 >{{ value }}</a
               >
@@ -104,7 +93,15 @@
       </div>
     </div>
   </div>
+  <div v-else style="width: 80%; margin-left: 200px">
+    <h1 style="text-align: center; padding-top: 30px; padding-bottom: 10px">
+      该分类还没有文章 立即创作一篇吧~
+    </h1>
+    <vditor></vditor>
+  </div>
+  <page-nav></page-nav>
 
+  <div style="padding-top: 40px"></div>
   <router-view></router-view>
 
   <div class="line"></div>
@@ -116,10 +113,20 @@ import { showArticle } from "../../api/showArticle.js";
 import { getArticleByCategory } from "../../api/Article.js";
 import { getACategory } from "../../api/Category.js";
 import { getMetas } from "../../api/Meta.js";
+import PageNav from "@/components/Compose/PageNav.vue";
+import Vditor from "@/components/Vditor.vue";
+import ListTab from "@/components/ListTab.vue"
 export default {
+  components: {
+    PageNav,
+    Vditor,
+    ListTab
+  },
   data() {
     return {
+      fromPath: "",
       activeIndex: "1",
+      hasArticle: false,
       //activeIndex2: '1'
       article: [],
       title: [],
@@ -128,7 +135,7 @@ export default {
       category_id: [],
       category_name: [],
       tags: [],
-      tags_map: new Map()
+      tags_map: new Map(),
     };
   },
   mounted() {
@@ -141,6 +148,9 @@ export default {
     showArticleByCategory() {
       getArticleByCategory(this.$route.params.id)
         .then((res) => {
+          if (res.length != 0) {
+            this.hasArticle = true;
+          }
           for (let i = 0; i < res.length; i++) {
             this.article.push(res[i].id);
             this.title.push(res[i].title);
@@ -165,7 +175,7 @@ export default {
             for (let i = 0; i < res3.length; i++) {
               this.tags.push(res3[i].name);
               if (i == res3.length - 1) {
-                this.tags_map.set(this.article[j], this.tags)
+                this.tags_map.set(this.article[j], this.tags);
               }
             }
           })
@@ -183,8 +193,8 @@ export default {
             this.createTime.push(res[i].created_at);
             this.content.push(res[i].content);
             this.category_name.push(res[i].Category.name);
-            if(i == res.length-1){
-                this.showMetas();
+            if (i == res.length - 1) {
+              this.showMetas();
             }
           }
           console.log(this.article.length);
@@ -207,6 +217,7 @@ export default {
     },
     init() {
       if (this.$route.params.id == 0) {
+        this.hasArticle = true
         this.showArticleList();
       } else {
         this.showArticleByCategory();
@@ -216,12 +227,12 @@ export default {
 };
 </script>
 
-<style scoped src="../../assets/css/article.css"></style>
-<style scoped src="../../assets/css/img-header-background.css"></style>
-<style scoped src="../../assets/css/m-button.css"></style>
-<style scoped src="../../assets/css/slide-animation.css"></style>
-
 <style scoped>
+@import "@/assets/css/article.css";
+@import "@/assets/css/img-header-background.css";
+@import "@/assets/css/m-button.css";
+@import "@/assets/css/slide-animation.css";
+
 .item-meta {
   position: absolute;
   right: 0;

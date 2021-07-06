@@ -1,147 +1,157 @@
 <template>
-
   <div>
-
-    <div id="content-down" class="pattern-center ">
-      <div class="pattern-attachment-img"> <img src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
-             data-src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
-             class="lazyload"
-             onerror="imgError(this,3)"
-             style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></div>
-      <header class="pattern-header ">
-        <h1 class="entry-title">{{title}}</h1>
+    <div id="content-down" class="pattern-center">
+      <div class="pattern-attachment-img">
+        <img
+          src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
+          data-src="https://2heng.xin/wp-content/uploads//2018/05/sakura2.jpeg"
+          class="lazyload"
+          onerror="imgError(this,3)"
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+          "
+        />
+      </div>
+      <header class="pattern-header">
+        <h1 class="entry-title">{{ title }}</h1>
         <router-link to="/article">
-          <h1 class="m-button" >写文章</h1>
+          <h1 class="m-button">写文章</h1>
         </router-link>
-        <router-link :to="'/editor/'+aid">
+        <router-link :to="'/editor/' + aid">
           <h1 class="m-button" style="padding-left: 30px">编辑文章</h1>
         </router-link>
       </header>
     </div>
-
+    <page-nav></page-nav>
     <!-- <el-button class="update-pos" type="primary" @click="update();show();">提交修改</el-button> -->
     <!-- <h3 style="text-align: center">{{title}}</h3> -->
     <!-- <div id="vditor" class="vditor"></div> -->
-    <h1 style="text-align: center"
-        class="title">&nbsp;</h1>
+    <div style="display:flex"><h2 style="height:20px;margin-left:200px" class="title">发布于&nbsp;{{created_at}}</h2>
+    <h2 style="height:20px;margin-left:150px" class="title">修改于&nbsp;{{updated_at}}</h2></div>
+    
     <div id="content" class="container-sm">
       <div class="split-layout">
         <div class="content-details">
-          <div id="vditorPreview"
-               class="readme md crispy"></div>
+          <div id="vditorPreview" class="readme md crispy"></div>
         </div>
         <div class="repo-details">
           <!-- <el-button class="update-pos" type="primary" @click="update();show();">提交修改</el-button> -->
 
           <!-- <div class="title-desc-box"><h1>{{title}}</h1></div> -->
           <div class="related-links">
-            <div id="vditorOutline"
-                 class="crispy outline"></div>
+            <div id="vditorOutline" class="crispy outline"></div>
           </div>
         </div>
 
         <!-- <div id="vditorOutline" class="outline crispy"></div> -->
       </div>
     </div>
-
   </div>
-
 </template>
-  
+
 <script>
-import {showArticle} from "../../api/showArticle.js"
-import {updateArticle} from "../../api/updateArticle.js"
-import { ElMessage } from 'element-plus'
-import Vditor from "vditor"
-import "vditor/dist/index.css"
+import { showArticle } from "../../api/showArticle.js";
+import { updateArticle } from "../../api/updateArticle.js";
+import { ElMessage } from "element-plus";
+import Vditor from "vditor";
+import PageNav from "@/components/Compose/PageNav.vue";
+import "vditor/dist/index.css";
 
 export default {
-    data(){
-      return{
-          contentEditor: "",
-          title: "",
-          content: "",
-          ids:[],
-          html:"",
-          aid:'',
-      }
-    },
-    mounted(){
-        this.show()
-       
-    },
-    methods:{
-        show(){
-            showArticle(this.$route.params.id)
-            .then((res)=>{
-                this.content = (res.content)
-                this.title = res.title
-                console.log(this.title)
-                this.aid = res.id
-                //this.contentEditor.setValue(this.content)
-                //console.log(res.data.id)
-                this.init()
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-        },
-        open() {
-          ElMessage.success({
-            message: '文章修改成功',
-            type: 'success'
-          });
-        },
-        update(){
-            updateArticle(this.$route.params.id, this.contentEditor.getValue())
-            .then((res)=>{
-                this.content = res.content
-                this.open()
-            })
-            .catch((err)=>{
-                console.log(err)
-            })
-        },
-        init(){
-            // this.ids = document.getElementsByClassName("vditor-tooltipped vditor-tooltipped__nw")
-          Vditor.preview(document.getElementById('vditorPreview'),this.content,{
-                       className: 'preview vditor-reset vditor-reset--anchor',
-           hljs: {
-           lineNumber: true,
-                    enable: true,
-                    style:"xcode", //参考https://xyproto.github.io/splash/docs/longer/all.html?utm_source=ld246.com
-           },
-           speech: {
-                enable: false,
-           },
-           markdown:{
-                toc:true,
-           },
-           anchor: false,
-           after(){
-             const outlineElement = document.getElementById('vditorOutline')
-              Vditor.outlineRender(document.getElementById('vditorPreview'), outlineElement)
-              if (outlineElement.innerText.trim() !== '') {
-                        outlineElement.style.display = 'block'
-              }
-           },
+  components: {
+    PageNav,
+  },
+  data() {
+    return {
+      contentEditor: "",
+      title: "",
+      created_at: "",
+      updated_at: "",
+      content: "",
+      ids: [],
+      html: "",
+      aid: "",
+    };
+  },
+  mounted() {
+    this.show();
+  },
+  methods: {
+    show() {
+      showArticle(this.$route.params.id)
+        .then((res) => {
+          this.content = res.content;
+          this.title = res.title;
+          this.created_at = res.created_at;
+          this.updated_at = res.updated_at
+          console.log(this.title);
+          this.aid = res.id;
+          //this.contentEditor.setValue(this.content)
+          //console.log(res.data.id)
+          this.init();
         })
-        
-            //console.log(this.content)
-            //console.log(this.ids[1]).click
-        }
-        
-        
+        .catch((err) => {
+          console.log(err);
+        });
     },
+    open() {
+      ElMessage.success({
+        message: "文章修改成功",
+        type: "success",
+      });
+    },
+    update() {
+      updateArticle(this.$route.params.id, this.contentEditor.getValue())
+        .then((res) => {
+          this.content = res.content;
+          this.open();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    init() {
+      // this.ids = document.getElementsByClassName("vditor-tooltipped vditor-tooltipped__nw")
+      Vditor.preview(document.getElementById("vditorPreview"), this.content, {
+        className: "preview vditor-reset vditor-reset--anchor",
+        hljs: {
+          lineNumber: true,
+          enable: true,
+          style: "xcode", //参考https://xyproto.github.io/splash/docs/longer/all.html?utm_source=ld246.com
+        },
+        speech: {
+          enable: false,
+        },
+        markdown: {
+          toc: true,
+        },
+        anchor: false,
+        after() {
+          const outlineElement = document.getElementById("vditorOutline");
+          Vditor.outlineRender(
+            document.getElementById("vditorPreview"),
+            outlineElement
+          );
+          if (outlineElement.innerText.trim() !== "") {
+            outlineElement.style.display = "block";
+          }
+        },
+      });
 
-}
+      //console.log(this.content)
+      //console.log(this.ids[1]).click
+    },
+  },
+};
 </script>
 
-<style scoped src='../../assets/css/m-button.css'></style>
-<style scoped src='../../assets/css/slide-animation.css'></style>
+<style scoped src="../../assets/css/m-button.css"></style>
+<style scoped src="../../assets/css/slide-animation.css"></style>
 
 <style lang="less" scoped>
-
 .pattern-center {
   position: relative;
   top: 0;
@@ -199,7 +209,7 @@ export default {
   height: 720px;
 }
 .container-sm {
-  max-width: 1250px;
+  max-width: 1450px;
   margin: 0 auto;
 }
 .repo-details {
@@ -209,7 +219,7 @@ export default {
 .split-layout {
   display: flex;
   justify-content: center;
-  max-width: 1250px;
+  max-width: 1450px;
   margin: 0 auto;
 }
 
@@ -256,7 +266,7 @@ h2 {
 }
 
 .readme {
-  max-width: 900px;
+  max-width: 1200px;
   width: 90%;
   padding: 24px 32px;
   border-radius: 24px;

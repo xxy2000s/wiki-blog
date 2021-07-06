@@ -209,7 +209,7 @@
           >
         </div>
 
-        <h2 style="text-align: center">GithubCard</h2>
+        <!-- <h2 style="text-align: center">GithubCard</h2>
 
         <div>
           <a href="https://github.com/xxy2000s/wiki-blog"
@@ -218,7 +218,7 @@
               style="margin-bottom: 30px; margin-top: 10px"
               src="https://gh-card.dev/repos/xxy2000s/wiki-blog.svg"
           /></a>
-        </div>
+        </div> -->
       </div>
 
       <div class="top-feature-row">
@@ -379,7 +379,7 @@
       </div>
     </div>
 
-    <div class="footer-wrapper" style="margin-top: 10px">
+    <!-- <div class="footer-wrapper" style="margin-top: 10px">
       <span
         ><a href="https://github.com/xxy2000s" target="_blank"
           >github address</a
@@ -406,7 +406,7 @@
           >Element UI</a
         ></span
       >
-    </div>
+    </div> -->
   </div>
   <!-- <div id="banner_wave_1"></div>
 <div id="banner_wave_2" ></div> -->
@@ -513,7 +513,7 @@ export default {
 <style scoped src="../../assets/css/poem.css"></style>
 <style scoped>
 #background {
-  /* background-image: url("/src/assets/imgs/home.jpg") */
+  background-image: url("/src/assets/imgs/home.jpg")
 
 }
 .sidebar-banner {
@@ -748,7 +748,7 @@ ul {
   transition-duration: 0.4s, 0.4s;
 }
 .centerbg {
-  background-image: url("src/assets/imgs/back2.jpg");
+  background-image: url("/src/assets/imgs/back2.jpg");
   background-position: center center;
   background-attachment: inherit;
 }

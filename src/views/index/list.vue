@@ -1,46 +1,22 @@
 <template>
-  <el-container style="height: 740px; border: 1px solid #eee">
-    <el-aside
-      :class="[isCollapse ? 'width-hide' : 'width-show']"
-      style="overflow-x: hidden; background-color: rgb(238, 241, 246)"
-    >
-      <el-menu :collapse="isCollapse">
-        <el-menu-item @click="clp()" :label="!isCollapse">
-          <el-radio-group v-model="isCollapse">
-            <div>
-              <i
-                :class="[isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold']"
-              ></i>
-            </div>
-          </el-radio-group>
-        </el-menu-item>
-        <div v-for="(value, idx) in category" :key=value>
-          <a :href="'#'+value">
-          <el-menu-item :index="idx">
-            <i v-if="isCollapse" :class="iconArray[idx]"></i>
-            <template #title
-              ><i :class="iconArray[idx]"></i><span>{{titleMap.get(value)}}</span></template
-            >
-          </el-menu-item>
-        </a>
-        </div>
-      </el-menu>
-    </el-aside>
-
+  <el-container style="height: calc(100vh - 70px); border: 1px solid #eee">
     <el-main>
       <div id="content" class="site-content">
         <div v-for="val in category" :key="val">
           <header class="page-header">
             <h1 class="cat-title" :id="val">{{ titleMap.get(val) }}</h1>
-            <span class="cat-des"><p>{{descMap.get(val)}}</p> </span>
+            <span class="cat-des"
+              ><p>{{ descMap.get(val) }}</p>
+            </span>
           </header>
 
-          <div class="row" >
+          <div class="row">
             <div
               class="col s12 m6"
               id="bangumi-274646"
               :style="{ clear: index % 4 != 0 ? 'none' : 'left' }"
-              v-for="(value, index) in sortMap.get(val)" :key="value"
+              v-for="(value, index) in sortMap.get(val)"
+              :key="value"
             >
               <a :href="value.url" target="_blank">
                 <div class="card hoverable">
@@ -62,11 +38,11 @@
                     </p>
                     <ul class="skill-list">
                       <li class="skill">
-                        <div>追番进度：{{ value.process/10 }}/10</div>
+                        <div>学习进度：{{ value.process / 10 }}/10</div>
                         <progress
                           class="skill-1"
                           max="100"
-                          :value="value.process "
+                          :value="value.process"
                         ></progress>
                       </li>
                     </ul>
@@ -109,41 +85,45 @@
         <span class="cat-des"><p>leetcode /poj /pat /DS </p> </span>
       </header> -->
       </div>
+      <list-nav></list-nav>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import { useRoute } from "vue-router";
-import { getAllLinks, getAllLinksBySort } from "../../api/Link.js";
+import { getAllLinks, getAllLinksBySort } from "@/api/Link.js";
+import ListNav from "@/components/ListNav.vue";
 export default {
+  components: {
+    ListNav,
+  },
   setup() {
     const route = useRoute();
   },
   data() {
     return {
-      titleMap:new Map(),
-      descMap:new Map(),
-      iconArray:[],
+      titleMap: new Map(),
+      descMap: new Map(),
       isCollapse: true,
       category: [],
-      sortMap: new Map()
+      sortMap: new Map(),
     };
   },
   mounted() {
-    this.descMap.set('frontend', "js /vue /react /html /css")
-    this.descMap.set('backend', "Go /Java /C++ /node.js /FastApi")
-    this.descMap.set('os', "leetcode /poj /pat /DS")
-    this.titleMap.set('frontend', "前端技术")
-    this.titleMap.set('backend', "后端技术")
-    this.titleMap.set('os', "计算机基础")
-    this.iconArray.push('el-icon-notebook-2')
-    this.iconArray.push('el-icon-c-scale-to-original')
-    this.iconArray.push('el-icon-price-tag')
+    this.descMap.set("frontend", "js /vue /react /html /css");
+    this.descMap.set("backend", "Go /Java /C++ /node.js /FastApi");
+    this.descMap.set("os", "leetcode /poj /pat /DS");
+    this.descMap.set(
+      "面试一条龙",
+      "Go/ Java/ Mysql/ 微服务/ 运维/ 中间件/ 源码/ Git"
+    );
+    this.titleMap.set("frontend", "前端技术");
+    this.titleMap.set("backend", "后端技术");
+    this.titleMap.set("os", "计算机基础");
+    this.titleMap.set("面试一条龙", "面试一条龙");
 
     this.showAllSorts();
-    
-
   },
   methods: {
     clp() {
@@ -183,9 +163,9 @@ export default {
 };
 </script>
 
-<style src="../../assets/css/progress-card.css"></style>
-
 <style scoped>
+@import "@/assets/css/progress-card.css";
+
 .el-main {
   overflow-x: hidden;
 }

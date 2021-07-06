@@ -18,7 +18,7 @@
         @click="generateTemplate(articleTemplates[0])"
         >生成模板</el-button
       >
-      <PublishButton @click="dialogFormVisible = true" round></PublishButton>
+      <publish-button @click="dialogFormVisible = true" round></publish-button>
     </div>
   </div>
   <el-dialog v-model="dialogFormVisible">
@@ -91,6 +91,7 @@ import { getCategories } from "../api/Category.js";
 import { getTags, getATag, createTag } from "../api/Tag.js";
 import { createMeta } from "../api/Meta.js";
 export default {
+  name:"Vditor",
   components: {
     PublishButton,
   },

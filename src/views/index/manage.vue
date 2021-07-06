@@ -1,5 +1,5 @@
 <template>
-  <el-container style="height: 740px; border: 1px solid #eee">
+  <el-container style="height: calc(100vh - 70px); border: 1px solid #eee">
     <el-aside
       :class="[isCollapse ? 'width-hide' : 'width-show']"
       style="overflow-x: hidden; background-color: rgb(238, 241, 246)"

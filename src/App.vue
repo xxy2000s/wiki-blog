@@ -145,13 +145,6 @@
     </div>
   </header>
 
-  <!-- <div class="openNav no-select"
-       style="height: 50px;">
-    <div class="iconflat no-select"
-         style="width: 50px; height: 50px;">
-      <div class="icon"></div>
-    </div>
-  </div> -->
   <div
     v-if="route['path'] != '/'"
     class="blank"

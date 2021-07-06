@@ -54,7 +54,7 @@
             <div class="m-article-card__info">
               <a
                 class="m-article-card__tag"
-                v-for="value in tags_map.get(article[ID-1])"
+                v-for="value in tags_map.get(article[ID - 1])"
                 :key="value"
                 >{{ value }}</a
               >
@@ -104,6 +104,7 @@
       </div>
     </div>
   </div>
+  <page-nav></page-nav>
 
   <router-view></router-view>
 
@@ -119,8 +120,12 @@ import { getMetas } from "../../api/Meta.js";
 import { getTagName } from "../../api/Tag.js";
 import { ref } from "vue";
 import axios from "axios";
+import PageNav from "@/components/Compose/PageNav.vue";
 
 export default {
+  components: {
+    PageNav,
+  },
   data() {
     return {
       activeIndex: "1",
@@ -247,9 +252,9 @@ export default {
             this.title.push(res[i].title);
             this.createTime.push(res[i].created_at);
             this.content.push(res[i].content);
-            this.category_name.push(res[i].Category.name)
-            if(i==res.length-1){
-              this.showMetas()
+            this.category_name.push(res[i].Category.name);
+            if (i == res.length - 1) {
+              this.showMetas();
             }
           }
 
@@ -268,8 +273,7 @@ export default {
               this.tags.push(res3[i].name);
               if (i == res3.length - 1) {
                 this.tags_name.push(this.tags);
-              this.tags_map.set(this.article[j], this.tags);
-
+                this.tags_map.set(this.article[j], this.tags);
               }
             }
           })
@@ -306,7 +310,7 @@ export default {
 <style src="../../assets/css/m-button.css"></style>
 <style src="../../assets/css/slide-animation.css"></style>
 
-<style scoped>
+<style lang="less" scoped>
 .item-meta {
   position: absolute;
   right: 0;
